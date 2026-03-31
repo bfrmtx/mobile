@@ -2,7 +2,6 @@
 /*
 
 # Un-ignore the doc folder
-!/doc/
 
 # Un-ignore hidden files needed by git itself
 !.gitignore
