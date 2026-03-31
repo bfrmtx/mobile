@@ -5,3 +5,6 @@
 
 # Un-ignore hidden files needed by git itself
 !.gitignore
+
+# Un-ignore README
+!README.md
