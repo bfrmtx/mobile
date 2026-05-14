@@ -1,0 +1,13 @@
+{
+  "date_time": "1970-01-01 00:00:00",
+  "latitude": 0,
+  "longitude": 0,
+  "elevation": 0.0,
+  "sats_tracked": 0,
+  "sats_in_view_gps": 0,
+  "sats_in_view_glonass": 0,
+  "sats_in_view_beidou": 0,
+  "sats_in_view_galileo": 0,
+  "sync_state": 0,
+  "mode": 0
+}

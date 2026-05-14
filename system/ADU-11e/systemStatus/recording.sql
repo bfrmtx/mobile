@@ -1,0 +1,5 @@
+CREATE TABLE "recording" (
+	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+	"key" STRING NOT NULL,
+	"value" STRING
+	)

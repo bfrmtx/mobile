@@ -1,0 +1,32 @@
+project:
+  type: book
+  output-dir: ../doc
+  preview:
+    navigate: false
+    watch-inputs: false
+
+book:
+  title: "Mobile WebInterface"
+  date: last-modified
+  sidebar:
+    collapse-level: 3
+  chapters:
+    - index.qmd
+    - part: "Databases"
+      chapters:
+        - qmd/databases/databases.qmd
+    - part: "Flows"
+      chapters:
+        - qmd/flows/slots-flow.qmd
+        - qmd/flows/adc.qmd
+
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: true
+    code-fold: show
+
+execute:
+  freeze: auto

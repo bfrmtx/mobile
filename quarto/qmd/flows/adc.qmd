@@ -1,0 +1,152 @@
+---
+title: "ADC"
+---
+
+## Overview
+
+The ADU-11e has two ADCs, each with 8 channels, **A** and **B**. They are working in a combined mode.
+
+### 8 Channel Measurement Setup with MFS
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Connector</th>
+      <th>Slot</th>
+      <th>Chan</th>
+      <th>AD</th>
+      <th>Type</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color:#f9a825;">
+      <td>S &rarr; N</td><td>0</td><td>0</td><td>A 0</td><td>E<sub>x</sub></td><td>C000_TEx</td>
+    </tr>
+    <tr style="background-color:#f9a825;">
+      <td>E &rarr; W</td><td>1</td><td>1</td><td>A 1</td><td>E<sub>y</sub></td><td>C001_TEy</td>
+    </tr>
+    <tr style="background-color:#42a5f5;">
+      <td>H<sub>x</sub></td><td>2</td><td>2</td><td>A 2</td><td>H<sub>x</sub></td><td>C002_THx</td>
+    </tr>
+    <tr style="background-color:#42a5f5;">
+      <td>H<sub>y</sub></td><td>3</td><td>3</td><td>B 0</td><td>H<sub>y</sub></td><td>C003_THy</td>
+    </tr>
+    <tr style="background-color:#42a5f5;">
+      <td>H<sub>z</sub></td><td>4</td><td>4</td><td>B 1</td><td>H<sub>z</sub></td><td>C004_THz</td>
+    </tr>
+    <tr style="background-color:#66bb6a;">
+      <td>MP H<sub>x</sub></td><td>5</td><td>5</td><td>A 3</td><td>H<sub>x</sub></td><td>C005_THx</td>
+    </tr>
+    <tr style="background-color:#66bb6a;">
+      <td>MP H<sub>y</sub></td><td>6</td><td>6</td><td>B 2</td><td>H<sub>y</sub></td><td>C006_THy</td>
+    </tr>
+    <tr style="background-color:#66bb6a;">
+      <td>MP H<sub>z</sub></td><td>7</td><td>7</td><td>B 3</td><td>H<sub>z</sub></td><td>C007_THz</td>
+    </tr>
+  </tbody>
+</table>
+
+### 5 Channel Measurement Setup with MFS
+
+Switch is set to **default**. Hence: the switch is on the connector board!
+
+<table>
+  <thead>
+    <tr>
+      <th>Connector</th>
+      <th>Slot</th>
+      <th>Chan</th>
+      <th>AD</th>
+      <th>Type</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color:#f9a825;">
+      <td>S &rarr; N</td><td>0</td><td>0</td><td>A 0</td><td>E<sub>x</sub></td><td>C000_TEx</td>
+    </tr>
+    <tr style="background-color:#f9a825;">
+      <td>E &rarr; W</td><td>1</td><td>1</td><td>A 1</td><td>E<sub>y</sub></td><td>C001_TEy</td>
+    </tr>
+    <tr style="background-color:#42a5f5;">
+      <td>H<sub>x</sub></td><td>2</td><td>2</td><td>A 2</td><td>H<sub>x</sub></td><td>C002_THx</td>
+    </tr>
+    <tr style="background-color:#42a5f5;">
+      <td>H<sub>y</sub></td><td>3</td><td>3</td><td>B 0</td><td>H<sub>y</sub></td><td>C003_THy</td>
+    </tr>
+    <tr style="background-color:#42a5f5;">
+      <td>H<sub>z</sub></td><td>4</td><td>4</td><td>B 1</td><td>H<sub>z</sub></td><td>C004_THz</td>
+    </tr>
+  </tbody>
+</table>
+
+### 5 Channel Measurement Setup with SHFT or FGS
+
+Switch is set to **MP**. Hence: the switch is on the connector board!
+
+<table>
+  <thead>
+    <tr>
+      <th>Connector</th>
+      <th>Slot</th>
+      <th>Chan</th>
+      <th>AD</th>
+      <th>Type</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color:#f9a825;">
+      <td>S &rarr; N</td><td>0</td><td>0</td><td>A 0</td><td>E<sub>x</sub></td><td>C000_TEx</td>
+    </tr>
+    <tr style="background-color:#f9a825;">
+      <td>E &rarr; W</td><td>1</td><td>1</td><td>A 1</td><td>E<sub>y</sub></td><td>C001_TEy</td>
+    </tr>
+    <tr style="background-color:#42a5f5;">
+      <td>MP H<sub>x</sub></td><td style="background-color:#66bb6a;">5</td><td>2</td><td>A 2</td><td>H<sub>x</sub></td><td>C002_THx</td>
+    </tr>
+    <tr style="background-color:#42a5f5;">
+      <td>MP H<sub>y</sub></td><td style="background-color:#66bb6a;">6</td><td>3</td><td>B 0</td><td>H<sub>y</sub></td><td>C003_THy</td>
+    </tr>
+    <tr style="background-color:#42a5f5;">
+      <td>MP H<sub>z</sub></td><td style="background-color:#66bb6a;">7</td><td>4</td><td>B 1</td><td>H<sub>z</sub></td><td>C004_THz</td>
+    </tr>
+  </tbody>
+</table>
+
+### 2 Channel Measurement EMAP or Current Clamp
+
+Switch is set to **MP**. Hence: the switch is on the connector board!
+
+<table>
+  <thead>
+    <tr>
+      <th>Connector</th>
+      <th>Slot</th>
+      <th>Chan</th>
+      <th>AD</th>
+      <th>Type</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color:#f9a825;">
+      <td>S &rarr; N</td><td>0</td><td>0</td><td>A 0</td><td>E<sub>x</sub></td><td>C000_TEx</td>
+    </tr>
+    <tr style="background-color:#f9a825;">
+      <td>E &rarr; W</td><td>1</td><td>1</td><td>A 1</td><td>E<sub>y</sub></td><td>C001_TEy</td>
+    </tr>
+  </tbody>
+</table>
+
+## Summary
+
+- The first two connectors (S &rarr; N and E &rarr; W) are always on the same slots (0 and 1) and are always associated with the channels 0 and 1, aka E<sub>x</sub> and E<sub>y</sub>.
+- The connectors (H<sub>x</sub>, H<sub>y</sub>, H<sub>z</sub>) are on slots 2, 3, and 4 **and if** a sensor is detected, are associated with channels 2, 3, and 4.
+- The connectors (MP H<sub>x</sub>, MP H<sub>y</sub>, MP H<sub>z</sub>) are on slots 5, 6, and 7 **and if** a sensor is detected:
+  - are associated with channels 2, 3, and 4 **if** H<sub>x</sub>, H<sub>y</sub>, H<sub>z</sub> are not detected
+  - are associated with channels 5, 6, and 7 **if** H<sub>x</sub>, H<sub>y</sub>, H<sub>z</sub> are detected
+
+Go back to the [**slots flow**](slots-flow.qmd) for more details on the slot configuration and resulting channels.

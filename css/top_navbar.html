@@ -1,0 +1,46 @@
+<!-- Navbar -->
+<header class="topnav_adu">
+  <link rel="stylesheet" href="css/nav.css">
+  <input class="menu-btn" type="checkbox" id="menu-btn" onclick="menuButtonClicked()"/>
+  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  <div id="menuLinks" class="menuLinksDiv" style="overflow:scroll">
+    <table class="datatable no_margin" width="100%" border="0">
+    <tr>
+    <td>
+    <li><a href="status.php" onclick="menuLinkClicked()">System Status</a></li>
+    <li><a href="index.php" onclick="menuLinkClicked()">Jobs</a></li>
+    <li><a href="subjob.php" onclick="menuLinkClicked()">Subjobs / EDI</a></li>
+    <li><a href="channels.php" onclick="menuLinkClicked()">Channels</a></li>
+    <li><a href="selftest.php" onclick="menuLinkClicked()">Selftest Result</a></li>
+    <li><a href="gpsBattStatus.php" onclick="menuLinkClicked()">System Status Plots</a></li>
+    <li><a href="systemHistory.php" onclick="menuLinkClicked()">System History</a></li>
+    <li><a href="jobs.php" onclick="menuLinkClicked()">JobDB</a></li>
+    <li><a href="timeSeries.php" onclick="menuLinkClicked()">Time Series Plotter</a></li>
+    </td>
+    <td valign=top align=middle style="background-color:white">
+    <!-- <li><img style="background-color:white;width:70%;border-radius: 25px;" src="logo.png" alt="Italian Trulli"></li> -->
+    </td>
+    </tr>
+    </table>
+  </div>
+  
+  <script>
+    var x = document.getElementById("menuLinks");
+    x.style.display = "none";
+    
+    function menuButtonClicked() {
+      var x = document.getElementById("menuLinks");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    } 
+    function menuLinkClicked() {
+      var x = document.getElementById("menuLinks");
+      x.style.display = "none";
+    } 
+  </script>
+
+</header>
+

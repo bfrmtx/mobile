@@ -1,0 +1,5 @@
+CREATE TABLE "main_backplane" (
+	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+	"key" STRING NOT NULL,
+	"value" STRING
+	)

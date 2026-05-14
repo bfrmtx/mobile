@@ -1,0 +1,20 @@
+CREATE TABLE "job" (
+  "id" INTEGER PRIMARY KEY CHECK (id = 1),
+	"start_date"	TEXT,
+	"start_time"	TEXT,
+	"duration"	INTEGER,
+	"sampling_rate"	INTEGER,
+	"digital_filter"	INTEGER,
+	"cal_mode"	TEXT DEFAULT 'off',
+	"channel_types"	TEXT,
+	"choppers"	TEXT,
+	"gains"	TEXT,
+	"dipole_lengths"	TEXT,
+	"use_atss"	INTEGER DEFAULT 0,
+	"copy_to_usb"	INTEGER DEFAULT 0,
+	"sub_cycle"	INTEGER,
+	"sub_duration"	INTEGER,
+	"sub_filter"	INTEGER,
+	"power_off_limit" REAL,
+	"station_id" STRING
+)

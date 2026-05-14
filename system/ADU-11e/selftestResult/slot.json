@@ -1,0 +1,13 @@
+{
+  "error_code": 0,
+  "severity": 0,
+  "message": "---",
+  "probe_res": 0,
+  "probe_res_gnd_1": 0,
+  "probe_res_gnd_2": 0,
+  "lsb": 0,
+  "max_amplitude": 0,
+  "dc_offset": 0,
+  "noise_check": 0,
+  "gain": 0
+}

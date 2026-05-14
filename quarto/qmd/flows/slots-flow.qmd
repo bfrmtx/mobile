@@ -1,0 +1,68 @@
+---
+title: "Slots Flow"
+---
+
+## Flow Summary
+
+The mobile interface works only with sensor detection, available on slots 2 to 7.<br>
+0 and 1 (e.g. E<sub>x</sub> and E<sub>y</sub>) are always on. You can switch them explicitly on or off.<br>
+The other slots (2 to 7) can only be used if a sensor is detected. <br>
+Use the Laptop **expert** interface for other configurations.
+
+
+```{mermaid}
+flowchart TD
+    A[Sensor Detection] --> B{detected?}
+    B -- No ----> E[E / current]
+    B -- Yes --> SL[slots]
+    SL --> SMTL{s: 0,1,2,3,4}
+    SL --> SMTH{s: 0,1,5,6,7}
+    SL --> SMTA{all<br>s: 0,1,2,3,4,5,6,7<br>c: 0,1,2,3,4,5,6,7}
+    SMTL --> CMTLH[airborne<br>c: 2,3,4<br>Hx, Hy, Hz]
+    SMTL --> CMTLD[MT <br>c: 0,1,2,3,4 <br>Ex, Ey, Hx, Hy, Hz]
+    SMTH --> CMTHH[airborne<br>c: 2,3,4<br>Hx, Hy, Hz]
+    SMTH --> CMTHD[AMT <br>c: 0,1,2,3,4 <br>Ex, Ey,Hx, Hy, Hz]
+
+```
+
+## Slot Config:
+
+| type | slot 0 | slot 1 | slot 2 | slot 3 | slot 4 | slot 5 | slot 6 | slot 7 |
+|---|---|---|---|---|---|---|---|---|
+| **E** | **1** | **1** | 0 | 0 | 0 | 0 | 0 | 0 |
+| **MT** | **1** | **1** | **1** | **1** | **1** | 0 | 0 | 0 |
+| **AMT** | **1** | **1** | 0 | 0 | 0 | **1** | **1** | **1** |
+| **Airborne** | 0 | 0 | **1** | **1** | **1** | 0 | 0 | 0 |
+| **Airborne** | 0 | 0 | **1** | **1** | **1** | **1** | **1** | **1** |
+| **Airborne** | 0 | 0 | 0 | 0 | 0 | **1** | **1** | **1** |
+| **ALL** | **1** | **1** | **1** | **1** | **1** | **1** | **1** | **1** |
+
+## Resulting Channel Numbers:
+- **E**: 0, 1
+- **MT**: 0, 1, 2, 3, 4
+- **AMT**: 0, 1, 2, 3, 4
+- **Airborne**: 2, 3, 4
+- **Airborne**: 2, 3, 4, 5, 6, 7
+- **Airborne**: 2, 3, 4
+- **ALL**: 0, 1, 2, 3, 4, 6, 7
+
+**Airborne** is a synonym for MT without E sensors. So for a remote reference station or GDS (geomagnetic deep sounding) you can use the airborne mode. It simply switches off the E and keeps all H. <br>
+**E** is a synonym for electric field only. Either for EMAP or current measurements. <br>
+**MT /AMT** is a synonym for magnetotelluric mode, so electric and magnetic field. <br>
+
+## PHP Classes
+
+Selected variables shown:
+```{mermaid}
+flowchart TD
+    A[<b>Sensor</b><br>sensor_type<br>sensor_serial<br>chopper<br>dipole_length] --> B[<b>Slot</b><br>slot_on<br>gain<br>channel_type<br>gain]
+    C[<b>Sensor</b><br>sensor_type<br>sensor_serial<br>chopper<br>dipole_length] --> D[<b>Slot</b><br>slot_on<br>gain<br>channel_type<br>gain]
+    E[<b>Sensor</b><br>sensor_type<br>sensor_serial<br>chopper<br>dipole_length] --> F[<b>Slot</b><br>slot_on<br>gain<br>channel_type<br>gain]
+    G[<b>job_time</b><br>start_date<br>start_time, dst<br>duration<br>utc_offset_seconds, grid] --base--> H[<b>frequency_handler</b><br>sampling_rate<br>digital_filter<br>sub_filter<br>sub_cycle, sub_duration]
+    B --ADU as container--> I[<b>ADU</b><br>serial<br>gps<br>con<br>bpl<br>R/W <b>hwConfig</b>]
+    D --ADU as container--> I[<b>ADU</b><br>serial<br>gps<br>con<br>bpl<br>R/W <b>hwConfig</b>]
+    F --ADU as container--> I[<b>ADU</b><br>serial<br>gps<br>con<br>bpl<br>R/W <b>hwConfig</b>]
+    H --base--> I[<b>ADU</b><br>serial<br>gps<br>con<br>bpl<br>R/W <b>hwConfig</b>]
+    I --base--> J[<b>job</b><br>use_atss<br>copy_to_usb<br>R/W <b>JOB DB</b> ]
+    J <--R/W/Edit--> L[<b>jobs</b><br>R/W <b>JOBS DB</b><br>Slots on, on submission]
+```

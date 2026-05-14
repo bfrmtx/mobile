@@ -1,0 +1,330 @@
+---
+title: "Databases"
+---
+
+## hwConfig.db
+
+hwConfig.db contains only id, key and value tables. <br>
+We treat as read only for the mobile web interface.<br>
+Tables are not growing, but updated on events. <br>
+
+**ALL** slots are written here, even if they are not detected. <br>
+The mobile web interface will decide. e.g. slots 0,1 are always shown, others not if sensor_type is empty or UNKN_E. <br>
+
+This is a *quasi static* database, written by the firmware. Not much in here<br>
+**The database is created / updated on boot or "sensor detection".**<br>
+You find the serial numbers here.<br>
+*The sensors will be detected and updated by* "**detect sensors**" in the system menu. Slots 0 and 1 can be set manually, for example if you use current clamps instead of electrodes, by loading the user configuration. <br>
+**The mobile web interface can only work with detected sensors, except slots 0 and 1.**
+
+### adu
+About the systems and their capabilities. <br>
+Sample frequencies and digital filter apply to ALL channels, so they are here.<br>
+As fixed value the **disk size** is here, to converted to **int** later. This is the total size at all of the data partition.  <br>
+
+```json
+{{< include ../../../system/ADU-11e/hwConfig/adu.json >}}
+```
+
+```sql
+{{< include ../../../system/ADU-11e/hwConfig/adu.sql >}}
+```
+
+### con
+About the connector board. <br>
+The connector board is the same for all ADU-10e / 11e
+
+```json
+{{< include ../../../system/ADU-11e/hwConfig/con.json >}}
+```
+
+```sql
+{{< include ../../../system/ADU-11e/hwConfig/con.sql >}}
+```
+
+### gps
+About the GPS. <br>
+
+```json
+{{< include ../../../system/ADU-11e/hwConfig/gps.json >}}
+```
+
+```sql
+{{< include ../../../system/ADU-11e/hwConfig/gps.sql >}}
+```
+
+### led
+About the LEDs or LED board. <br>
+```json
+{{< include ../../../system/ADU-11e/hwConfig/led.json >}}
+```
+
+```sql
+{{< include ../../../system/ADU-11e/hwConfig/led.sql >}}
+```
+
+### slot
+About the slots and their capabilities. <br>
+Gains and channel types are per slot, so they are here. You will find slot0 to slot4 (ADU-10e) or up to slot7 (ADU-11e) depending on your system. <br>
+
+::: {.callout-note}
+#### NSLOTS
+is 5 for ADU-10e and 8 for ADU-11e and coded in *config.php*. That avoids scanning the slot tables for each page request. <br>
+:::
+
+We have slot0 ... slot4 for ADU-10e and slot0 ... slot7 for ADU-11e. <br>
+
+```json
+{{< include ../../../system/ADU-11e/hwConfig/slot.json >}}
+```
+The slot aquires the sensor information, so the sensor type and serial number are here. <br>
+
+```sql
+{{< include ../../../system/ADU-11e/hwConfig/slot.sql >}}
+```
+
+"**detect sensors**" will update the sensor type and serial. For slot0 and slot1 sensor type can be set manually.
+
+## selftestResult.db
+
+selftestResult.db contains only id, key and value tables. <br>
+Updated on **boot, detect sensors and test**. <br> So these values change only when the user triggers one of these events. <br>
+We treat as read only for the mobile web interface. <br>
+
+
+### con
+
+The self test results for the connector board. <br>
+```json
+{{< include ../../../system/ADU-11e/selftestResult/con.json >}}
+```
+
+```sql
+{{< include ../../../system/ADU-11e/selftestResult/con.sql >}}
+```
+
+### cpu
+
+The self test results for the CPU. <br>
+```json{{< include ../../../system/ADU-11e/selftestResult/cpu.json >}}
+```
+
+```sql
+{{< include ../../../system/ADU-11e/selftestResult/cpu.sql >}}
+```
+
+### gps
+
+The self test results for the GPS. <br>
+```json
+{{< include ../../../system/ADU-11e/selftestResult/gps.json >}}
+```
+
+```sql
+{{< include ../../../system/ADU-11e/selftestResult/gps.sql >}}
+```
+
+### led
+
+The self test results for the LEDs or LED board. <br>
+
+```json{{< include ../../../system/ADU-11e/selftestResult/led.json >}}
+```
+
+```sql
+{{< include ../../../system/ADU-11e/selftestResult/led.sql >}}
+```
+
+### main backplane
+
+The self test results for the main backplane. <br>
+
+```json
+{{< include ../../../system/ADU-11e/selftestResult/main_backplane.json >}}
+```
+
+```sql
+{{< include ../../../system/ADU-11e/selftestResult/main_backplane.sql >}}
+```
+
+### slot
+
+The self test results for each slot. <br>
+```json
+{{< include ../../../system/ADU-11e/selftestResult/slot.json >}}
+```
+
+for slot0 and slot1, you find the important probe resistance here.<br>
+**Partly** you find the results on the **channels page** of the mobile web interface: <br>
+here you can adjust the gain settings and this information is needed here.
+
+```sql
+{{< include ../../../system/ADU-11e/selftestResult/slot.sql >}}
+```
+
+## THE LOG TABLES
+
+ALL log tables have the same structure: 
+- "id" INTEGER , created by inserting,
+- "date_time"	INT (**UTC timestamp**, avoid string parsing, easier to compare and sort)
+- continued with specific fields for each log type.
+
+These tables are growing row by row and logging the system's history.<br>
+The database reader, different from above, need to know the columns.
+
+### gpsLog.db
+The GPS log, for example, logs the GPS status and the number of satellites. <br
+
+```sql
+{{< include ../../../system/ADU-11e/gpsLog/gpsLog.sql >}}
+```
+ latitude and longitude are in ms (milli seconds) as coming from the module.<br>
+ elevation is in m (meters) as coming from the module.<br>
+ sats_tracked is the number of satellites USED by the module. There can be more *visible* satellites.<br>
+ sync_state is 0 = no fix, 1 = 2D fix, 2 = 3D fix, 3 = fully synced, 4 = G4Fix includes system sync.<br>
+ The mobile web interface will show RED until we get 4. You shall **only submit jobs when the system is fully synced**.
+
+### hwLog.db
+The hardware log, for example, logs the system temperature. <br>
+
+```sql
+{{< include ../../../system/ADU-11e/hwLog/hwLog.sql >}}
+```
+Where recording_status is 0 = idle, 1 = recording. <br>
+selftest_status ??
+
+### systemLog.db
+The system log, for example, logs the system events. <br>
+
+```sql
+{{< include ../../../system/ADU-11e/systemLog/systemLog.sql >}}
+```
+
+main_index and sub_index are for main HW component and sub HW component (detail). A short message is generated by the system and stored in the message field. <br>
+
+**priority** is MWI <br>
+
+## systemStatus.db
+
+systemStatus.db contains only id, key and value tables. <br>
+Updated by the firmware every few seconds or on events. <br>
+Treated as read only for the mobile web interface; table is *not* growing. <br>
+
+### adu
+The system status for the system. <br>
+These tables in systemStatus.db are updated by the firmware every few seconds and show the current status of the system. <br>
+The recording status drives the icon on the mobile web interface. <br>
+
+```json
+{{< include ../../../system/ADU-11e/systemStatus/adu.json >}}
+```
+
+```sql
+{{< include ../../../system/ADU-11e/systemStatus/adu.sql >}}
+```
+
+### gps
+The system status for the GPS. <br>
+If sync_state is 4, the GPS is fully synced and you can submit jobs, the GPS symbol on the mobile web interface will be green. <br>
+
+```json
+{{< include ../../../system/ADU-11e/systemStatus/gps.json >}}
+```
+
+```sql
+{{< include ../../../system/ADU-11e/systemStatus/gps.sql >}}
+```
+
+### recording
+The detailed system status for the recording. <br>
+
+```json
+{{< include ../../../system/ADU-11e/systemStatus/recording.json >}}
+```
+
+```sql
+{{< include ../../../system/ADU-11e/systemStatus/recording.sql >}}
+```
+
+The mobile web interface will show the details.
+
+## job.db
+
+This is the essential database for the recording jobs. <br>
+When you submit a job, the job parameters are stored here. <br>
+
+```sql
+{{< include ../../../system/ADU-11e/job/job.sql >}}
+```
+
+Remark: "slots_on" TEXT and  "started" INTEGER are not part of the job.db. They will be appended "on the fly" when the interface submits a job. <br>
+Vice versa, when you open a job from the jobs.db for editing, the "slots_on" and "started" (aka copying back to the job.db) are not copied (truncate). <br>
+The slots_on logic is: E (0,1) always on, H as detected. You may submit "no electric", then E (0,1) are off, H as detected. Mostly for airborne measurements. <br> 
+
+**Syntax: -1 auto, 0 off, 1 on - OR 1, 2, 4, 8 values >= 1**. <br>
+In the **fields** (plural) gains for example, the **POSITION** (-1,-1, 4, ...) is equivalent to the slot number. So the first value is for slot0, the second for slot1, and so on. <br>
+The same applies for the channel types, dipole_lengths, and choppers. <br>
+
+ - "id" INTEGER , created by inserting,
+ - "start_date"	2026-12-31 (UTC, yyyy-mm-dd)
+ - "start_time"	16:30:00 (UTC, hh:mm:ss)
+ - "duration"	36000 (seconds, example 10 minutes = 600 seconds, 1 hour = 3600 seconds)
+ - "sampling_rate"	1024, ..., 131072 (Hz), -1 stop job, -2 detect sensors, 3 shutdown system, 4 reboot system.
+ - "digital_filter"	32, 8, 4, 0
+ - "cal_mode"	off, (always, not to be changed, use special jobs)
+ - "channel_types"	"Ex, Ey, Hx, Hy, Hz, Jx, Jx, Jz"
+ - "choppers"	"-1, -1, -1, -1, -1" : -1 == auto, 0 = off, 1 == on
+ - "gains"	"-1, -1, -1, -1, -1" : -1 == auto or 1, 2, 4, 8 fixed gain
+ - "dipole_lengths"	"100.0, 100.0, 0, 0, 0, 0, 0, 0" : in meters, available for slots 0, 1
+ - "use_atss"	0 (default off, set to 1 to use ATSS)
+ - "copy_to_usb"	0 (default off, set to 1 to copy files to USB after recording, leave the drive connected!)
+ - "sub_cycle"	0 (default off, set to >0 to use sub-cycles, example 120 for 2 minutes)
+ - "sub_duration"	0 (default off, set to >0 to use sub-cycles, example 32 for 32 seconds)
+ - "sub_filter"	0 (default off, set to >0 to use sub-filter, example 32 for a sub job with 64 Hz sample frequency if the main job is 2048 Hz)
+ - "power_off_limit"	0 (default off, set to >0, for example 10.9 to power off the system when the battery voltage drops below this limit, in Volt. This can be helpful in case your batteries want that. The system may power off at 9.8 V latest.)
+
+
+## Logic
+### shots
+sub_cycle and sub_duration > 0, sub_filter = 0 AND digital_filter > 0.
+```{mermaid}
+graph TD
+    A[job <br> sampling_rate 131 kHz <br> duration 3600 s] --> B[sub_cycle 120 s <br> sub_duration32s]
+    A --> C[digital_filter 4]
+    C --> D[one file set <br>32 kHz ats / atss 3600 s]
+    B --> E[ 29 file sets <br> 131 kHz]
+
+```
+
+### filter
+sub_filter > 0, sub_cycle and sub_duration = 0 AND digital_filter = 0. <br>
+If **ONLY** sub_filter is set, we get a filtered set of files for *all time**. That is the typical long term recording where you may want to download a low sample frequency version. 
+```{mermaid}
+
+graph TD
+    A[job <br> sampling_rate 512 Hz <br> duration N s] --> B[sub_filter 32]
+    A --> C[one set of files <br> 512 Hz]
+    B --> E[ one set of files <br> 16 Hz]
+
+```
+
+### straight 
+sub_cycle and sub_duration = 0, sub_filter = 0 AND digital_filter >= 0. <br>
+```{mermaid}
+graph TD
+		A[job <br> sampling_rate 512 Hz <br> duration N s] --> B[one set of files <br> 512 Hz]
+```
+
+
+## jobs.db
+
+jobs.db contains the recording jobs. <br>
+When you submit a job, the job parameters are stored (copied) here. <br>
+If you edit a job, the table row will be copied into job.db for editing, but the original row will stay in job.db. <br>
+When the system starts a job, the "started" field will be set to 1 by the system. <br>
+
+```sql
+{{< include ../../../system/ADU-11e/jobs/jobs.sql >}}
+```
+
+As mentioned above, "slots_on" TEXT and  "started" INTEGER are not part of the job.db. They will be appended "on the fly" when the interface submits a job to the jobs.db. <br>

@@ -1,0 +1,15 @@
+{
+  "sampling_rate": 0,
+  "buffer_size": 0,
+  "num_buffers": 0,
+  "used_slots": "",
+  "remaining_job_time": 0,
+  "time_to_next_job": 0,
+  "target_directory": "",
+  "ts_directory_selected": "",
+  "ts_act_buffer_offset": 0,
+  "ts_start": 0,
+  "ts_stop": 0,
+  "ts_act_buffer_step_size": 0,
+  "ts_display_mode": 2
+}

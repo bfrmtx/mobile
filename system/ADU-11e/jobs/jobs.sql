@@ -1,0 +1,22 @@
+CREATE TABLE "jobs" (
+	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+	"start_date"	TEXT,
+	"start_time"	TEXT,
+	"duration"	INTEGER,
+	"sampling_rate"	INTEGER,
+	"digital_filter"	INTEGER,
+	"cal_mode"	TEXT DEFAULT 'off',
+	"channel_types"	TEXT,
+	"choppers"	TEXT,
+	"gains"	TEXT,
+	"dipole_lengths"	TEXT,
+	"use_atss"	INTEGER DEFAULT 0,
+	"copy_to_usb"	INTEGER DEFAULT 0,
+	"sub_cycle"	INTEGER,
+	"sub_duration"	INTEGER,
+	"sub_filter"	INTEGER,
+	"station_id" STRING,
+	"power_off_limit" REAL,
+	"slots_on" TEXT,
+	"started"	INTEGER
+)

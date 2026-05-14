@@ -1,0 +1,194 @@
+a {
+  color: #FFFFFF;
+}
+
+/*! topnav_adu #_004f7c_  */
+
+.topnav_adu {
+  background-color: #004f7c
+
+;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  top:0;
+  width: 100%;
+  z-index: 3;
+}
+
+.topnav_adu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #004f7c
+
+;
+}
+
+.topnav_adu li a {
+  display: block;
+  padding: 10px 10px;
+  text-decoration: none;
+}
+
+.topnav_adu li a:hover,
+.topnav_adu .menu-btn:hover {
+  background-color: #FFFFFF;
+  color: #004f7c
+
+;
+}
+
+.topnav_adu .logo {
+  display: block;
+  float: left;
+  font-size: 1em;
+  padding: 10px 10px;
+  text-decoration: none;
+}
+
+/*! menu */
+.topnav_adu .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/*! menu icon */
+.topnav_adu .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  padding: 15px 5px;
+  position: relative;
+  user-select: none;
+  max-height: 30px;
+  max-width: 30px;
+  min-height: 30px;
+  min-width: 30px;
+}
+
+.topnav_adu .menu-icon .navicon {
+  background: #FFFFFF;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.topnav_adu .menu-icon .navicon:before,
+.topnav_adu .menu-icon .navicon:after {
+  background: #FFFFFF;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.topnav_adu .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.topnav_adu .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/*! menu btn */
+.topnav_adu .menu-btn {
+  display: none;
+}
+
+.topnav_adu .menu-btn:checked ~ .menu {
+  max-height: 1240px;
+}
+
+.topnav_adu .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.topnav_adu .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.topnav_adu .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.topnav_adu .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.topnav_adu .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/*! Hide the links inside the navigation menu (except for logo/home) */
+.topnav_adu .menuLinksDiv {
+  display: none;
+  overflow:scroll;   
+  max-height:400px;
+}
+
+/*! paint svg with a different color */
+.topnav_adu .icon-green { stroke: limegreen; }
+.topnav_adu .icon-red   { stroke: red; }
+.topnav_adu .icon-yellow { stroke: yellow; }
+.topnav_adu .icon-black { stroke: black; }
+.topnav_adu .icon-white { stroke: white; }
+
+/*! target SVG child elements for inline SVGs */
+.topnav_adu .icon-green path,
+.topnav_adu .icon-green circle,
+.topnav_adu .icon-green rect,
+.topnav_adu .icon-green line,
+.topnav_adu .icon-green polyline,
+.topnav_adu .icon-green polygon { stroke: limegreen; fill: none; }
+
+.topnav_adu .icon-red path,
+.topnav_adu .icon-red circle,
+.topnav_adu .icon-red rect,
+.topnav_adu .icon-red line,
+.topnav_adu .icon-red polyline,
+.topnav_adu .icon-red polygon { stroke: red; fill: none; }
+
+.topnav_adu .icon-yellow path,
+.topnav_adu .icon-yellow circle,
+.topnav_adu .icon-yellow rect,
+.topnav_adu .icon-yellow line,
+.topnav_adu .icon-yellow polyline,
+.topnav_adu .icon-yellow polygon { stroke: yellow; fill: none; }
+
+.topnav_adu .icon-black path,
+.topnav_adu .icon-black circle,
+.topnav_adu .icon-black rect,
+.topnav_adu .icon-black line,
+.topnav_adu .icon-black polyline,
+.topnav_adu .icon-black polygon { stroke: black; fill: none; }
+
+.topnav_adu .icon-white path,
+.topnav_adu .icon-white circle,
+.topnav_adu .icon-white rect,
+.topnav_adu .icon-white line,
+.topnav_adu .icon-white polyline,
+.topnav_adu .icon-white polygon { stroke: white; fill: none; }
+
+/*! status icon sizing and layout */
+.status-icon { display: inline-flex; align-items: center; }
+.status-icon svg { width: 28px; height: 28px; }
+.status-icon svg * {
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/*! status icons bar floated right inside header */
+.topnav_adu .status-icons-bar {
+  float: right;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding-right: 8px;
+  gap: 4px;
+}
