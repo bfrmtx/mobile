@@ -38,7 +38,7 @@ this new interface already uses the naming conventions of MTH5
     - MP H~y~ 6
     - MP H~z~ 7
   - **Channel**: that is a **(sensor + slot)** = the data stream, e.g. E~x~, E~y~, H~x~, H~y~, H~z~, *MP* H~x~, *MP* H~y~, *MP* H~z~. <br>
-  *Channel number must not necessarily be the same as the slot number!* <br> For technical details ref.: [ADC](../flows/adc.qmd) and [Slots Flow](../flows/slots-flow.qmd).
+  *Channel number must not necessarily be the same as the slot number!* <br> For technical details ref.: [ADC](flows/adc.qmd) and [Slots Flow](flows/slots-flow.qmd).
 
 
 

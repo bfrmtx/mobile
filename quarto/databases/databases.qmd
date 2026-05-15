@@ -23,11 +23,11 @@ Sample frequencies and digital filter apply to ALL channels, so they are here.<b
 As fixed value the **disk size** is here, to converted to **int** later. This is the total size at all of the data partition.  <br>
 
 ```json
-{{< include ../../../system/ADU-11e/hwConfig/adu.json >}}
+{{< include ../../system/ADU-11e/hwConfig/adu.json >}}
 ```
 
 ```sql
-{{< include ../../../system/ADU-11e/hwConfig/adu.sql >}}
+{{< include ../../system/ADU-11e/hwConfig/adu.sql >}}
 ```
 
 ### con
@@ -35,32 +35,32 @@ About the connector board. <br>
 The connector board is the same for all ADU-10e / 11e
 
 ```json
-{{< include ../../../system/ADU-11e/hwConfig/con.json >}}
+{{< include ../../system/ADU-11e/hwConfig/con.json >}}
 ```
 
 ```sql
-{{< include ../../../system/ADU-11e/hwConfig/con.sql >}}
+{{< include ../../system/ADU-11e/hwConfig/con.sql >}}
 ```
 
 ### gps
 About the GPS. <br>
 
 ```json
-{{< include ../../../system/ADU-11e/hwConfig/gps.json >}}
+{{< include ../../system/ADU-11e/hwConfig/gps.json >}}
 ```
 
 ```sql
-{{< include ../../../system/ADU-11e/hwConfig/gps.sql >}}
+{{< include ../../system/ADU-11e/hwConfig/gps.sql >}}
 ```
 
 ### led
 About the LEDs or LED board. <br>
 ```json
-{{< include ../../../system/ADU-11e/hwConfig/led.json >}}
+{{< include ../../system/ADU-11e/hwConfig/led.json >}}
 ```
 
 ```sql
-{{< include ../../../system/ADU-11e/hwConfig/led.sql >}}
+{{< include ../../system/ADU-11e/hwConfig/led.sql >}}
 ```
 
 ### slot
@@ -75,12 +75,12 @@ is 5 for ADU-10e and 8 for ADU-11e and coded in *config.php*. That avoids scanni
 We have slot0 ... slot4 for ADU-10e and slot0 ... slot7 for ADU-11e. <br>
 
 ```json
-{{< include ../../../system/ADU-11e/hwConfig/slot.json >}}
+{{< include ../../system/ADU-11e/hwConfig/slot.json >}}
 ```
 The slot aquires the sensor information, so the sensor type and serial number are here. <br>
 
 ```sql
-{{< include ../../../system/ADU-11e/hwConfig/slot.sql >}}
+{{< include ../../system/ADU-11e/hwConfig/slot.sql >}}
 ```
 
 "**detect sensors**" will update the sensor type and serial. For slot0 and slot1 sensor type can be set manually.
@@ -96,43 +96,43 @@ We treat as read only for the mobile web interface. <br>
 
 The self test results for the connector board. <br>
 ```json
-{{< include ../../../system/ADU-11e/selftestResult/con.json >}}
+{{< include ../../system/ADU-11e/selftestResult/con.json >}}
 ```
 
 ```sql
-{{< include ../../../system/ADU-11e/selftestResult/con.sql >}}
+{{< include ../../system/ADU-11e/selftestResult/con.sql >}}
 ```
 
 ### cpu
 
 The self test results for the CPU. <br>
-```json{{< include ../../../system/ADU-11e/selftestResult/cpu.json >}}
+```json{{< include ../../system/ADU-11e/selftestResult/cpu.json >}}
 ```
 
 ```sql
-{{< include ../../../system/ADU-11e/selftestResult/cpu.sql >}}
+{{< include ../../system/ADU-11e/selftestResult/cpu.sql >}}
 ```
 
 ### gps
 
 The self test results for the GPS. <br>
 ```json
-{{< include ../../../system/ADU-11e/selftestResult/gps.json >}}
+{{< include ../../system/ADU-11e/selftestResult/gps.json >}}
 ```
 
 ```sql
-{{< include ../../../system/ADU-11e/selftestResult/gps.sql >}}
+{{< include ../../system/ADU-11e/selftestResult/gps.sql >}}
 ```
 
 ### led
 
 The self test results for the LEDs or LED board. <br>
 
-```json{{< include ../../../system/ADU-11e/selftestResult/led.json >}}
+```json{{< include ../../system/ADU-11e/selftestResult/led.json >}}
 ```
 
 ```sql
-{{< include ../../../system/ADU-11e/selftestResult/led.sql >}}
+{{< include ../../system/ADU-11e/selftestResult/led.sql >}}
 ```
 
 ### main backplane
@@ -140,18 +140,18 @@ The self test results for the LEDs or LED board. <br>
 The self test results for the main backplane. <br>
 
 ```json
-{{< include ../../../system/ADU-11e/selftestResult/main_backplane.json >}}
+{{< include ../../system/ADU-11e/selftestResult/main_backplane.json >}}
 ```
 
 ```sql
-{{< include ../../../system/ADU-11e/selftestResult/main_backplane.sql >}}
+{{< include ../../system/ADU-11e/selftestResult/main_backplane.sql >}}
 ```
 
 ### slot
 
 The self test results for each slot. <br>
 ```json
-{{< include ../../../system/ADU-11e/selftestResult/slot.json >}}
+{{< include ../../system/ADU-11e/selftestResult/slot.json >}}
 ```
 
 for slot0 and slot1, you find the important probe resistance here.<br>
@@ -159,7 +159,7 @@ for slot0 and slot1, you find the important probe resistance here.<br>
 here you can adjust the gain settings and this information is needed here.
 
 ```sql
-{{< include ../../../system/ADU-11e/selftestResult/slot.sql >}}
+{{< include ../../system/ADU-11e/selftestResult/slot.sql >}}
 ```
 
 ## THE LOG TABLES
@@ -176,7 +176,7 @@ The database reader, different from above, need to know the columns.
 The GPS log, for example, logs the GPS status and the number of satellites. <br
 
 ```sql
-{{< include ../../../system/ADU-11e/gpsLog/gpsLog.sql >}}
+{{< include ../../system/ADU-11e/gpsLog/gpsLog.sql >}}
 ```
  latitude and longitude are in ms (milli seconds) as coming from the module.<br>
  elevation is in m (meters) as coming from the module.<br>
@@ -188,7 +188,7 @@ The GPS log, for example, logs the GPS status and the number of satellites. <br
 The hardware log, for example, logs the system temperature. <br>
 
 ```sql
-{{< include ../../../system/ADU-11e/hwLog/hwLog.sql >}}
+{{< include ../../system/ADU-11e/hwLog/hwLog.sql >}}
 ```
 Where recording_status is 0 = idle, 1 = recording. <br>
 selftest_status ??
@@ -197,7 +197,7 @@ selftest_status ??
 The system log, for example, logs the system events. <br>
 
 ```sql
-{{< include ../../../system/ADU-11e/systemLog/systemLog.sql >}}
+{{< include ../../system/ADU-11e/systemLog/systemLog.sql >}}
 ```
 
 main_index and sub_index are for main HW component and sub HW component (detail). A short message is generated by the system and stored in the message field. <br>
@@ -216,11 +216,11 @@ These tables in systemStatus.db are updated by the firmware every few seconds an
 The recording status drives the icon on the mobile web interface. <br>
 
 ```json
-{{< include ../../../system/ADU-11e/systemStatus/adu.json >}}
+{{< include ../../system/ADU-11e/systemStatus/adu.json >}}
 ```
 
 ```sql
-{{< include ../../../system/ADU-11e/systemStatus/adu.sql >}}
+{{< include ../../system/ADU-11e/systemStatus/adu.sql >}}
 ```
 
 ### gps
@@ -228,22 +228,22 @@ The system status for the GPS. <br>
 If sync_state is 4, the GPS is fully synced and you can submit jobs, the GPS symbol on the mobile web interface will be green. <br>
 
 ```json
-{{< include ../../../system/ADU-11e/systemStatus/gps.json >}}
+{{< include ../../system/ADU-11e/systemStatus/gps.json >}}
 ```
 
 ```sql
-{{< include ../../../system/ADU-11e/systemStatus/gps.sql >}}
+{{< include ../../system/ADU-11e/systemStatus/gps.sql >}}
 ```
 
 ### recording
 The detailed system status for the recording. <br>
 
 ```json
-{{< include ../../../system/ADU-11e/systemStatus/recording.json >}}
+{{< include ../../system/ADU-11e/systemStatus/recording.json >}}
 ```
 
 ```sql
-{{< include ../../../system/ADU-11e/systemStatus/recording.sql >}}
+{{< include ../../system/ADU-11e/systemStatus/recording.sql >}}
 ```
 
 The mobile web interface will show the details.
@@ -254,7 +254,7 @@ This is the essential database for the recording jobs. <br>
 When you submit a job, the job parameters are stored here. <br>
 
 ```sql
-{{< include ../../../system/ADU-11e/job/job.sql >}}
+{{< include ../../system/ADU-11e/job/job.sql >}}
 ```
 
 Remark: "slots_on" TEXT and  "started" INTEGER are not part of the job.db. They will be appended "on the fly" when the interface submits a job. <br>
@@ -324,7 +324,7 @@ If you edit a job, the table row will be copied into job.db for editing, but the
 When the system starts a job, the "started" field will be set to 1 by the system. <br>
 
 ```sql
-{{< include ../../../system/ADU-11e/jobs/jobs.sql >}}
+{{< include ../../system/ADU-11e/jobs/jobs.sql >}}
 ```
 
 As mentioned above, "slots_on" TEXT and  "started" INTEGER are not part of the job.db. They will be appended "on the fly" when the interface submits a job to the jobs.db. <br>

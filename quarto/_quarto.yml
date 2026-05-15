@@ -14,11 +14,11 @@ book:
     - index.qmd
     - part: "Databases"
       chapters:
-        - qmd/databases/databases.qmd
+        - databases/databases.qmd
     - part: "Flows"
       chapters:
-        - qmd/flows/slots-flow.qmd
-        - qmd/flows/adc.qmd
+        - flows/slots-flow.qmd
+        - flows/adc.qmd
 
 format:
   html:
