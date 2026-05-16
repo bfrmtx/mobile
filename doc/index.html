@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-05-15">
+<meta name="dcterms.date" content="2026-05-16">
 
 <title>Mobile WebInterface</title>
 <style>
@@ -164,6 +164,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose"><span class="header-section-number">1</span> Purpose</a>
   <ul class="collapse">
+  <li><a href="#mwi" id="toc-mwi" class="nav-link" data-scroll-target="#mwi"><span class="header-section-number">1.0.1</span> MWI</a></li>
   <li><a href="#scope" id="toc-scope" class="nav-link" data-scroll-target="#scope"><span class="header-section-number">1.1</span> Scope</a></li>
   <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">1.2</span> Definitions</a></li>
   <li><a href="#auto-detection" id="toc-auto-detection" class="nav-link" data-scroll-target="#auto-detection"><span class="header-section-number">1.3</span> Auto Detection</a></li>
@@ -191,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 15, 2026</p>
+      <p class="date">May 16, 2026</p>
     </div>
   </div>
   
@@ -207,6 +208,11 @@ ul.task-list li input[type="checkbox"] {
 <h1 data-number="1"><span class="header-section-number">1</span> Purpose</h1>
 <p>Add introductory material for operators and developers.</p>
 <p>The intent is a error free operation of the ADU system for 95% of the use cases. For the remaining 5% the expert interface on the laptop can be used. <br> The mobile web interface is designed to be used on a smartphone, tablet or laptop.</p>
+<section id="mwi" class="level3" data-number="1.0.1">
+<h3 data-number="1.0.1" class="anchored" data-anchor-id="mwi"><span class="header-section-number">1.0.1</span> MWI</h3>
+<p>Call php <code>mobile/system/ADU-11e/create_system.php</code> and I should generate a ADU-11e system with 8 channels. <br> Location should be $HOME/tmp/sqlite_db_created.</p>
+<p>Naming convention has changed to MTH5; sample_freq(uency) is now sampling_rate, and float values are now int (Hz). <br> site -&gt; station <br> filter mtx4 -&gt; 4<br> So watch out please.</p>
+</section>
 <section id="scope" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="scope"><span class="header-section-number">1.1</span> Scope</h2>
 <p>Understanding the databases structure on an advanced level.</p>

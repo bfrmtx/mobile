@@ -9,6 +9,16 @@ Add introductory material for operators and developers.
 The intent is a error free operation of the ADU system for 95% of the use cases. For the remaining 5% the expert interface on the laptop can be used. <br>
 The mobile web interface is designed to be used on a smartphone, tablet or laptop.
 
+### MWI
+
+Call php `mobile/system/ADU-11e/create_system.php` and I should generate a ADU-11e system with 8 channels. <br>
+Location should be $HOME/tmp/sqlite_db_created.
+
+Naming convention has changed to MTH5; sample_freq(uency) is now sampling_rate, and float values are now int (Hz). <br>
+site -> station <br>
+filter mtx4 -> 4<br>
+So watch out please.
+
 ## Scope
 
 Understanding the databases structure on an advanced level.
