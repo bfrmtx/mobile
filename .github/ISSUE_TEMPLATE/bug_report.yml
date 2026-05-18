@@ -1,0 +1,36 @@
+name: Bug report
+description: Report a defect in the mobile ADU web interface.
+title: "bug: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the problem and expected behavior.
+      placeholder: What happened, and what should have happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: List the exact steps needed to reproduce the issue.
+      placeholder: |
+        1. Open ...
+        2. Tap ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Device or browser
+      description: Include browser, mobile OS, or ADU context if relevant.
+      placeholder: Safari on iPhone 15, ADU-11e job page
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Add screenshots, logs, or any related details.

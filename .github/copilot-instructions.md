@@ -1,0 +1,1 @@
+Repository-level Copilot instructions belong under the Git repository root.
