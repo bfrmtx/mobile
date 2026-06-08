@@ -30,3 +30,5 @@ format:
 
 execute:
   freeze: auto
+
+# quarto preview . --port 3333 

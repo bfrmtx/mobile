@@ -175,6 +175,7 @@ class database {
         "duration"	INTEGER,
         "sampling_rate"	INTEGER,
         "digital_filter"	INTEGER,
+        "split_main"	INTEGER DEFAULT 0,
         "cal_mode"	TEXT DEFAULT "off",
         "channel_types"	TEXT,
         "choppers"	TEXT,
@@ -185,6 +186,7 @@ class database {
         "sub_cycle" INTEGER,
         "sub_duration" INTEGER,
         "sub_filter" INTEGER,
+        "split_sub" INTEGER DEFAULT 0,
         "power_off_limit" REAL,
         "station_id" STRING' . $extra_columns_sql . '
       )');

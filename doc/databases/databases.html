@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-12eeb4b20e9f5a2b0bfc604bfaf942bb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -579,19 +579,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"duration"</span>  <span class="dt">INTEGER</span>,</span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sampling_rate"</span> <span class="dt">INTEGER</span>,</span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"digital_filter"</span>    <span class="dt">INTEGER</span>,</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"cal_mode"</span>  TEXT <span class="kw">DEFAULT</span> <span class="st">'off'</span>,</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"channel_types"</span> TEXT,</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"choppers"</span>  TEXT,</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"gains"</span> TEXT,</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"dipole_lengths"</span>    TEXT,</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"use_atss"</span>  <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"copy_to_usb"</span>   <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_cycle"</span> <span class="dt">INTEGER</span>,</span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_duration"</span>  <span class="dt">INTEGER</span>,</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_filter"</span>    <span class="dt">INTEGER</span>,</span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"power_off_limit"</span> <span class="dt">REAL</span>,</span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"station_id"</span> STRING</span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"split_main"</span>    <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"cal_mode"</span>  TEXT <span class="kw">DEFAULT</span> <span class="st">'off'</span>,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"channel_types"</span> TEXT,</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"choppers"</span>  TEXT,</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"gains"</span> TEXT,</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"dipole_lengths"</span>    TEXT,</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"use_atss"</span>  <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"copy_to_usb"</span>   <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_cycle"</span> <span class="dt">INTEGER</span>,</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_duration"</span>  <span class="dt">INTEGER</span>,</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_filter"</span>    <span class="dt">INTEGER</span>,</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"split_sub"</span> <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"power_off_limit"</span> <span class="dt">REAL</span>,</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"station_id"</span> STRING</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Remark: “slots_on” TEXT and “started” INTEGER are not part of the job.db. They will be appended “on the fly” when the interface submits a job. <br> Vice versa, when you open a job from the jobs.db for editing, the “slots_on” and “started” (aka copying back to the job.db) are not copied (truncate). <br> The slots_on logic is: E (0,1) always on, H as detected. You may submit “no electric”, then E (0,1) are off, H as detected. Mostly for airborne measurements. <br></p>
 <p><strong>Syntax: -1 auto, 0 off, 1 on - OR 1, 2, 4, 8 values &gt;= 1</strong>. <br> In the <strong>fields</strong> (plural) gains for example, the <strong>POSITION</strong> (-1,-1, 4, …) is equivalent to the slot number. So the first value is for slot0, the second for slot1, and so on. <br> The same applies for the channel types, dipole_lengths, and choppers. <br></p>
 <ul>
@@ -601,6 +603,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>“duration” 36000 (seconds, example 10 minutes = 600 seconds, 1 hour = 3600 seconds)</li>
 <li>“sampling_rate” 1024, …, 131072 (Hz), -1 stop job, -2 detect sensors, 3 shutdown system, 4 reboot system.</li>
 <li>“digital_filter” 32, 8, 4, 0</li>
+<li>“split_main” 0 (default off, set to &gt;0 to split main job into multiple files, example 409600 for 400 MB files), covered by GUI for main job splitting, but not yet implemented in the system, so no effect for now.</li>
 <li>“cal_mode” off, (always, not to be changed, use special jobs)</li>
 <li>“channel_types” “Ex, Ey, Hx, Hy, Hz, Jx, Jx, Jz”</li>
 <li>“choppers” “-1, -1, -1, -1, -1” : -1 == auto, 0 = off, 1 == on</li>
@@ -611,6 +614,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>“sub_cycle” 0 (default off, set to &gt;0 to use sub-cycles, example 120 for 2 minutes)</li>
 <li>“sub_duration” 0 (default off, set to &gt;0 to use sub-cycles, example 32 for 32 seconds)</li>
 <li>“sub_filter” 0 (default off, set to &gt;0 to use sub-filter, example 32 for a sub job with 64 Hz sample frequency if the main job is 2048 Hz)</li>
+<li>“split_sub” 0 (default off, set to &gt;0 to split sub job into multiple files, example 102400 for 100 MB files), covered by GUI for sub job splitting, but not yet implemented in the system, so no effect for now.</li>
 <li>“power_off_limit” 0 (default off, set to &gt;0, for example 10.9 to power off the system when the battery voltage drops below this limit, in Volt. This can be helpful in case your batteries want that. The system may power off at 9.8 V latest.)</li>
 </ul>
 </section>
@@ -646,9 +650,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">graph TD
-    A[job &lt;br&gt; sampling_rate 512 Hz &lt;br&gt; duration N s] --&gt; B[sub_filter 32]
-    A --&gt; C[one set of files &lt;br&gt; 512 Hz]
-    B --&gt; E[ one set of files &lt;br&gt; 16 Hz]
+    A[job &lt;br&gt; sampling_rate 1024 Hz &lt;br&gt; duration N s] --&gt; B[sub_filter 32]
+    A --&gt; C[one set of files &lt;br&gt; 1024 Hz]
+    B --&gt; E[ one set of files &lt;br&gt; 32 Hz]
 
 </pre>
 </div>
@@ -666,7 +670,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">graph TD
-        A[job &lt;br&gt; sampling_rate 512 Hz &lt;br&gt; duration N s] --&gt; B[one set of files &lt;br&gt; 512 Hz]
+        A[job &lt;br&gt; sampling_rate 1024 Hz &lt;br&gt; duration N s] --&gt; B[one set of files &lt;br&gt; 1024 Hz]
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -685,21 +689,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"duration"</span>  <span class="dt">INTEGER</span>,</span>
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sampling_rate"</span> <span class="dt">INTEGER</span>,</span>
 <span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"digital_filter"</span>    <span class="dt">INTEGER</span>,</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"cal_mode"</span>  TEXT <span class="kw">DEFAULT</span> <span class="st">'off'</span>,</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"channel_types"</span> TEXT,</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"choppers"</span>  TEXT,</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"gains"</span> TEXT,</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"dipole_lengths"</span>    TEXT,</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"use_atss"</span>  <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"copy_to_usb"</span>   <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_cycle"</span> <span class="dt">INTEGER</span>,</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_duration"</span>  <span class="dt">INTEGER</span>,</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_filter"</span>    <span class="dt">INTEGER</span>,</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"station_id"</span> STRING,</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"power_off_limit"</span> <span class="dt">REAL</span>,</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"slots_on"</span> TEXT,</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"started"</span>   <span class="dt">INTEGER</span></span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"split_main"</span>    <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"cal_mode"</span>  TEXT <span class="kw">DEFAULT</span> <span class="st">'off'</span>,</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"channel_types"</span> TEXT,</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"choppers"</span>  TEXT,</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"gains"</span> TEXT,</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"dipole_lengths"</span>    TEXT,</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"use_atss"</span>  <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"copy_to_usb"</span>   <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_cycle"</span> <span class="dt">INTEGER</span>,</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_duration"</span>  <span class="dt">INTEGER</span>,</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_filter"</span>    <span class="dt">INTEGER</span>,</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"split_sub"</span> <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"station_id"</span> STRING,</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"power_off_limit"</span> <span class="dt">REAL</span>,</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"slots_on"</span> TEXT,</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"started"</span>   <span class="dt">INTEGER</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>As mentioned above, “slots_on” TEXT and “started” INTEGER are not part of the job.db. They will be appended “on the fly” when the interface submits a job to the jobs.db. <br></p>
 
 

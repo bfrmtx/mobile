@@ -15,10 +15,11 @@ class frequency_handler extends job_time {
   protected int $sampling_rate  = 0;                  //!< sampling rate in Hz controlled by virtual rates. this is the SQL sampling_rate field, no direct access from UI.
   private array $native_sampling_rates = [];          //!< array of native sampling rates for this ADU, set by child class (ADU) based on the board type, shall never be changed!
   protected int $digital_filter = 0;                  //!< digital filter setting controlled virtual rates, no direct access from UI.
+  protected int $split_main     = 0;                  //!< split main pipe very N samples into a new file
   protected int $sub_cycle      = 0;                  //!< sub-cycle time in seconds, 0 means no sub-cycles, for "shots" (in job class)
   protected int $sub_duration   = 0;                  //!< sub-cycle duration in seconds, for "shots" (in job class)
   protected int $sub_filter     = 0;                  //!< sub_filter filter setting controlled virtual rates, no direct access from UI.
-
+  protected int $split_sub       = 0;                 //!< split sub pipe very N samples into a new file
   private array $virtual_sampling_rates = [];         //!< array of sampling rates for the system
   private int $virtual_sampling_rate = 0;             //!< current virtual sampling rate, set by virtual_sampling_rates, no direct access from UI.
 
@@ -148,6 +149,28 @@ class frequency_handler extends job_time {
   }
   public function get_sub_filter(): int {
     return $this->sub_filter;
+  }
+
+  public function get_split_main(): int {
+    return $this->split_main;
+  }
+
+  public function set_split_main(int $samples): void {
+    if ($samples < 0) {
+      throw new Exception("Invalid split main value. Please enter a non-negative integer.");
+    }
+    $this->split_main = $samples;
+  }
+
+  public function get_split_sub(): int {
+    return $this->split_sub;
+  }
+
+  public function set_split_sub(int $samples): void {
+    if ($samples < 0) {
+      throw new Exception("Invalid split sub value. Please enter a non-negative integer.");
+    }
+    $this->split_sub = $samples;
   }
 
   public function set_sub_cycle_mins(int $mins): void {
@@ -298,6 +321,12 @@ class frequency_handler extends job_time {
         $updated = true;
       } elseif ($what === 'shot_rate' && $value !== null) {
         $this->set_shot_rate(intval($value));
+        $updated = true;
+      } elseif ($what === 'split_main' && $value !== null) {
+        $this->set_split_main(intval($value));
+        $updated = true;
+      } elseif ($what === 'split_sub' && $value !== null) {
+        $this->set_split_sub(intval($value));
         $updated = true;
       }
     }

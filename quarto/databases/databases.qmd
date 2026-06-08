@@ -271,6 +271,7 @@ The same applies for the channel types, dipole_lengths, and choppers. <br>
  - "duration"	36000 (seconds, example 10 minutes = 600 seconds, 1 hour = 3600 seconds)
  - "sampling_rate"	1024, ..., 131072 (Hz), -1 stop job, -2 detect sensors, 3 shutdown system, 4 reboot system.
  - "digital_filter"	32, 8, 4, 0
+ - "split_main" 0 (default off, set to >0 to split main job into multiple files, example 409600 for 400 MB files), covered by GUI for main job splitting, but not yet implemented in the system, so no effect for now.
  - "cal_mode"	off, (always, not to be changed, use special jobs)
  - "channel_types"	"Ex, Ey, Hx, Hy, Hz, Jx, Jx, Jz"
  - "choppers"	"-1, -1, -1, -1, -1" : -1 == auto, 0 = off, 1 == on
@@ -281,6 +282,7 @@ The same applies for the channel types, dipole_lengths, and choppers. <br>
  - "sub_cycle"	0 (default off, set to >0 to use sub-cycles, example 120 for 2 minutes)
  - "sub_duration"	0 (default off, set to >0 to use sub-cycles, example 32 for 32 seconds)
  - "sub_filter"	0 (default off, set to >0 to use sub-filter, example 32 for a sub job with 64 Hz sample frequency if the main job is 2048 Hz)
+ - "split_sub" 0 (default off, set to >0 to split sub job into multiple files, example 102400 for 100 MB files), covered by GUI for sub job splitting, but not yet implemented in the system, so no effect for now.
  - "power_off_limit"	0 (default off, set to >0, for example 10.9 to power off the system when the battery voltage drops below this limit, in Volt. This can be helpful in case your batteries want that. The system may power off at 9.8 V latest.)
 
 
@@ -302,9 +304,9 @@ If **ONLY** sub_filter is set, we get a filtered set of files for *all time**. T
 ```{mermaid}
 
 graph TD
-    A[job <br> sampling_rate 512 Hz <br> duration N s] --> B[sub_filter 32]
-    A --> C[one set of files <br> 512 Hz]
-    B --> E[ one set of files <br> 16 Hz]
+    A[job <br> sampling_rate 1024 Hz <br> duration N s] --> B[sub_filter 32]
+    A --> C[one set of files <br> 1024 Hz]
+    B --> E[ one set of files <br> 32 Hz]
 
 ```
 
@@ -312,7 +314,7 @@ graph TD
 sub_cycle and sub_duration = 0, sub_filter = 0 AND digital_filter >= 0. <br>
 ```{mermaid}
 graph TD
-		A[job <br> sampling_rate 512 Hz <br> duration N s] --> B[one set of files <br> 512 Hz]
+		A[job <br> sampling_rate 1024 Hz <br> duration N s] --> B[one set of files <br> 1024 Hz]
 ```
 
 

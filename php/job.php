@@ -16,6 +16,7 @@ class job extends adu {
   // Use get_duration() for col 3 / and set_*() to access them.
   // $sampling_rate;                          // sampling rate in Hz controlled by frequency_handler class
   // $digital_filter                          // setting controlled by frequency_handler class, no direct access from UI.
+  // $split_main                              // setting controlled by frequency_handler class, no direct access from UI.
   public string $cal_mode       = 'off';
   //  $channel_types  = [];                   // per-slot channel type settings in slot class, adu creates array
   //  $choppers       = [];                   // per-slot chopper settings in sensor class via slot class , adu creates array
@@ -26,6 +27,7 @@ class job extends adu {
   // $sub_cycle      = 0;          // via frequency handler
   // $sub_duration   = 0;          // via frequency handler
   // $sub_filter     = 0;          // via frequency handler
+  // $split_sub     = 0;           // via frequency handler
   public float  $power_off_limit = 10.0;        // power off limit in W, if the estimated power consumption exceeds this limit, the job will not be started (in job class)
   public string   $station_id        = '';          //!< site identifier; not managed here
   // end job table columns
@@ -120,6 +122,7 @@ class job extends adu {
     }
     $this->sampling_rate = intval($row['sampling_rate'] ?? $this->sampling_rate);       // for frequency handler mainly
     $this->digital_filter = intval($row['digital_filter'] ?? $this->digital_filter);    // for frequency handler
+    $this->split_main = intval($row['split_main'] ?? $this->split_main);                // for frequency handler
     $this->cal_mode = $row['cal_mode'] ?? $this->cal_mode;
     // for the arrays, we need to convert the CSV string back to an array -> they will go to the adu and their slots and sensors
     $this->channel_types = isset($row['channel_types']) ? explode(',', $row['channel_types']) : $this->channel_types;
@@ -132,6 +135,7 @@ class job extends adu {
     $this->sub_cycle = intval($row['sub_cycle'] ?? $this->sub_cycle);                   // for frequency handler
     $this->sub_duration = intval($row['sub_duration'] ?? $this->sub_duration);          // for frequency handler
     $this->sub_filter = intval($row['sub_filter'] ?? $this->sub_filter);                // for frequency handler
+    $this->split_sub = intval($row['split_sub'] ?? $this->split_sub);                   // for frequency handler
     $this->power_off_limit = floatval($row['power_off_limit'] ?? $this->power_off_limit);
     $this->station_id = strval($row['station_id'] ?? $this->station_id);
     $this->init_virtual_rate_from_sql();                                               // for frequency handler
@@ -183,6 +187,7 @@ class job extends adu {
       'duration'   => $this->get_duration(),
       'sampling_rate' => $this->sampling_rate,
       'digital_filter' => $this->digital_filter,
+      'split_main' => $this->split_main,
       'cal_mode' => $this->cal_mode,
       'channel_types' => $this->get_channel_types(), //!< get the channel types from the ADU object as CSV string
       'choppers' => $this->get_choppers(), //!< get the chopper settings from the ADU object as CSV string
@@ -193,6 +198,7 @@ class job extends adu {
       'sub_cycle' => $this->sub_cycle,
       'sub_duration' => $this->sub_duration,
       'sub_filter' => $this->sub_filter,
+      'split_sub' => $this->split_sub,
       'power_off_limit' => $this->power_off_limit,
       'station_id' => $this->station_id,
     ];
