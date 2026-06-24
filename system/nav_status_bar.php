@@ -19,6 +19,7 @@ class nav_status_bar extends status {
     'channels.php' => 'Channels',
     'selftest.php' => 'Selftest Result',
     'jobs.php'     => 'JobDB',
+    'doc/index.html' => 'Assistance',
   ];
 
   public function __construct() {

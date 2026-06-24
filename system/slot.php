@@ -51,9 +51,6 @@ class slot extends sensor {
           $sensor_serial_ = 34;                         // default to 34 if not provided or invalid
         }
       }
-      if (empty($sensor_type_)) {
-        $sensor_type_ = 'EFP-06'; // default to 'EFP-06' if no sensor type is provided; SLOT shall decide
-      }
       parent::__construct($this->slot_num, $sensor_type_, $sensor_serial_);
     } else { // magnetic field sensor slots
       $this->available_channel_types = $this->channel_types_h; // for magnetic field sensor slots we use the magnetic field channel types

@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-06-08">
+<meta name="dcterms.date" content="2026-06-24">
 
 <title>Mobile WebInterface</title>
 <style>
@@ -34,7 +34,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./databases/databases.html" rel="next">
+<link href="./jobs/jobs.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -119,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Databases</span></a>
+ <span class="menu-text">User Guide</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -127,8 +127,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./databases/databases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Databases</span></span></a>
+  <a href="./jobs/jobs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Jobs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./status/status.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Status</span></span></a>
   </div>
 </li>
       </ul>
@@ -136,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Flows</span></a>
+ <span class="menu-text">Developers</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -144,14 +150,26 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./mwi/mwi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">MWI</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./databases/databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Databases</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./flows/slots-flow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Slots Flow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Slots Flow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./flows/adc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ADC</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ADC</span></span></a>
   </div>
 </li>
       </ul>
@@ -162,13 +180,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose"><span class="header-section-number">1</span> Purpose</a>
-  <ul class="collapse">
-  <li><a href="#mwi" id="toc-mwi" class="nav-link" data-scroll-target="#mwi"><span class="header-section-number">1.0.1</span> MWI</a></li>
-  <li><a href="#scope" id="toc-scope" class="nav-link" data-scroll-target="#scope"><span class="header-section-number">1.1</span> Scope</a></li>
-  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">1.2</span> Definitions</a></li>
-  <li><a href="#auto-detection" id="toc-auto-detection" class="nav-link" data-scroll-target="#auto-detection"><span class="header-section-number">1.3</span> Auto Detection</a></li>
-  </ul></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose"><span class="header-section-number">1</span> Purpose</a></li>
   </ul>
 </nav>
 </nav>
@@ -192,7 +204,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 8, 2026</p>
+      <p class="date">June 24, 2026</p>
     </div>
   </div>
   
@@ -208,94 +220,8 @@ ul.task-list li input[type="checkbox"] {
 <h1 data-number="1"><span class="header-section-number">1</span> Purpose</h1>
 <p>Add introductory material for operators and developers.</p>
 <p>The intent is a error free operation of the ADU system for 95% of the use cases. For the remaining 5% the expert interface on the laptop can be used. <br> The mobile web interface is designed to be used on a smartphone, tablet or laptop.</p>
-<section id="mwi" class="level3" data-number="1.0.1">
-<h3 data-number="1.0.1" class="anchored" data-anchor-id="mwi"><span class="header-section-number">1.0.1</span> MWI</h3>
-<p>Call php <code>mobile/system/ADU-11e/create_system.php</code> and I should generate a ADU-11e system with 8 channels. <br> Location should be $HOME/tmp/sqlite_db_created.</p>
-<p>Naming convention has changed to MTH5; sample_freq(uency) is now sampling_rate, and float values are now int (Hz). <br> site -&gt; station <br> filter mtx4 -&gt; 4<br> So watch out please.</p>
-</section>
-<section id="scope" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="scope"><span class="header-section-number">1.1</span> Scope</h2>
-<p>Understanding the databases structure on an advanced level.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>MTH5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>this new interface already uses the naming conventions of MTH5</p>
-<ul>
-<li>station(s) [string]</li>
-<li>sample rate(s) [int, Hz]</li>
-<li>duration(s) [int, s]</li>
-<li>chopper on/off [int 1, 0] to be understood as LF/HF mode [of the coil]</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="definitions" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="definitions"><span class="header-section-number">1.2</span> Definitions</h2>
-<ul>
-<li><strong>Sensor</strong>: item “outside” the ADU, e.g.&nbsp;electrode, coil, clamp.</li>
-<li><strong>Slot</strong>: the physical slot (connector, MP == multi purpose)<br>
-<ul>
-<li>E<sub>x</sub> 0</li>
-<li>E<sub>y</sub> 1</li>
-<li>H<sub>x</sub> 2</li>
-<li>H<sub>y</sub> 3</li>
-<li>H<sub>z</sub> 4</li>
-<li>MP H<sub>x</sub> 5</li>
-<li>MP H<sub>y</sub> 6</li>
-<li>MP H<sub>z</sub> 7</li>
-</ul></li>
-<li><strong>Channel</strong>: that is a <strong>(sensor + slot)</strong> = the data stream, e.g.&nbsp;E<sub>x</sub>, E<sub>y</sub>, H<sub>x</sub>, H<sub>y</sub>, H<sub>z</sub>, <em>MP</em> H<sub>x</sub>, <em>MP</em> H<sub>y</sub>, <em>MP</em> H<sub>z</sub>. <br> <em>Channel number must not necessarily be the same as the slot number!</em> <br> For technical details ref.: <a href="./flows/adc.html">ADC</a> and <a href="./flows/slots-flow.html">Slots Flow</a>.</li>
-</ul>
-</section>
-<section id="auto-detection" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="auto-detection"><span class="header-section-number">1.3</span> Auto Detection</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>slot 0</th>
-<th>slot 1</th>
-<th>slot 2</th>
-<th>slot 3</th>
-<th>slot 4</th>
-<th>slot 5</th>
-<th>slot 6</th>
-<th>slot 7</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>false</td>
-<td>false</td>
-<td>true</td>
-<td>true</td>
-<td>true</td>
-<td>true</td>
-<td>true</td>
-<td>true</td>
-</tr>
-</tbody>
-</table>
-<p>The mobile web interface will let you configure <strong>E</strong> 0 &amp; 1, e.g.&nbsp;E<sub>x</sub>, E<sub>y</sub> of J<sub>x</sub>, J<sub>y</sub> (currents).<br> Slots &gt; 1 are detected and treated as <strong>H</strong> (magnetic) by default. <br></p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -703,8 +629,8 @@ ul.task-list li input[type="checkbox"] {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./databases/databases.html" class="pagination-link" aria-label="Databases">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Databases</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./jobs/jobs.html" class="pagination-link" aria-label="Jobs">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Jobs</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; ADC – Mobile WebInterface</title>
+<title>3&nbsp; Status – Mobile WebInterface</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,7 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../flows/slots-flow.html" rel="prev">
+<link href="../mwi/mwi.html" rel="next">
+<link href="../jobs/jobs.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -84,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mwi/mwi.html">Developers</a></li><li class="breadcrumb-item"><a href="../flows/adc.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ADC</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../jobs/jobs.html">User Guide</a></li><li class="breadcrumb-item"><a href="../status/status.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Status</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -132,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../status/status.html" class="sidebar-item-text sidebar-link">
+  <a href="../status/status.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Status</span></span></a>
   </div>
 </li>
@@ -167,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../flows/adc.html" class="sidebar-item-text sidebar-link active">
+  <a href="../flows/adc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ADC</span></span></a>
   </div>
 </li>
@@ -179,14 +180,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">7.1</span> Overview</a>
-  <ul class="collapse">
-  <li><a href="#channel-measurement-setup-with-mfs" id="toc-channel-measurement-setup-with-mfs" class="nav-link" data-scroll-target="#channel-measurement-setup-with-mfs"><span class="header-section-number">7.1.1</span> 8 Channel Measurement Setup with MFS</a></li>
-  <li><a href="#channel-measurement-setup-with-mfs-1" id="toc-channel-measurement-setup-with-mfs-1" class="nav-link" data-scroll-target="#channel-measurement-setup-with-mfs-1"><span class="header-section-number">7.1.2</span> 5 Channel Measurement Setup with MFS</a></li>
-  <li><a href="#channel-measurement-setup-with-shft-or-fgs" id="toc-channel-measurement-setup-with-shft-or-fgs" class="nav-link" data-scroll-target="#channel-measurement-setup-with-shft-or-fgs"><span class="header-section-number">7.1.3</span> 5 Channel Measurement Setup with SHFT or FGS</a></li>
-  <li><a href="#channel-measurement-emap-or-current-clamp" id="toc-channel-measurement-emap-or-current-clamp" class="nav-link" data-scroll-target="#channel-measurement-emap-or-current-clamp"><span class="header-section-number">7.1.4</span> 2 Channel Measurement EMAP or Current Clamp</a></li>
-  </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.2</span> Summary</a></li>
+  <li><a href="#gps" id="toc-gps" class="nav-link active" data-scroll-target="#gps"><span class="header-section-number">3.1</span> GPS</a></li>
+  <li><a href="#system" id="toc-system" class="nav-link" data-scroll-target="#system"><span class="header-section-number">3.2</span> System</a></li>
   </ul>
 </nav>
 </nav>
@@ -197,9 +192,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mwi/mwi.html">Developers</a></li><li class="breadcrumb-item"><a href="../flows/adc.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ADC</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../jobs/jobs.html">User Guide</a></li><li class="breadcrumb-item"><a href="../status/status.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Status</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ADC</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Status</span></h1>
 </div>
 
 
@@ -216,541 +211,11 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">7.1</span> Overview</h2>
-<p>The ADU-11e has two ADCs, each with 8 channels, <strong>A</strong> and <strong>B</strong>. They are working in a combined mode.</p>
-<section id="channel-measurement-setup-with-mfs" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="channel-measurement-setup-with-mfs"><span class="header-section-number">7.1.1</span> 8 Channel Measurement Setup with MFS</h3>
-<table>
-<thead>
-<tr>
-<th>
-Connector
-</th>
-<th>
-Slot
-</th>
-<th>
-Chan
-</th>
-<th>
-AD
-</th>
-<th>
-Type
-</th>
-<th>
-Name
-</th>
-</tr>
-</thead>
-<tbody>
-<tr style="background-color:#f9a825;">
-<td>
-S → N
-</td>
-<td>
-0
-</td>
-<td>
-0
-</td>
-<td>
-A 0
-</td>
-<td>
-E<sub>x</sub>
-</td>
-<td>
-C000_TEx
-</td>
-</tr>
-<tr style="background-color:#f9a825;">
-<td>
-E → W
-</td>
-<td>
-1
-</td>
-<td>
-1
-</td>
-<td>
-A 1
-</td>
-<td>
-E<sub>y</sub>
-</td>
-<td>
-C001_TEy
-</td>
-</tr>
-<tr style="background-color:#42a5f5;">
-<td>
-H<sub>x</sub>
-</td>
-<td>
-2
-</td>
-<td>
-2
-</td>
-<td>
-A 2
-</td>
-<td>
-H<sub>x</sub>
-</td>
-<td>
-C002_THx
-</td>
-</tr>
-<tr style="background-color:#42a5f5;">
-<td>
-H<sub>y</sub>
-</td>
-<td>
-3
-</td>
-<td>
-3
-</td>
-<td>
-B 0
-</td>
-<td>
-H<sub>y</sub>
-</td>
-<td>
-C003_THy
-</td>
-</tr>
-<tr style="background-color:#42a5f5;">
-<td>
-H<sub>z</sub>
-</td>
-<td>
-4
-</td>
-<td>
-4
-</td>
-<td>
-B 1
-</td>
-<td>
-H<sub>z</sub>
-</td>
-<td>
-C004_THz
-</td>
-</tr>
-<tr style="background-color:#66bb6a;">
-<td>
-MP H<sub>x</sub>
-</td>
-<td>
-5
-</td>
-<td>
-5
-</td>
-<td>
-A 3
-</td>
-<td>
-H<sub>x</sub>
-</td>
-<td>
-C005_THx
-</td>
-</tr>
-<tr style="background-color:#66bb6a;">
-<td>
-MP H<sub>y</sub>
-</td>
-<td>
-6
-</td>
-<td>
-6
-</td>
-<td>
-B 2
-</td>
-<td>
-H<sub>y</sub>
-</td>
-<td>
-C006_THy
-</td>
-</tr>
-<tr style="background-color:#66bb6a;">
-<td>
-MP H<sub>z</sub>
-</td>
-<td>
-7
-</td>
-<td>
-7
-</td>
-<td>
-B 3
-</td>
-<td>
-H<sub>z</sub>
-</td>
-<td>
-C007_THz
-</td>
-</tr>
-</tbody>
-</table>
+<section id="gps" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="gps"><span class="header-section-number">3.1</span> GPS</h2>
 </section>
-<section id="channel-measurement-setup-with-mfs-1" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="channel-measurement-setup-with-mfs-1"><span class="header-section-number">7.1.2</span> 5 Channel Measurement Setup with MFS</h3>
-<p>Switch is set to <strong>default</strong>. Hence: the switch is on the connector board!</p>
-<table>
-<thead>
-<tr>
-<th>
-Connector
-</th>
-<th>
-Slot
-</th>
-<th>
-Chan
-</th>
-<th>
-AD
-</th>
-<th>
-Type
-</th>
-<th>
-Name
-</th>
-</tr>
-</thead>
-<tbody>
-<tr style="background-color:#f9a825;">
-<td>
-S → N
-</td>
-<td>
-0
-</td>
-<td>
-0
-</td>
-<td>
-A 0
-</td>
-<td>
-E<sub>x</sub>
-</td>
-<td>
-C000_TEx
-</td>
-</tr>
-<tr style="background-color:#f9a825;">
-<td>
-E → W
-</td>
-<td>
-1
-</td>
-<td>
-1
-</td>
-<td>
-A 1
-</td>
-<td>
-E<sub>y</sub>
-</td>
-<td>
-C001_TEy
-</td>
-</tr>
-<tr style="background-color:#42a5f5;">
-<td>
-H<sub>x</sub>
-</td>
-<td>
-2
-</td>
-<td>
-2
-</td>
-<td>
-A 2
-</td>
-<td>
-H<sub>x</sub>
-</td>
-<td>
-C002_THx
-</td>
-</tr>
-<tr style="background-color:#42a5f5;">
-<td>
-H<sub>y</sub>
-</td>
-<td>
-3
-</td>
-<td>
-3
-</td>
-<td>
-B 0
-</td>
-<td>
-H<sub>y</sub>
-</td>
-<td>
-C003_THy
-</td>
-</tr>
-<tr style="background-color:#42a5f5;">
-<td>
-H<sub>z</sub>
-</td>
-<td>
-4
-</td>
-<td>
-4
-</td>
-<td>
-B 1
-</td>
-<td>
-H<sub>z</sub>
-</td>
-<td>
-C004_THz
-</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="channel-measurement-setup-with-shft-or-fgs" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="channel-measurement-setup-with-shft-or-fgs"><span class="header-section-number">7.1.3</span> 5 Channel Measurement Setup with SHFT or FGS</h3>
-<p>Switch is set to <strong>MP</strong>. Hence: the switch is on the connector board!</p>
-<table>
-<thead>
-<tr>
-<th>
-Connector
-</th>
-<th>
-Slot
-</th>
-<th>
-Chan
-</th>
-<th>
-AD
-</th>
-<th>
-Type
-</th>
-<th>
-Name
-</th>
-</tr>
-</thead>
-<tbody>
-<tr style="background-color:#f9a825;">
-<td>
-S → N
-</td>
-<td>
-0
-</td>
-<td>
-0
-</td>
-<td>
-A 0
-</td>
-<td>
-E<sub>x</sub>
-</td>
-<td>
-C000_TEx
-</td>
-</tr>
-<tr style="background-color:#f9a825;">
-<td>
-E → W
-</td>
-<td>
-1
-</td>
-<td>
-1
-</td>
-<td>
-A 1
-</td>
-<td>
-E<sub>y</sub>
-</td>
-<td>
-C001_TEy
-</td>
-</tr>
-<tr style="background-color:#42a5f5;">
-<td>
-MP H<sub>x</sub>
-</td>
-<td style="background-color:#66bb6a;">
-5
-</td>
-<td>
-2
-</td>
-<td>
-A 2
-</td>
-<td>
-H<sub>x</sub>
-</td>
-<td>
-C002_THx
-</td>
-</tr>
-<tr style="background-color:#42a5f5;">
-<td>
-MP H<sub>y</sub>
-</td>
-<td style="background-color:#66bb6a;">
-6
-</td>
-<td>
-3
-</td>
-<td>
-B 0
-</td>
-<td>
-H<sub>y</sub>
-</td>
-<td>
-C003_THy
-</td>
-</tr>
-<tr style="background-color:#42a5f5;">
-<td>
-MP H<sub>z</sub>
-</td>
-<td style="background-color:#66bb6a;">
-7
-</td>
-<td>
-4
-</td>
-<td>
-B 1
-</td>
-<td>
-H<sub>z</sub>
-</td>
-<td>
-C004_THz
-</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="channel-measurement-emap-or-current-clamp" class="level3" data-number="7.1.4">
-<h3 data-number="7.1.4" class="anchored" data-anchor-id="channel-measurement-emap-or-current-clamp"><span class="header-section-number">7.1.4</span> 2 Channel Measurement EMAP or Current Clamp</h3>
-<p>Switch is set to <strong>MP</strong>. Hence: the switch is on the connector board!</p>
-<table>
-<thead>
-<tr>
-<th>
-Connector
-</th>
-<th>
-Slot
-</th>
-<th>
-Chan
-</th>
-<th>
-AD
-</th>
-<th>
-Type
-</th>
-<th>
-Name
-</th>
-</tr>
-</thead>
-<tbody>
-<tr style="background-color:#f9a825;">
-<td>
-S → N
-</td>
-<td>
-0
-</td>
-<td>
-0
-</td>
-<td>
-A 0
-</td>
-<td>
-E<sub>x</sub>
-</td>
-<td>
-C000_TEx
-</td>
-</tr>
-<tr style="background-color:#f9a825;">
-<td>
-E → W
-</td>
-<td>
-1
-</td>
-<td>
-1
-</td>
-<td>
-A 1
-</td>
-<td>
-E<sub>y</sub>
-</td>
-<td>
-C001_TEy
-</td>
-</tr>
-</tbody>
-</table>
-</section>
-</section>
-<section id="summary" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.2</span> Summary</h2>
-<ul>
-<li>The first two connectors (S → N and E → W) are always on the same slots (0 and 1) and are always associated with the channels 0 and 1, aka E<sub>x</sub> and E<sub>y</sub>.</li>
-<li>The connectors (H<sub>x</sub>, H<sub>y</sub>, H<sub>z</sub>) are on slots 2, 3, and 4 <strong>and if</strong> a sensor is detected, are associated with channels 2, 3, and 4.</li>
-<li>The connectors (MP H<sub>x</sub>, MP H<sub>y</sub>, MP H<sub>z</sub>) are on slots 5, 6, and 7 <strong>and if</strong> a sensor is detected:
-<ul>
-<li>are associated with channels 2, 3, and 4 <strong>if</strong> H<sub>x</sub>, H<sub>y</sub>, H<sub>z</sub> are not detected</li>
-<li>are associated with channels 5, 6, and 7 <strong>if</strong> H<sub>x</sub>, H<sub>y</sub>, H<sub>z</sub> are detected</li>
-</ul></li>
-</ul>
-<p>Go back to the <a href="../flows/slots-flow.html"><strong>slots flow</strong></a> for more details on the slot configuration and resulting channels.</p>
+<section id="system" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="system"><span class="header-section-number">3.2</span> System</h2>
 
 
 </section>
@@ -1158,11 +623,14 @@ C001_TEy
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../flows/slots-flow.html" class="pagination-link" aria-label="Slots Flow">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Slots Flow</span></span>
+      <a href="../jobs/jobs.html" class="pagination-link" aria-label="Jobs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Jobs</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../mwi/mwi.html" class="pagination-link" aria-label="MWI">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">MWI</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

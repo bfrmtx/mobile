@@ -32,7 +32,11 @@ class sensor {
     }
     $this->slot_num = $slot_num_;                 // same as the connected slot
     $this->sensor_serial = $sensor_serial_;
-    if (in_array($sensor_type_, $this->sensor_types_e)) {
+    if ($sensor_type_ === 'Clamp') {
+      $this->available_sensor_types = $this->sensor_types_e;
+      $this->dipole_length = 1000.0;
+      $this->chopper = 0;
+    } elseif (in_array($sensor_type_, $this->sensor_types_e)) {
       $this->available_sensor_types = $this->sensor_types_e;
       // for E we must avoid division by zero
       $this->dipole_length = 25.0;                // Set dipole length for electric field sensors as default
@@ -41,6 +45,8 @@ class sensor {
       $this->available_sensor_types = $this->sensor_types_h;
       $this->dipole_length = 0.0;                 // Set dipole length for magnetic field sensors
       $this->chopper = -1;                        // Set chopper to auto for magnetic field sensors
+    } elseif ($this->slot_num === 0 || $this->slot_num === 1) {
+      $this->available_sensor_types = $this->sensor_types_e;
     }
   }
   public function __destruct() {
@@ -76,7 +82,7 @@ class sensor {
       return;
     }
 
-    if ($was_clamp) {
+    if (in_array($sensor_type_, $this->sensor_types_e, true) && ($was_clamp || $this->dipole_length <= 0.0)) {
       $this->dipole_length = 25.0;
     }
   }
@@ -99,7 +105,10 @@ class sensor {
       return null;
     }
     $parsed = floatval($input);
-    if ($parsed <= 0.0 || $parsed > 9999.99) {
+    if ($parsed <= 0.0) {
+      return 25.0;
+    }
+    if ($parsed < 0.1 || $parsed > 9999.0) {
       return null;
     }
     return $parsed;
@@ -109,7 +118,10 @@ class sensor {
   public function set_dipole_length(float $dipole_length_) {
 
     if (in_array($this->sensor_type, $this->sensor_types_e) && $dipole_length_ <= 0.0) {
-      throw new Exception('Dipole length must be greater than zero for electric field sensors');
+      $dipole_length_ = 25.0;
+    }
+    if (in_array($this->sensor_type, $this->sensor_types_e) && $dipole_length_ > 9999.0) {
+      $dipole_length_ = 9999.0;
     }
     $this->dipole_length = $dipole_length_;
   }
@@ -165,6 +177,10 @@ class sensor {
     $form = '<form method="POST" action="" style="display:inline-block;margin:0;vertical-align:middle;">' . PHP_EOL;
     $form .= '<select style="width:auto;min-width:8em;display:inline-block;vertical-align:middle;" name="class[value]" id="sensor_type_' . intval($this->slot_num) . '" onchange="this.form.submit()">' . PHP_EOL;
 
+    if ($this->sensor_type === '') {
+      $form .= '<option value="" selected="selected" disabled="disabled">----</option>' . PHP_EOL;
+    }
+
     foreach ($this->available_sensor_types as $type) {
       $selected = ($type === $this->sensor_type) ? ' selected="selected"' : '';
       $safe_type = htmlspecialchars((string) $type, ENT_QUOTES, 'UTF-8');
@@ -181,6 +197,10 @@ class sensor {
   }
 
   public function dipole_length_form(): string {
+    if (($this->slot_num === 0 || $this->slot_num === 1) && $this->sensor_type === '') {
+      return '<span class="w3-text-grey">no sensor</span>';
+    }
+
     if (!$this->supports_dipole_input()) {
       return '';
     }
@@ -194,7 +214,7 @@ class sensor {
     $form .= '<input type="hidden" name="class[name]" value="sensor" />' . PHP_EOL;
     $form .= '<input type="hidden" name="class[slot]" value="' . $slot_num . '" />' . PHP_EOL;
     $form .= '<input type="hidden" name="class[key]" value="dipole_length" />' . PHP_EOL;
-    $form .= '<input style="width:98%" type="number" inputmode="decimal" min="0.01" max="9999.99" step="0.01" name="class[value]" id="' . htmlspecialchars($input_id, ENT_QUOTES, 'UTF-8') . '" value="' . htmlspecialchars($display_value, ENT_QUOTES, 'UTF-8') . '" />' . PHP_EOL;
+    $form .= '<input style="width:98%" type="number" inputmode="decimal" min="0.1" max="9999.00" step="0.01" name="class[value]" id="' . htmlspecialchars($input_id, ENT_QUOTES, 'UTF-8') . '" value="' . htmlspecialchars($display_value, ENT_QUOTES, 'UTF-8') . '" />' . PHP_EOL;
     $form .= '</form>' . PHP_EOL;
 
     $safe_form_id = htmlspecialchars($form_id, ENT_QUOTES, 'UTF-8');
@@ -205,7 +225,7 @@ class sensor {
       'if(!f||!i){return;}' .
       'var timer=null;' .
       'var last=i.value;' .
-      'function isValid(){return /^\\d{1,4}(\\.\\d{1,2})?$/.test(i.value) && parseFloat(i.value)>0;}' .
+      'function isValid(){var v=parseFloat(i.value);return /^\\d{1,4}(\\.\\d{1,2})?$/.test(i.value) && v>=0.1 && v<=9999;}' .
       'function submitForm(){' .
       'if(!isValid()||i.value===last){return;}' .
       'last=i.value;' .

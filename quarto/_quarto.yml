@@ -12,11 +12,14 @@ book:
     collapse-level: 3
   chapters:
     - index.qmd
-    - part: "Databases"
+    - part: "User Guide"
       chapters:
+        - jobs/jobs.qmd
+        - status/status.qmd
+    - part: "Developers"
+      chapters:
+        - mwi/mwi.qmd
         - databases/databases.qmd
-    - part: "Flows"
-      chapters:
         - flows/slots-flow.qmd
         - flows/adc.qmd
 

@@ -10,198 +10,256 @@
     ]
   },
   {
-    "objectID": "index.html#scope",
-    "href": "index.html#scope",
-    "title": "Mobile WebInterface",
-    "section": "1.1 Scope",
-    "text": "1.1 Scope\nUnderstanding the databases structure on an advanced level.\n\n\n\n\n\n\nNoteMTH5\n\n\n\nthis new interface already uses the naming conventions of MTH5\n\nstation(s) [string]\nsample rate(s) [int, Hz]\nduration(s) [int, s]\nchopper on/off [int 1, 0] to be understood as LF/HF mode [of the coil]",
+    "objectID": "jobs/jobs.html",
+    "href": "jobs/jobs.html",
+    "title": "2  Jobs",
+    "section": "",
+    "text": "2.1 Creating a Job",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Mobile WebInterface</span>"
+      "User Guide",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Jobs</span>"
     ]
   },
   {
-    "objectID": "index.html#definitions",
-    "href": "index.html#definitions",
-    "title": "Mobile WebInterface",
-    "section": "1.2 Definitions",
-    "text": "1.2 Definitions\n\nSensor: item “outside” the ADU, e.g. electrode, coil, clamp.\nSlot: the physical slot (connector, MP == multi purpose)\n\nEx 0\nEy 1\nHx 2\nHy 3\nHz 4\nMP Hx 5\nMP Hy 6\nMP Hz 7\n\nChannel: that is a (sensor + slot) = the data stream, e.g. Ex, Ey, Hx, Hy, Hz, MP Hx, MP Hy, MP Hz.  Channel number must not necessarily be the same as the slot number!  For technical details ref.: ADC and Slots Flow.",
+    "objectID": "jobs/jobs.html#submitting-a-job",
+    "href": "jobs/jobs.html#submitting-a-job",
+    "title": "2  Jobs",
+    "section": "2.2 Submitting a Job",
+    "text": "2.2 Submitting a Job",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Mobile WebInterface</span>"
+      "User Guide",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Jobs</span>"
     ]
   },
   {
-    "objectID": "index.html#auto-detection",
-    "href": "index.html#auto-detection",
-    "title": "Mobile WebInterface",
-    "section": "1.3 Auto Detection",
-    "text": "1.3 Auto Detection\n\n\n\n\n\n\n\n\n\n\n\n\n\nslot 0\nslot 1\nslot 2\nslot 3\nslot 4\nslot 5\nslot 6\nslot 7\n\n\n\n\nfalse\nfalse\ntrue\ntrue\ntrue\ntrue\ntrue\ntrue\n\n\n\nThe mobile web interface will let you configure E 0 & 1, e.g. Ex, Ey of Jx, Jy (currents). Slots &gt; 1 are detected and treated as H (magnetic) by default.",
+    "objectID": "status/status.html",
+    "href": "status/status.html",
+    "title": "3  Status",
+    "section": "",
+    "text": "3.1 GPS",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Mobile WebInterface</span>"
+      "User Guide",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Status</span>"
+    ]
+  },
+  {
+    "objectID": "status/status.html#system",
+    "href": "status/status.html#system",
+    "title": "3  Status",
+    "section": "3.2 System",
+    "text": "3.2 System",
+    "crumbs": [
+      "User Guide",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Status</span>"
+    ]
+  },
+  {
+    "objectID": "mwi/mwi.html",
+    "href": "mwi/mwi.html",
+    "title": "4  MWI",
+    "section": "",
+    "text": "4.1 Scope\nCall php mobile/system/ADU-11e/create_system.php and I should generate a ADU-11e system with 8 channels.  Location should be $HOME/tmp/sqlite_db_created.\nNaming convention has changed to MTH5; sample_freq(uency) is now sampling_rate, and float values are now int (Hz).  site -&gt; station  filter mtx4 -&gt; 4 So watch out please.\nUnderstanding the databases structure on an advanced level.",
+    "crumbs": [
+      "Developers",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>MWI</span>"
+    ]
+  },
+  {
+    "objectID": "mwi/mwi.html#scope",
+    "href": "mwi/mwi.html#scope",
+    "title": "4  MWI",
+    "section": "",
+    "text": "NoteMTH5\n\n\n\nthis new interface already uses the naming conventions of MTH5\n\nstation(s) [string]\nsample rate(s) [int, Hz]\nduration(s) [int, s]\nchopper on/off [int 1, 0] to be understood as LF/HF mode [of the coil]",
+    "crumbs": [
+      "Developers",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>MWI</span>"
+    ]
+  },
+  {
+    "objectID": "mwi/mwi.html#definitions",
+    "href": "mwi/mwi.html#definitions",
+    "title": "4  MWI",
+    "section": "4.2 Definitions",
+    "text": "4.2 Definitions\n\nSensor: item “outside” the ADU, e.g. electrode, coil, clamp.\nSlot: the physical slot (connector, MP == multi purpose)\n\nEx 0\nEy 1\nHx 2\nHy 3\nHz 4\nMP Hx 5\nMP Hy 6\nMP Hz 7\n\nChannel: that is a (sensor + slot) = the data stream, e.g. Ex, Ey, Hx, Hy, Hz, MP Hx, MP Hy, MP Hz.  Channel number must not necessarily be the same as the slot number!  For technical details ref.: ADC and Slots Flow.",
+    "crumbs": [
+      "Developers",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>MWI</span>"
+    ]
+  },
+  {
+    "objectID": "mwi/mwi.html#auto-detection",
+    "href": "mwi/mwi.html#auto-detection",
+    "title": "4  MWI",
+    "section": "4.3 Auto Detection",
+    "text": "4.3 Auto Detection\n\n\n\n\n\n\n\n\n\n\n\n\n\nslot 0\nslot 1\nslot 2\nslot 3\nslot 4\nslot 5\nslot 6\nslot 7\n\n\n\n\nfalse\nfalse\ntrue\ntrue\ntrue\ntrue\ntrue\ntrue\n\n\n\nThe mobile web interface will let you configure E 0 & 1, e.g. Ex, Ey of Jx, Jy (currents). Slots &gt; 1 are detected and treated as H (magnetic) by default.",
+    "crumbs": [
+      "Developers",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>MWI</span>"
     ]
   },
   {
     "objectID": "databases/databases.html",
     "href": "databases/databases.html",
-    "title": "2  Databases",
+    "title": "5  Databases",
     "section": "",
-    "text": "2.1 hwConfig.db\nhwConfig.db contains only id, key and value tables.  We treat as read only for the mobile web interface. Tables are not growing, but updated on events.\nALL slots are written here, even if they are not detected.  The mobile web interface will decide. e.g. slots 0,1 are always shown, others not if sensor_type is empty or UNKN_E.\nThis is a quasi static database, written by the firmware. Not much in here The database is created / updated on boot or “sensor detection”. You find the serial numbers here. The sensors will be detected and updated by “detect sensors” in the system menu. Slots 0 and 1 can be set manually, for example if you use current clamps instead of electrodes, by loading the user configuration.  The mobile web interface can only work with detected sensors, except slots 0 and 1.",
+    "text": "5.1 hwConfig.db\nhwConfig.db contains only id, key and value tables.  We treat as read only for the mobile web interface. Tables are not growing, but updated on events.\nALL slots are written here, even if they are not detected.  The mobile web interface will decide. e.g. slots 0,1 are always shown, others not if sensor_type is empty or UNKN_E.\nThis is a quasi static database, written by the firmware. Not much in here The database is created / updated on boot or “sensor detection”. You find the serial numbers here. The sensors will be detected and updated by “detect sensors” in the system menu. Slots 0 and 1 can be set manually, for example if you use current clamps instead of electrodes, by loading the user configuration.  The mobile web interface can only work with detected sensors, except slots 0 and 1.",
     "crumbs": [
-      "Databases",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Databases</span>"
+      "Developers",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Databases</span>"
     ]
   },
   {
     "objectID": "databases/databases.html#hwconfig.db",
     "href": "databases/databases.html#hwconfig.db",
-    "title": "2  Databases",
+    "title": "5  Databases",
     "section": "",
-    "text": "2.1.1 adu\nAbout the systems and their capabilities.  Sample frequencies and digital filter apply to ALL channels, so they are here. As fixed value the disk size is here, to converted to int later. This is the total size at all of the data partition. \n{\n  \"board_type\": \"ADU-11e\",\n  \"serial\": 0,\n  \"disk_size_mb_sd\": 80000000\n}\nCREATE TABLE \"adu\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n2.1.2 con\nAbout the connector board.  The connector board is the same for all ADU-10e / 11e\n{\n  \"board_type:\": \"ADU-11E-10E-CON\",\n  \"serial\": 0\n}\nCREATE TABLE \"con\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n2.1.3 gps\nAbout the GPS. \n{\n  \"board_type\": \"ADU-11E-CLK\",\n  \"serial\": 0\n}\nCREATE TABLE \"gps\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n2.1.4 led\nAbout the LEDs or LED board. \n{\n  \"board_type\": \"ADU-11E-LED\",\n  \"serial\": 0\n}\nCREATE TABLE \"led\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n2.1.5 slot\nAbout the slots and their capabilities.  Gains and channel types are per slot, so they are here. You will find slot0 to slot4 (ADU-10e) or up to slot7 (ADU-11e) depending on your system. \n\n\n\n\n\n\nNoteNSLOTS\n\n\n\nis 5 for ADU-10e and 8 for ADU-11e and coded in config.php. That avoids scanning the slot tables for each page request. \n\n\nWe have slot0 … slot4 for ADU-10e and slot0 … slot7 for ADU-11e. \n{\n  \"board_type\": \"ADU-11E-BB\",\n  \"serial\": 0,\n  \"sensor_type\": \"\",\n  \"sensor_serial\": 0\n}\nThe slot aquires the sensor information, so the sensor type and serial number are here. \nCREATE TABLE \"slot\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n“detect sensors” will update the sensor type and serial. For slot0 and slot1 sensor type can be set manually.",
+    "text": "5.1.1 adu\nAbout the systems and their capabilities.  Sample frequencies and digital filter apply to ALL channels, so they are here. As fixed value the disk size is here, to converted to int later. This is the total size at all of the data partition. \n{\n  \"board_type\": \"ADU-11e\",\n  \"serial\": 0,\n  \"disk_size_mb_sd\": 80000000\n}\nCREATE TABLE \"adu\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n5.1.2 con\nAbout the connector board.  The connector board is the same for all ADU-10e / 11e\n{\n  \"board_type:\": \"ADU-11E-10E-CON\",\n  \"serial\": 0\n}\nCREATE TABLE \"con\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n5.1.3 gps\nAbout the GPS. \n{\n  \"board_type\": \"ADU-11E-CLK\",\n  \"serial\": 0\n}\nCREATE TABLE \"gps\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n5.1.4 led\nAbout the LEDs or LED board. \n{\n  \"board_type\": \"ADU-11E-LED\",\n  \"serial\": 0\n}\nCREATE TABLE \"led\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n5.1.5 slot\nAbout the slots and their capabilities.  Gains and channel types are per slot, so they are here. You will find slot0 to slot4 (ADU-10e) or up to slot7 (ADU-11e) depending on your system. \n\n\n\n\n\n\nNoteNSLOTS\n\n\n\nis 5 for ADU-10e and 8 for ADU-11e and coded in config.php. That avoids scanning the slot tables for each page request. \n\n\nWe have slot0 … slot4 for ADU-10e and slot0 … slot7 for ADU-11e. \n{\n  \"board_type\": \"ADU-11E-BB\",\n  \"serial\": 0,\n  \"sensor_type\": \"\",\n  \"sensor_serial\": 0\n}\nThe slot aquires the sensor information, so the sensor type and serial number are here. \nCREATE TABLE \"slot\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n“detect sensors” will update the sensor type and serial. For slot0 and slot1 sensor type can be set manually.",
     "crumbs": [
-      "Databases",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Databases</span>"
+      "Developers",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Databases</span>"
     ]
   },
   {
     "objectID": "databases/databases.html#selftestresult.db",
     "href": "databases/databases.html#selftestresult.db",
-    "title": "2  Databases",
-    "section": "2.2 selftestResult.db",
-    "text": "2.2 selftestResult.db\nselftestResult.db contains only id, key and value tables.  Updated on boot, detect sensors and test.  So these values change only when the user triggers one of these events.  We treat as read only for the mobile web interface. \n\n2.2.1 con\nThe self test results for the connector board. \n{\n  \"error_code\": 0,\n  \"severity\": 0,\n  \"message\": \"---\"\n}\nCREATE TABLE \"con\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n2.2.2 cpu\nThe self test results for the CPU. \n\nCREATE TABLE \"cpu\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n2.2.3 gps\nThe self test results for the GPS. \n{\n  \"error_code\": 0,\n  \"severity\": 0,\n  \"message\": \"---\"\n}\nCREATE TABLE \"gps\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n2.2.4 led\nThe self test results for the LEDs or LED board. \n\nCREATE TABLE \"led\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n2.2.5 main backplane\nThe self test results for the main backplane. \n{\n  \"error_code\": 0,\n  \"severity\": 0,\n  \"message\": \"---\"\n}\nCREATE TABLE \"main_backplane\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n2.2.6 slot\nThe self test results for each slot. \n{\n  \"error_code\": 0,\n  \"severity\": 0,\n  \"message\": \"---\",\n  \"probe_res\": 0,\n  \"probe_res_gnd_1\": 0,\n  \"probe_res_gnd_2\": 0,\n  \"lsb\": 0,\n  \"max_amplitude\": 0,\n  \"dc_offset\": 0,\n  \"noise_check\": 0,\n  \"gain\": 0\n}\nfor slot0 and slot1, you find the important probe resistance here. Partly you find the results on the channels page of the mobile web interface:  here you can adjust the gain settings and this information is needed here.\nCREATE TABLE \"slot\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )",
+    "title": "5  Databases",
+    "section": "5.2 selftestResult.db",
+    "text": "5.2 selftestResult.db\nselftestResult.db contains only id, key and value tables.  Updated on boot, detect sensors and test.  So these values change only when the user triggers one of these events.  We treat as read only for the mobile web interface. \n\n5.2.1 con\nThe self test results for the connector board. \n{\n  \"error_code\": 0,\n  \"severity\": 0,\n  \"message\": \"---\"\n}\nCREATE TABLE \"con\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n5.2.2 cpu\nThe self test results for the CPU. \n\nCREATE TABLE \"cpu\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n5.2.3 gps\nThe self test results for the GPS. \n{\n  \"error_code\": 0,\n  \"severity\": 0,\n  \"message\": \"---\"\n}\nCREATE TABLE \"gps\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n5.2.4 led\nThe self test results for the LEDs or LED board. \n\nCREATE TABLE \"led\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n5.2.5 main backplane\nThe self test results for the main backplane. \n{\n  \"error_code\": 0,\n  \"severity\": 0,\n  \"message\": \"---\"\n}\nCREATE TABLE \"main_backplane\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n5.2.6 slot\nThe self test results for each slot. \n{\n  \"error_code\": 0,\n  \"severity\": 0,\n  \"message\": \"---\",\n  \"probe_res\": 0,\n  \"probe_res_gnd_1\": 0,\n  \"probe_res_gnd_2\": 0,\n  \"lsb\": 0,\n  \"max_amplitude\": 0,\n  \"dc_offset\": 0,\n  \"noise_check\": 0,\n  \"gain\": 0\n}\nfor slot0 and slot1, you find the important probe resistance here. Partly you find the results on the channels page of the mobile web interface:  here you can adjust the gain settings and this information is needed here.\nCREATE TABLE \"slot\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )",
     "crumbs": [
-      "Databases",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Databases</span>"
+      "Developers",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Databases</span>"
     ]
   },
   {
     "objectID": "databases/databases.html#the-log-tables",
     "href": "databases/databases.html#the-log-tables",
-    "title": "2  Databases",
-    "section": "2.3 THE LOG TABLES",
-    "text": "2.3 THE LOG TABLES\nALL log tables have the same structure: - “id” INTEGER , created by inserting, - “date_time” INT (UTC timestamp, avoid string parsing, easier to compare and sort) - continued with specific fields for each log type.\nThese tables are growing row by row and logging the system’s history. The database reader, different from above, need to know the columns.\n\n2.3.1 gpsLog.db\nThe GPS log, for example, logs the GPS status and the number of satellites. &lt;br\nCREATE TABLE \"gpsStatus\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"date_time\" INTEGER,\n    \"latitude\"  INTEGER,\n    \"longitude\" INTEGER,\n    \"elevation\" REAL,\n    \"sats_tracked\"  INTEGER,\n    \"sync_state\"    INTEGER\n)\nlatitude and longitude are in ms (milli seconds) as coming from the module. elevation is in m (meters) as coming from the module. sats_tracked is the number of satellites USED by the module. There can be more visible satellites. sync_state is 0 = no fix, 1 = 2D fix, 2 = 3D fix, 3 = fully synced, 4 = G4Fix includes system sync. The mobile web interface will show RED until we get 4. You shall only submit jobs when the system is fully synced.\n\n\n2.3.2 hwLog.db\nThe hardware log, for example, logs the system temperature. \nCREATE TABLE \"hwStatus\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"date_time\" INTEGER,\n    \"batt_state\"    INTEGER,\n    \"batt_voltage_1\"    REAL,\n    \"batt_voltage_2\"    REAL,\n    \"temperature_system\"    REAL,\n    \"temperature_sensor\"    REAL,\n    \"free_disk_space_mb\"    REAL,\n    \"selftest_status\"   INTEGER,\n    \"recording_status\"  INTEGER\n);\nWhere recording_status is 0 = idle, 1 = recording.  selftest_status ??\n\n\n2.3.3 systemLog.db\nThe system log, for example, logs the system events. \nCREATE TABLE \"log\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"date_time\" INTEGER,\n    \"priority\"  INTEGER,\n    \"main_index\"    INTEGER,\n    \"sub_index\" INTEGER,\n    \"message\"   TEXT\n)\nmain_index and sub_index are for main HW component and sub HW component (detail). A short message is generated by the system and stored in the message field. \npriority is MWI",
+    "title": "5  Databases",
+    "section": "5.3 THE LOG TABLES",
+    "text": "5.3 THE LOG TABLES\nALL log tables have the same structure: - “id” INTEGER , created by inserting, - “date_time” INT (UTC timestamp, avoid string parsing, easier to compare and sort) - continued with specific fields for each log type.\nThese tables are growing row by row and logging the system’s history. The database reader, different from above, need to know the columns.\n\n5.3.1 gpsLog.db\nThe GPS log, for example, logs the GPS status and the number of satellites. &lt;br\nCREATE TABLE \"gpsStatus\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"date_time\" INTEGER,\n    \"latitude\"  INTEGER,\n    \"longitude\" INTEGER,\n    \"elevation\" REAL,\n    \"sats_tracked\"  INTEGER,\n    \"sync_state\"    INTEGER\n)\nlatitude and longitude are in ms (milli seconds) as coming from the module. elevation is in m (meters) as coming from the module. sats_tracked is the number of satellites USED by the module. There can be more visible satellites. sync_state is 0 = no fix, 1 = 2D fix, 2 = 3D fix, 3 = fully synced, 4 = G4Fix includes system sync. The mobile web interface will show RED until we get 4. You shall only submit jobs when the system is fully synced.\n\n\n5.3.2 hwLog.db\nThe hardware log, for example, logs the system temperature. \nCREATE TABLE \"hwStatus\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"date_time\" INTEGER,\n    \"batt_state\"    INTEGER,\n    \"batt_voltage_1\"    REAL,\n    \"batt_voltage_2\"    REAL,\n    \"temperature_system\"    REAL,\n    \"temperature_sensor\"    REAL,\n    \"free_disk_space_mb\"    REAL,\n    \"selftest_status\"   INTEGER,\n    \"recording_status\"  INTEGER\n);\nWhere recording_status is 0 = idle, 1 = recording.  selftest_status ??\n\n\n5.3.3 systemLog.db\nThe system log, for example, logs the system events. \nCREATE TABLE \"log\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"date_time\" INTEGER,\n    \"priority\"  INTEGER,\n    \"main_index\"    INTEGER,\n    \"sub_index\" INTEGER,\n    \"message\"   TEXT\n)\nmain_index and sub_index are for main HW component and sub HW component (detail). A short message is generated by the system and stored in the message field. \npriority is MWI",
     "crumbs": [
-      "Databases",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Databases</span>"
+      "Developers",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Databases</span>"
     ]
   },
   {
     "objectID": "databases/databases.html#systemstatus.db",
     "href": "databases/databases.html#systemstatus.db",
-    "title": "2  Databases",
-    "section": "2.4 systemStatus.db",
-    "text": "2.4 systemStatus.db\nsystemStatus.db contains only id, key and value tables.  Updated by the firmware every few seconds or on events.  Treated as read only for the mobile web interface; table is not growing. \n\n2.4.1 adu\nThe system status for the system.  These tables in systemStatus.db are updated by the firmware every few seconds and show the current status of the system.  The recording status drives the icon on the mobile web interface. \n{\n  \"date_time\": \"1970-01-01 00:00:00\",\n  \"batt_state\": 0,\n  \"batt_voltage_1\": 0.0,\n  \"batt_voltage_2\": 0.0,\n  \"temperature_system\": 0.0,\n  \"temperature_sensor\": 0.0,\n  \"free_disk_space_mb_sd\": 0.0,\n  \"free_disk_space_mb_usb\": 0.0,\n  \"selftest_status\": 0,\n  \"selftest_active\": 0,\n  \"recording_status\": 0,\n  \"ts_copy_status\": -1.0\n}\nCREATE TABLE \"adu\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n2.4.2 gps\nThe system status for the GPS.  If sync_state is 4, the GPS is fully synced and you can submit jobs, the GPS symbol on the mobile web interface will be green. \n{\n  \"date_time\": \"1970-01-01 00:00:00\",\n  \"latitude\": 0,\n  \"longitude\": 0,\n  \"elevation\": 0.0,\n  \"sats_tracked\": 0,\n  \"sats_in_view_gps\": 0,\n  \"sats_in_view_glonass\": 0,\n  \"sats_in_view_beidou\": 0,\n  \"sats_in_view_galileo\": 0,\n  \"sync_state\": 0,\n  \"mode\": 0\n}\nCREATE TABLE \"gps\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n2.4.3 recording\nThe detailed system status for the recording. \n{\n  \"sampling_rate\": 0,\n  \"buffer_size\": 0,\n  \"num_buffers\": 0,\n  \"used_slots\": \"\",\n  \"remaining_job_time\": 0,\n  \"time_to_next_job\": 0,\n  \"target_directory\": \"\",\n  \"ts_directory_selected\": \"\",\n  \"ts_act_buffer_offset\": 0,\n  \"ts_start\": 0,\n  \"ts_stop\": 0,\n  \"ts_act_buffer_step_size\": 0,\n  \"ts_display_mode\": 2\n}\nCREATE TABLE \"recording\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\nThe mobile web interface will show the details.",
+    "title": "5  Databases",
+    "section": "5.4 systemStatus.db",
+    "text": "5.4 systemStatus.db\nsystemStatus.db contains only id, key and value tables.  Updated by the firmware every few seconds or on events.  Treated as read only for the mobile web interface; table is not growing. \n\n5.4.1 adu\nThe system status for the system.  These tables in systemStatus.db are updated by the firmware every few seconds and show the current status of the system.  The recording status drives the icon on the mobile web interface. \n{\n  \"date_time\": \"1970-01-01 00:00:00\",\n  \"batt_state\": 0,\n  \"batt_voltage_1\": 0.0,\n  \"batt_voltage_2\": 0.0,\n  \"temperature_system\": 0.0,\n  \"temperature_sensor\": 0.0,\n  \"free_disk_space_mb_sd\": 0.0,\n  \"free_disk_space_mb_usb\": 0.0,\n  \"selftest_status\": 0,\n  \"selftest_active\": 0,\n  \"recording_status\": 0,\n  \"ts_copy_status\": -1.0\n}\nCREATE TABLE \"adu\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n5.4.2 gps\nThe system status for the GPS.  If sync_state is 4, the GPS is fully synced and you can submit jobs, the GPS symbol on the mobile web interface will be green. \n{\n  \"date_time\": \"1970-01-01 00:00:00\",\n  \"latitude\": 0,\n  \"longitude\": 0,\n  \"elevation\": 0.0,\n  \"sats_tracked\": 0,\n  \"sats_in_view_gps\": 0,\n  \"sats_in_view_glonass\": 0,\n  \"sats_in_view_beidou\": 0,\n  \"sats_in_view_galileo\": 0,\n  \"sync_state\": 0,\n  \"mode\": 0\n}\nCREATE TABLE \"gps\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\n\n\n5.4.3 recording\nThe detailed system status for the recording. \n{\n  \"sampling_rate\": 0,\n  \"buffer_size\": 0,\n  \"num_buffers\": 0,\n  \"used_slots\": \"\",\n  \"remaining_job_time\": 0,\n  \"time_to_next_job\": 0,\n  \"target_directory\": \"\"\n}\nCREATE TABLE \"recording\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"key\" STRING NOT NULL,\n    \"value\" STRING\n    )\nThe mobile web interface will show the details.",
     "crumbs": [
-      "Databases",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Databases</span>"
+      "Developers",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Databases</span>"
     ]
   },
   {
     "objectID": "databases/databases.html#job.db",
     "href": "databases/databases.html#job.db",
-    "title": "2  Databases",
-    "section": "2.5 job.db",
-    "text": "2.5 job.db\nThis is the essential database for the recording jobs.  When you submit a job, the job parameters are stored here. \nCREATE TABLE \"job\" (\n  \"id\" INTEGER PRIMARY KEY CHECK (id = 1),\n    \"start_date\"    TEXT,\n    \"start_time\"    TEXT,\n    \"duration\"  INTEGER,\n    \"sampling_rate\" INTEGER,\n    \"digital_filter\"    INTEGER,\n    \"split_main\"    INTEGER DEFAULT 0,\n    \"cal_mode\"  TEXT DEFAULT 'off',\n    \"channel_types\" TEXT,\n    \"choppers\"  TEXT,\n    \"gains\" TEXT,\n    \"dipole_lengths\"    TEXT,\n    \"use_atss\"  INTEGER DEFAULT 0,\n    \"copy_to_usb\"   INTEGER DEFAULT 0,\n    \"sub_cycle\" INTEGER,\n    \"sub_duration\"  INTEGER,\n    \"sub_filter\"    INTEGER,\n    \"split_sub\" INTEGER DEFAULT 0,\n    \"power_off_limit\" REAL,\n    \"station_id\" STRING\n)\nRemark: “slots_on” TEXT and “started” INTEGER are not part of the job.db. They will be appended “on the fly” when the interface submits a job.  Vice versa, when you open a job from the jobs.db for editing, the “slots_on” and “started” (aka copying back to the job.db) are not copied (truncate).  The slots_on logic is: E (0,1) always on, H as detected. You may submit “no electric”, then E (0,1) are off, H as detected. Mostly for airborne measurements. \nSyntax: -1 auto, 0 off, 1 on - OR 1, 2, 4, 8 values &gt;= 1.  In the fields (plural) gains for example, the POSITION (-1,-1, 4, …) is equivalent to the slot number. So the first value is for slot0, the second for slot1, and so on.  The same applies for the channel types, dipole_lengths, and choppers. \n\n“id” INTEGER , created by inserting,\n“start_date” 2026-12-31 (UTC, yyyy-mm-dd)\n“start_time” 16:30:00 (UTC, hh:mm:ss)\n“duration” 36000 (seconds, example 10 minutes = 600 seconds, 1 hour = 3600 seconds)\n“sampling_rate” 1024, …, 131072 (Hz), -1 stop job, -2 detect sensors, 3 shutdown system, 4 reboot system.\n“digital_filter” 32, 8, 4, 0\n“split_main” 0 (default off, set to &gt;0 to split main job into multiple files, example 409600 for 400 MB files), covered by GUI for main job splitting, but not yet implemented in the system, so no effect for now.\n“cal_mode” off, (always, not to be changed, use special jobs)\n“channel_types” “Ex, Ey, Hx, Hy, Hz, Jx, Jx, Jz”\n“choppers” “-1, -1, -1, -1, -1” : -1 == auto, 0 = off, 1 == on\n“gains” “-1, -1, -1, -1, -1” : -1 == auto or 1, 2, 4, 8 fixed gain\n“dipole_lengths” “100.0, 100.0, 0, 0, 0, 0, 0, 0” : in meters, available for slots 0, 1\n“use_atss” 0 (default off, set to 1 to use ATSS)\n“copy_to_usb” 0 (default off, set to 1 to copy files to USB after recording, leave the drive connected!)\n“sub_cycle” 0 (default off, set to &gt;0 to use sub-cycles, example 120 for 2 minutes)\n“sub_duration” 0 (default off, set to &gt;0 to use sub-cycles, example 32 for 32 seconds)\n“sub_filter” 0 (default off, set to &gt;0 to use sub-filter, example 32 for a sub job with 64 Hz sample frequency if the main job is 2048 Hz)\n“split_sub” 0 (default off, set to &gt;0 to split sub job into multiple files, example 102400 for 100 MB files), covered by GUI for sub job splitting, but not yet implemented in the system, so no effect for now.\n“power_off_limit” 0 (default off, set to &gt;0, for example 10.9 to power off the system when the battery voltage drops below this limit, in Volt. This can be helpful in case your batteries want that. The system may power off at 9.8 V latest.)",
+    "title": "5  Databases",
+    "section": "5.5 job.db",
+    "text": "5.5 job.db\nThis is the essential database for the recording jobs.  When you submit a job, the job parameters are stored here. \nCREATE TABLE \"job\" (\n  \"id\" INTEGER PRIMARY KEY CHECK (id = 1),\n    \"start_date\"    TEXT,\n    \"start_time\"    TEXT,\n    \"duration\"  INTEGER,\n    \"sampling_rate\" INTEGER,\n    \"digital_filter\"    INTEGER,\n    \"split_main\"    INTEGER DEFAULT 0,\n    \"cal_mode\"  TEXT DEFAULT 'off',\n    \"channel_types\" TEXT,\n    \"choppers\"  TEXT,\n    \"gains\" TEXT,\n    \"dipole_lengths\"    TEXT,\n    \"use_atss\"  INTEGER DEFAULT 0,\n    \"copy_to_usb\"   INTEGER DEFAULT 0,\n    \"sub_cycle\" INTEGER,\n    \"sub_duration\"  INTEGER,\n    \"sub_filter\"    INTEGER,\n    \"split_sub\" INTEGER DEFAULT 0,\n    \"power_off_limit\" REAL,\n    \"station_id\" STRING\n)\nRemark: “slots_on” TEXT and “started” INTEGER are not part of the job.db. They will be appended “on the fly” when the interface submits a job.  Vice versa, when you open a job from the jobs.db for editing, the “slots_on” and “started” (aka copying back to the job.db) are not copied (truncate).  The slots_on logic is: E (0,1) always on, H as detected. You may submit “no electric”, then E (0,1) are off, H as detected. Mostly for airborne measurements. \nSyntax: -1 auto, 0 off, 1 on - OR 1, 2, 4, 8 values &gt;= 1.  In the fields (plural) gains for example, the POSITION (-1,-1, 4, …) is equivalent to the slot number. So the first value is for slot0, the second for slot1, and so on.  The same applies for the channel types, dipole_lengths, and choppers. \n\n“id” INTEGER , created by inserting,\n“start_date” 2026-12-31 (UTC, yyyy-mm-dd)\n“start_time” 16:30:00 (UTC, hh:mm:ss)\n“duration” 36000 (seconds, example 10 minutes = 600 seconds, 1 hour = 3600 seconds)\n“sampling_rate” 1024, …, 131072 (Hz), -1 stop job, -2 detect sensors, 3 shutdown system, 4 reboot system.\n“digital_filter” 32, 8, 4, 0\n“split_main” 0 (default off, set to &gt;0 to split main job into multiple files, example 409600 for 400 MB files), covered by GUI for main job splitting, but not yet implemented in the system, so no effect for now.\n“cal_mode” off, (always, not to be changed, use special jobs)\n“channel_types” “Ex, Ey, Hx, Hy, Hz, Jx, Jx, Jz”\n“choppers” “-1, -1, -1, -1, -1” : -1 == auto, 0 = off, 1 == on\n“gains” “-1, -1, -1, -1, -1” : -1 == auto or 1, 2, 4, 8 fixed gain\n“dipole_lengths” “100.0, 100.0, 0, 0, 0, 0, 0, 0” : in meters, available for slots 0, 1\n“use_atss” 0 (default off, set to 1 to use ATSS)\n“copy_to_usb” 0 (default off, set to 1 to copy files to USB after recording, leave the drive connected!)\n“sub_cycle” 0 (default off, set to &gt;0 to use sub-cycles, example 120 for 2 minutes)\n“sub_duration” 0 (default off, set to &gt;0 to use sub-cycles, example 32 for 32 seconds)\n“sub_filter” 0 (default off, set to &gt;0 to use sub-filter, example 32 for a sub job with 64 Hz sample frequency if the main job is 2048 Hz)\n“split_sub” 0 (default off, set to &gt;0 to split sub job into multiple files, example 102400 for 100 MB files), covered by GUI for sub job splitting, but not yet implemented in the system, so no effect for now.\n“power_off_limit” 0 (default off, set to &gt;0, for example 10.9 to power off the system when the battery voltage drops below this limit, in Volt. This can be helpful in case your batteries want that. The system may power off at 9.8 V latest.)",
     "crumbs": [
-      "Databases",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Databases</span>"
+      "Developers",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Databases</span>"
     ]
   },
   {
     "objectID": "databases/databases.html#logic",
     "href": "databases/databases.html#logic",
-    "title": "2  Databases",
-    "section": "2.6 Logic",
-    "text": "2.6 Logic\n\n2.6.1 shots\nsub_cycle and sub_duration &gt; 0, sub_filter = 0 AND digital_filter &gt; 0.\n\n\n\n\n\ngraph TD\n    A[job &lt;br&gt; sampling_rate 131 kHz &lt;br&gt; duration 3600 s] --&gt; B[sub_cycle 120 s &lt;br&gt; sub_duration32s]\n    A --&gt; C[digital_filter 4]\n    C --&gt; D[one file set &lt;br&gt;32 kHz ats / atss 3600 s]\n    B --&gt; E[ 29 file sets &lt;br&gt; 131 kHz]\n\n\n\n\n\n\n\n\n\n2.6.2 filter\nsub_filter &gt; 0, sub_cycle and sub_duration = 0 AND digital_filter = 0.  If ONLY sub_filter is set, we get a filtered set of files for *all time**. That is the typical long term recording where you may want to download a low sample frequency version.\n\n\n\n\n\ngraph TD\n    A[job &lt;br&gt; sampling_rate 1024 Hz &lt;br&gt; duration N s] --&gt; B[sub_filter 32]\n    A --&gt; C[one set of files &lt;br&gt; 1024 Hz]\n    B --&gt; E[ one set of files &lt;br&gt; 32 Hz]\n\n\n\n\n\n\n\n\n\n2.6.3 straight\nsub_cycle and sub_duration = 0, sub_filter = 0 AND digital_filter &gt;= 0. \n\n\n\n\n\ngraph TD\n        A[job &lt;br&gt; sampling_rate 1024 Hz &lt;br&gt; duration N s] --&gt; B[one set of files &lt;br&gt; 1024 Hz]",
+    "title": "5  Databases",
+    "section": "5.6 Logic",
+    "text": "5.6 Logic\n\n5.6.1 shots\nsub_cycle and sub_duration &gt; 0, sub_filter = 0 AND digital_filter &gt; 0.\n\n\n\n\n\ngraph TD\n    A[job &lt;br&gt; sampling_rate 131 kHz &lt;br&gt; duration 3600 s] --&gt; B[sub_cycle 120 s &lt;br&gt; sub_duration32s]\n    A --&gt; C[digital_filter 4]\n    C --&gt; D[one file set &lt;br&gt;32 kHz ats / atss 3600 s]\n    B --&gt; E[ 29 file sets &lt;br&gt; 131 kHz]\n\n\n\n\n\n\n\n\n\n5.6.2 filter\nsub_filter &gt; 0, sub_cycle and sub_duration = 0 AND digital_filter = 0.  If ONLY sub_filter is set, we get a filtered set of files for *all time**. That is the typical long term recording where you may want to download a low sample frequency version.\n\n\n\n\n\ngraph TD\n    A[job &lt;br&gt; sampling_rate 1024 Hz &lt;br&gt; duration N s] --&gt; B[sub_filter 32]\n    A --&gt; C[one set of files &lt;br&gt; 1024 Hz]\n    B --&gt; E[ one set of files &lt;br&gt; 32 Hz]\n\n\n\n\n\n\n\n\n\n5.6.3 straight\nsub_cycle and sub_duration = 0, sub_filter = 0 AND digital_filter &gt;= 0. \n\n\n\n\n\ngraph TD\n        A[job &lt;br&gt; sampling_rate 1024 Hz &lt;br&gt; duration N s] --&gt; B[one set of files &lt;br&gt; 1024 Hz]",
     "crumbs": [
-      "Databases",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Databases</span>"
+      "Developers",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Databases</span>"
     ]
   },
   {
     "objectID": "databases/databases.html#jobs.db",
     "href": "databases/databases.html#jobs.db",
-    "title": "2  Databases",
-    "section": "2.7 jobs.db",
-    "text": "2.7 jobs.db\njobs.db contains the recording jobs.  When you submit a job, the job parameters are stored (copied) here.  If you edit a job, the table row will be copied into job.db for editing, but the original row will stay in job.db.  When the system starts a job, the “started” field will be set to 1 by the system. \nCREATE TABLE \"jobs\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"start_date\"    TEXT,\n    \"start_time\"    TEXT,\n    \"duration\"  INTEGER,\n    \"sampling_rate\" INTEGER,\n    \"digital_filter\"    INTEGER,\n    \"split_main\"    INTEGER DEFAULT 0,\n    \"cal_mode\"  TEXT DEFAULT 'off',\n    \"channel_types\" TEXT,\n    \"choppers\"  TEXT,\n    \"gains\" TEXT,\n    \"dipole_lengths\"    TEXT,\n    \"use_atss\"  INTEGER DEFAULT 0,\n    \"copy_to_usb\"   INTEGER DEFAULT 0,\n    \"sub_cycle\" INTEGER,\n    \"sub_duration\"  INTEGER,\n    \"sub_filter\"    INTEGER,\n    \"split_sub\" INTEGER DEFAULT 0,\n    \"station_id\" STRING,\n    \"power_off_limit\" REAL,\n    \"slots_on\" TEXT,\n    \"started\"   INTEGER\n)\nAs mentioned above, “slots_on” TEXT and “started” INTEGER are not part of the job.db. They will be appended “on the fly” when the interface submits a job to the jobs.db.",
+    "title": "5  Databases",
+    "section": "5.7 jobs.db",
+    "text": "5.7 jobs.db\njobs.db contains the recording jobs.  When you submit a job, the job parameters are stored (copied) here.  If you edit a job, the table row will be copied into job.db for editing, but the original row will stay in job.db.  When the system starts a job, the “started” field will be set to 1 by the system. \nCREATE TABLE \"jobs\" (\n    \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n    \"start_date\"    TEXT,\n    \"start_time\"    TEXT,\n    \"duration\"  INTEGER,\n    \"sampling_rate\" INTEGER,\n    \"digital_filter\"    INTEGER,\n    \"split_main\"    INTEGER DEFAULT 0,\n    \"cal_mode\"  TEXT DEFAULT 'off',\n    \"channel_types\" TEXT,\n    \"choppers\"  TEXT,\n    \"gains\" TEXT,\n    \"dipole_lengths\"    TEXT,\n    \"use_atss\"  INTEGER DEFAULT 0,\n    \"copy_to_usb\"   INTEGER DEFAULT 0,\n    \"sub_cycle\" INTEGER,\n    \"sub_duration\"  INTEGER,\n    \"sub_filter\"    INTEGER,\n    \"split_sub\" INTEGER DEFAULT 0,\n    \"station_id\" STRING,\n    \"power_off_limit\" REAL,\n    \"slots_on\" TEXT,\n    \"started\"   INTEGER\n)\nAs mentioned above, “slots_on” TEXT and “started” INTEGER are not part of the job.db. They will be appended “on the fly” when the interface submits a job to the jobs.db.",
     "crumbs": [
-      "Databases",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Databases</span>"
+      "Developers",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Databases</span>"
     ]
   },
   {
     "objectID": "flows/slots-flow.html",
     "href": "flows/slots-flow.html",
-    "title": "3  Slots Flow",
+    "title": "6  Slots Flow",
     "section": "",
-    "text": "3.1 Flow Summary\nThe mobile interface works only with sensor detection, available on slots 2 to 7. 0 and 1 (e.g. Ex and Ey) are always on. You can switch them explicitly on or off. The other slots (2 to 7) can only be used if a sensor is detected.  Use the Laptop expert interface for other configurations.\nflowchart TD\n    A[Sensor Detection] --&gt; B{detected?}\n    B -- No ----&gt; E[E / current]\n    B -- Yes --&gt; SL[slots]\n    SL --&gt; SMTL{s: 0,1,2,3,4}\n    SL --&gt; SMTH{s: 0,1,5,6,7}\n    SL --&gt; SMTA{all&lt;br&gt;s: 0,1,2,3,4,5,6,7&lt;br&gt;c: 0,1,2,3,4,5,6,7}\n    SMTL --&gt; CMTLH[airborne&lt;br&gt;c: 2,3,4&lt;br&gt;Hx, Hy, Hz]\n    SMTL --&gt; CMTLD[MT &lt;br&gt;c: 0,1,2,3,4 &lt;br&gt;Ex, Ey, Hx, Hy, Hz]\n    SMTH --&gt; CMTHH[airborne&lt;br&gt;c: 2,3,4&lt;br&gt;Hx, Hy, Hz]\n    SMTH --&gt; CMTHD[AMT &lt;br&gt;c: 0,1,2,3,4 &lt;br&gt;Ex, Ey,Hx, Hy, Hz]",
+    "text": "6.1 Flow Summary\nThe mobile interface works only with sensor detection, available on slots 2 to 7. 0 and 1 (e.g. Ex and Ey) are always on. You can switch them explicitly on or off. The other slots (2 to 7) can only be used if a sensor is detected.  Use the Laptop expert interface for other configurations.\nflowchart TD\n    A[Sensor Detection] --&gt; B{detected?}\n    B -- No ----&gt; E[E / current]\n    B -- Yes --&gt; SL[slots]\n    SL --&gt; SMTL{s: 0,1,2,3,4}\n    SL --&gt; SMTH{s: 0,1,5,6,7}\n    SL --&gt; SMTA{all&lt;br&gt;s: 0,1,2,3,4,5,6,7&lt;br&gt;c: 0,1,2,3,4,5,6,7}\n    SMTL --&gt; CMTLH[airborne&lt;br&gt;c: 2,3,4&lt;br&gt;Hx, Hy, Hz]\n    SMTL --&gt; CMTLD[MT &lt;br&gt;c: 0,1,2,3,4 &lt;br&gt;Ex, Ey, Hx, Hy, Hz]\n    SMTH --&gt; CMTHH[airborne&lt;br&gt;c: 2,3,4&lt;br&gt;Hx, Hy, Hz]\n    SMTH --&gt; CMTHD[AMT &lt;br&gt;c: 0,1,2,3,4 &lt;br&gt;Ex, Ey,Hx, Hy, Hz]",
     "crumbs": [
-      "Flows",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Slots Flow</span>"
+      "Developers",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Slots Flow</span>"
     ]
   },
   {
     "objectID": "flows/slots-flow.html#slot-config",
     "href": "flows/slots-flow.html#slot-config",
-    "title": "3  Slots Flow",
-    "section": "3.2 Slot Config:",
-    "text": "3.2 Slot Config:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntype\nslot 0\nslot 1\nslot 2\nslot 3\nslot 4\nslot 5\nslot 6\nslot 7\n\n\n\n\nE\n1\n1\n0\n0\n0\n0\n0\n0\n\n\nMT\n1\n1\n1\n1\n1\n0\n0\n0\n\n\nAMT\n1\n1\n0\n0\n0\n1\n1\n1\n\n\nAirborne\n0\n0\n1\n1\n1\n0\n0\n0\n\n\nAirborne\n0\n0\n1\n1\n1\n1\n1\n1\n\n\nAirborne\n0\n0\n0\n0\n0\n1\n1\n1\n\n\nALL\n1\n1\n1\n1\n1\n1\n1\n1",
+    "title": "6  Slots Flow",
+    "section": "6.2 Slot Config:",
+    "text": "6.2 Slot Config:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntype\nslot 0\nslot 1\nslot 2\nslot 3\nslot 4\nslot 5\nslot 6\nslot 7\n\n\n\n\nE\n1\n1\n0\n0\n0\n0\n0\n0\n\n\nMT\n1\n1\n1\n1\n1\n0\n0\n0\n\n\nAMT\n1\n1\n0\n0\n0\n1\n1\n1\n\n\nAirborne\n0\n0\n1\n1\n1\n0\n0\n0\n\n\nAirborne\n0\n0\n1\n1\n1\n1\n1\n1\n\n\nAirborne\n0\n0\n0\n0\n0\n1\n1\n1\n\n\nALL\n1\n1\n1\n1\n1\n1\n1\n1",
     "crumbs": [
-      "Flows",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Slots Flow</span>"
+      "Developers",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Slots Flow</span>"
     ]
   },
   {
     "objectID": "flows/slots-flow.html#resulting-channel-numbers",
     "href": "flows/slots-flow.html#resulting-channel-numbers",
-    "title": "3  Slots Flow",
-    "section": "3.3 Resulting Channel Numbers:",
-    "text": "3.3 Resulting Channel Numbers:\n\nE: 0, 1\nMT: 0, 1, 2, 3, 4\nAMT: 0, 1, 2, 3, 4\nAirborne: 2, 3, 4\nAirborne: 2, 3, 4, 5, 6, 7\nAirborne: 2, 3, 4\nALL: 0, 1, 2, 3, 4, 6, 7\n\nAirborne is a synonym for MT without E sensors. So for a remote reference station or GDS (geomagnetic deep sounding) you can use the airborne mode. It simply switches off the E and keeps all H.  E is a synonym for electric field only. Either for EMAP or current measurements.  MT /AMT is a synonym for magnetotelluric mode, so electric and magnetic field.",
+    "title": "6  Slots Flow",
+    "section": "6.3 Resulting Channel Numbers:",
+    "text": "6.3 Resulting Channel Numbers:\n\nE: 0, 1\nMT: 0, 1, 2, 3, 4\nAMT: 0, 1, 2, 3, 4\nAirborne: 2, 3, 4\nAirborne: 2, 3, 4, 5, 6, 7\nAirborne: 2, 3, 4\nALL: 0, 1, 2, 3, 4, 6, 7\n\nAirborne is a synonym for MT without E sensors. So for a remote reference station or GDS (geomagnetic deep sounding) you can use the airborne mode. It simply switches off the E and keeps all H.  E is a synonym for electric field only. Either for EMAP or current measurements.  MT /AMT is a synonym for magnetotelluric mode, so electric and magnetic field.",
     "crumbs": [
-      "Flows",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Slots Flow</span>"
+      "Developers",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Slots Flow</span>"
     ]
   },
   {
     "objectID": "flows/slots-flow.html#php-classes",
     "href": "flows/slots-flow.html#php-classes",
-    "title": "3  Slots Flow",
-    "section": "3.4 PHP Classes",
-    "text": "3.4 PHP Classes\nSelected variables shown:\n\n\n\n\n\nflowchart TD\n    A[&lt;b&gt;Sensor&lt;/b&gt;&lt;br&gt;sensor_type&lt;br&gt;sensor_serial&lt;br&gt;chopper&lt;br&gt;dipole_length] --&gt; B[&lt;b&gt;Slot&lt;/b&gt;&lt;br&gt;slot_on&lt;br&gt;gain&lt;br&gt;channel_type&lt;br&gt;gain]\n    C[&lt;b&gt;Sensor&lt;/b&gt;&lt;br&gt;sensor_type&lt;br&gt;sensor_serial&lt;br&gt;chopper&lt;br&gt;dipole_length] --&gt; D[&lt;b&gt;Slot&lt;/b&gt;&lt;br&gt;slot_on&lt;br&gt;gain&lt;br&gt;channel_type&lt;br&gt;gain]\n    E[&lt;b&gt;Sensor&lt;/b&gt;&lt;br&gt;sensor_type&lt;br&gt;sensor_serial&lt;br&gt;chopper&lt;br&gt;dipole_length] --&gt; F[&lt;b&gt;Slot&lt;/b&gt;&lt;br&gt;slot_on&lt;br&gt;gain&lt;br&gt;channel_type&lt;br&gt;gain]\n    G[&lt;b&gt;job_time&lt;/b&gt;&lt;br&gt;start_date&lt;br&gt;start_time, dst&lt;br&gt;duration&lt;br&gt;utc_offset_seconds, grid] --base--&gt; H[&lt;b&gt;frequency_handler&lt;/b&gt;&lt;br&gt;sampling_rate&lt;br&gt;digital_filter&lt;br&gt;sub_filter&lt;br&gt;sub_cycle, sub_duration]\n    B --ADU as container--&gt; I[&lt;b&gt;ADU&lt;/b&gt;&lt;br&gt;serial&lt;br&gt;gps&lt;br&gt;con&lt;br&gt;bpl&lt;br&gt;R/W &lt;b&gt;hwConfig&lt;/b&gt;]\n    D --ADU as container--&gt; I[&lt;b&gt;ADU&lt;/b&gt;&lt;br&gt;serial&lt;br&gt;gps&lt;br&gt;con&lt;br&gt;bpl&lt;br&gt;R/W &lt;b&gt;hwConfig&lt;/b&gt;]\n    F --ADU as container--&gt; I[&lt;b&gt;ADU&lt;/b&gt;&lt;br&gt;serial&lt;br&gt;gps&lt;br&gt;con&lt;br&gt;bpl&lt;br&gt;R/W &lt;b&gt;hwConfig&lt;/b&gt;]\n    H --base--&gt; I[&lt;b&gt;ADU&lt;/b&gt;&lt;br&gt;serial&lt;br&gt;gps&lt;br&gt;con&lt;br&gt;bpl&lt;br&gt;R/W &lt;b&gt;hwConfig&lt;/b&gt;]\n    I --base--&gt; J[&lt;b&gt;job&lt;/b&gt;&lt;br&gt;use_atss&lt;br&gt;copy_to_usb&lt;br&gt;R/W &lt;b&gt;JOB DB&lt;/b&gt; ]\n    J &lt;--R/W/Edit--&gt; L[&lt;b&gt;jobs&lt;/b&gt;&lt;br&gt;R/W &lt;b&gt;JOBS DB&lt;/b&gt;&lt;br&gt;Slots on, on submission]",
+    "title": "6  Slots Flow",
+    "section": "6.4 PHP Classes",
+    "text": "6.4 PHP Classes\nSelected variables shown:\n\n\n\n\n\nflowchart TD\n    A[&lt;b&gt;Sensor&lt;/b&gt;&lt;br&gt;sensor_type&lt;br&gt;sensor_serial&lt;br&gt;chopper&lt;br&gt;dipole_length] --&gt; B[&lt;b&gt;Slot&lt;/b&gt;&lt;br&gt;slot_on&lt;br&gt;gain&lt;br&gt;channel_type&lt;br&gt;gain]\n    C[&lt;b&gt;Sensor&lt;/b&gt;&lt;br&gt;sensor_type&lt;br&gt;sensor_serial&lt;br&gt;chopper&lt;br&gt;dipole_length] --&gt; D[&lt;b&gt;Slot&lt;/b&gt;&lt;br&gt;slot_on&lt;br&gt;gain&lt;br&gt;channel_type&lt;br&gt;gain]\n    E[&lt;b&gt;Sensor&lt;/b&gt;&lt;br&gt;sensor_type&lt;br&gt;sensor_serial&lt;br&gt;chopper&lt;br&gt;dipole_length] --&gt; F[&lt;b&gt;Slot&lt;/b&gt;&lt;br&gt;slot_on&lt;br&gt;gain&lt;br&gt;channel_type&lt;br&gt;gain]\n    G[&lt;b&gt;job_time&lt;/b&gt;&lt;br&gt;start_date&lt;br&gt;start_time, dst&lt;br&gt;duration&lt;br&gt;utc_offset_seconds, grid] --base--&gt; H[&lt;b&gt;frequency_handler&lt;/b&gt;&lt;br&gt;sampling_rate&lt;br&gt;digital_filter&lt;br&gt;sub_filter&lt;br&gt;sub_cycle, sub_duration]\n    B --ADU as container--&gt; I[&lt;b&gt;ADU&lt;/b&gt;&lt;br&gt;serial&lt;br&gt;gps&lt;br&gt;con&lt;br&gt;bpl&lt;br&gt;R/W &lt;b&gt;hwConfig&lt;/b&gt;]\n    D --ADU as container--&gt; I[&lt;b&gt;ADU&lt;/b&gt;&lt;br&gt;serial&lt;br&gt;gps&lt;br&gt;con&lt;br&gt;bpl&lt;br&gt;R/W &lt;b&gt;hwConfig&lt;/b&gt;]\n    F --ADU as container--&gt; I[&lt;b&gt;ADU&lt;/b&gt;&lt;br&gt;serial&lt;br&gt;gps&lt;br&gt;con&lt;br&gt;bpl&lt;br&gt;R/W &lt;b&gt;hwConfig&lt;/b&gt;]\n    H --base--&gt; I[&lt;b&gt;ADU&lt;/b&gt;&lt;br&gt;serial&lt;br&gt;gps&lt;br&gt;con&lt;br&gt;bpl&lt;br&gt;R/W &lt;b&gt;hwConfig&lt;/b&gt;]\n    I --base--&gt; J[&lt;b&gt;job&lt;/b&gt;&lt;br&gt;use_atss&lt;br&gt;copy_to_usb&lt;br&gt;R/W &lt;b&gt;JOB DB&lt;/b&gt; ]\n    J &lt;--R/W/Edit--&gt; L[&lt;b&gt;jobs&lt;/b&gt;&lt;br&gt;R/W &lt;b&gt;JOBS DB&lt;/b&gt;&lt;br&gt;Slots on, on submission]",
     "crumbs": [
-      "Flows",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Slots Flow</span>"
+      "Developers",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Slots Flow</span>"
     ]
   },
   {
     "objectID": "flows/adc.html",
     "href": "flows/adc.html",
-    "title": "4  ADC",
+    "title": "7  ADC",
     "section": "",
-    "text": "4.1 Overview\nThe ADU-11e has two ADCs, each with 8 channels, A and B. They are working in a combined mode.",
+    "text": "7.1 Overview\nThe ADU-11e has two ADCs, each with 8 channels, A and B. They are working in a combined mode.",
     "crumbs": [
-      "Flows",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>ADC</span>"
+      "Developers",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>ADC</span>"
     ]
   },
   {
     "objectID": "flows/adc.html#overview",
     "href": "flows/adc.html#overview",
-    "title": "4  ADC",
+    "title": "7  ADC",
     "section": "",
-    "text": "4.1.1 8 Channel Measurement Setup with MFS\n\n\n\n\nConnector\n\n\nSlot\n\n\nChan\n\n\nAD\n\n\nType\n\n\nName\n\n\n\n\n\n\nS → N\n\n\n0\n\n\n0\n\n\nA 0\n\n\nEx\n\n\nC000_TEx\n\n\n\n\nE → W\n\n\n1\n\n\n1\n\n\nA 1\n\n\nEy\n\n\nC001_TEy\n\n\n\n\nHx\n\n\n2\n\n\n2\n\n\nA 2\n\n\nHx\n\n\nC002_THx\n\n\n\n\nHy\n\n\n3\n\n\n3\n\n\nB 0\n\n\nHy\n\n\nC003_THy\n\n\n\n\nHz\n\n\n4\n\n\n4\n\n\nB 1\n\n\nHz\n\n\nC004_THz\n\n\n\n\nMP Hx\n\n\n5\n\n\n5\n\n\nA 3\n\n\nHx\n\n\nC005_THx\n\n\n\n\nMP Hy\n\n\n6\n\n\n6\n\n\nB 2\n\n\nHy\n\n\nC006_THy\n\n\n\n\nMP Hz\n\n\n7\n\n\n7\n\n\nB 3\n\n\nHz\n\n\nC007_THz\n\n\n\n\n\n\n4.1.2 5 Channel Measurement Setup with MFS\nSwitch is set to default. Hence: the switch is on the connector board!\n\n\n\n\nConnector\n\n\nSlot\n\n\nChan\n\n\nAD\n\n\nType\n\n\nName\n\n\n\n\n\n\nS → N\n\n\n0\n\n\n0\n\n\nA 0\n\n\nEx\n\n\nC000_TEx\n\n\n\n\nE → W\n\n\n1\n\n\n1\n\n\nA 1\n\n\nEy\n\n\nC001_TEy\n\n\n\n\nHx\n\n\n2\n\n\n2\n\n\nA 2\n\n\nHx\n\n\nC002_THx\n\n\n\n\nHy\n\n\n3\n\n\n3\n\n\nB 0\n\n\nHy\n\n\nC003_THy\n\n\n\n\nHz\n\n\n4\n\n\n4\n\n\nB 1\n\n\nHz\n\n\nC004_THz\n\n\n\n\n\n\n4.1.3 5 Channel Measurement Setup with SHFT or FGS\nSwitch is set to MP. Hence: the switch is on the connector board!\n\n\n\n\nConnector\n\n\nSlot\n\n\nChan\n\n\nAD\n\n\nType\n\n\nName\n\n\n\n\n\n\nS → N\n\n\n0\n\n\n0\n\n\nA 0\n\n\nEx\n\n\nC000_TEx\n\n\n\n\nE → W\n\n\n1\n\n\n1\n\n\nA 1\n\n\nEy\n\n\nC001_TEy\n\n\n\n\nMP Hx\n\n\n5\n\n\n2\n\n\nA 2\n\n\nHx\n\n\nC002_THx\n\n\n\n\nMP Hy\n\n\n6\n\n\n3\n\n\nB 0\n\n\nHy\n\n\nC003_THy\n\n\n\n\nMP Hz\n\n\n7\n\n\n4\n\n\nB 1\n\n\nHz\n\n\nC004_THz\n\n\n\n\n\n\n4.1.4 2 Channel Measurement EMAP or Current Clamp\nSwitch is set to MP. Hence: the switch is on the connector board!\n\n\n\n\nConnector\n\n\nSlot\n\n\nChan\n\n\nAD\n\n\nType\n\n\nName\n\n\n\n\n\n\nS → N\n\n\n0\n\n\n0\n\n\nA 0\n\n\nEx\n\n\nC000_TEx\n\n\n\n\nE → W\n\n\n1\n\n\n1\n\n\nA 1\n\n\nEy\n\n\nC001_TEy",
+    "text": "7.1.1 8 Channel Measurement Setup with MFS\n\n\n\n\nConnector\n\n\nSlot\n\n\nChan\n\n\nAD\n\n\nType\n\n\nName\n\n\n\n\n\n\nS → N\n\n\n0\n\n\n0\n\n\nA 0\n\n\nEx\n\n\nC000_TEx\n\n\n\n\nE → W\n\n\n1\n\n\n1\n\n\nA 1\n\n\nEy\n\n\nC001_TEy\n\n\n\n\nHx\n\n\n2\n\n\n2\n\n\nA 2\n\n\nHx\n\n\nC002_THx\n\n\n\n\nHy\n\n\n3\n\n\n3\n\n\nB 0\n\n\nHy\n\n\nC003_THy\n\n\n\n\nHz\n\n\n4\n\n\n4\n\n\nB 1\n\n\nHz\n\n\nC004_THz\n\n\n\n\nMP Hx\n\n\n5\n\n\n5\n\n\nA 3\n\n\nHx\n\n\nC005_THx\n\n\n\n\nMP Hy\n\n\n6\n\n\n6\n\n\nB 2\n\n\nHy\n\n\nC006_THy\n\n\n\n\nMP Hz\n\n\n7\n\n\n7\n\n\nB 3\n\n\nHz\n\n\nC007_THz\n\n\n\n\n\n\n7.1.2 5 Channel Measurement Setup with MFS\nSwitch is set to default. Hence: the switch is on the connector board!\n\n\n\n\nConnector\n\n\nSlot\n\n\nChan\n\n\nAD\n\n\nType\n\n\nName\n\n\n\n\n\n\nS → N\n\n\n0\n\n\n0\n\n\nA 0\n\n\nEx\n\n\nC000_TEx\n\n\n\n\nE → W\n\n\n1\n\n\n1\n\n\nA 1\n\n\nEy\n\n\nC001_TEy\n\n\n\n\nHx\n\n\n2\n\n\n2\n\n\nA 2\n\n\nHx\n\n\nC002_THx\n\n\n\n\nHy\n\n\n3\n\n\n3\n\n\nB 0\n\n\nHy\n\n\nC003_THy\n\n\n\n\nHz\n\n\n4\n\n\n4\n\n\nB 1\n\n\nHz\n\n\nC004_THz\n\n\n\n\n\n\n7.1.3 5 Channel Measurement Setup with SHFT or FGS\nSwitch is set to MP. Hence: the switch is on the connector board!\n\n\n\n\nConnector\n\n\nSlot\n\n\nChan\n\n\nAD\n\n\nType\n\n\nName\n\n\n\n\n\n\nS → N\n\n\n0\n\n\n0\n\n\nA 0\n\n\nEx\n\n\nC000_TEx\n\n\n\n\nE → W\n\n\n1\n\n\n1\n\n\nA 1\n\n\nEy\n\n\nC001_TEy\n\n\n\n\nMP Hx\n\n\n5\n\n\n2\n\n\nA 2\n\n\nHx\n\n\nC002_THx\n\n\n\n\nMP Hy\n\n\n6\n\n\n3\n\n\nB 0\n\n\nHy\n\n\nC003_THy\n\n\n\n\nMP Hz\n\n\n7\n\n\n4\n\n\nB 1\n\n\nHz\n\n\nC004_THz\n\n\n\n\n\n\n7.1.4 2 Channel Measurement EMAP or Current Clamp\nSwitch is set to MP. Hence: the switch is on the connector board!\n\n\n\n\nConnector\n\n\nSlot\n\n\nChan\n\n\nAD\n\n\nType\n\n\nName\n\n\n\n\n\n\nS → N\n\n\n0\n\n\n0\n\n\nA 0\n\n\nEx\n\n\nC000_TEx\n\n\n\n\nE → W\n\n\n1\n\n\n1\n\n\nA 1\n\n\nEy\n\n\nC001_TEy",
     "crumbs": [
-      "Flows",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>ADC</span>"
+      "Developers",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>ADC</span>"
     ]
   },
   {
     "objectID": "flows/adc.html#summary",
     "href": "flows/adc.html#summary",
-    "title": "4  ADC",
-    "section": "4.2 Summary",
-    "text": "4.2 Summary\n\nThe first two connectors (S → N and E → W) are always on the same slots (0 and 1) and are always associated with the channels 0 and 1, aka Ex and Ey.\nThe connectors (Hx, Hy, Hz) are on slots 2, 3, and 4 and if a sensor is detected, are associated with channels 2, 3, and 4.\nThe connectors (MP Hx, MP Hy, MP Hz) are on slots 5, 6, and 7 and if a sensor is detected:\n\nare associated with channels 2, 3, and 4 if Hx, Hy, Hz are not detected\nare associated with channels 5, 6, and 7 if Hx, Hy, Hz are detected\n\n\nGo back to the slots flow for more details on the slot configuration and resulting channels.",
+    "title": "7  ADC",
+    "section": "7.2 Summary",
+    "text": "7.2 Summary\n\nThe first two connectors (S → N and E → W) are always on the same slots (0 and 1) and are always associated with the channels 0 and 1, aka Ex and Ey.\nThe connectors (Hx, Hy, Hz) are on slots 2, 3, and 4 and if a sensor is detected, are associated with channels 2, 3, and 4.\nThe connectors (MP Hx, MP Hy, MP Hz) are on slots 5, 6, and 7 and if a sensor is detected:\n\nare associated with channels 2, 3, and 4 if Hx, Hy, Hz are not detected\nare associated with channels 5, 6, and 7 if Hx, Hy, Hz are detected\n\n\nGo back to the slots flow for more details on the slot configuration and resulting channels.",
     "crumbs": [
-      "Flows",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>ADC</span>"
+      "Developers",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>ADC</span>"
     ]
   }
 ]
