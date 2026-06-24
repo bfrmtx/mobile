@@ -20,7 +20,15 @@ function base_asset_url(string $relative_path): string {
   $absolute = str_replace('\\', '/', BASE_DIR . $relative);
   $doc_root = isset($_SERVER['DOCUMENT_ROOT']) ? rtrim(str_replace('\\', '/', (string) $_SERVER['DOCUMENT_ROOT']), '/') : '';
 
-  if ($doc_root !== '' && str_starts_with($absolute, $doc_root . '/')) {
+  // if ($doc_root !== '' && str_starts_with($absolute, $doc_root . '/')) {
+  //   return substr($absolute, strlen($doc_root));
+  // }
+  // MWI: str_starts_with doe not exist on embedded version.
+  // if ((intval(strlen($doc_root)) != 0) && (intval(strncmp($absolute, $doc_root . '/', strlen($doc_root . '/'))) == 0)) {
+  //   return substr($absolute, strlen($doc_root));
+  // }
+  // old php compatible version shorter, chatgpt version
+  if ($doc_root !== '' && strncmp($absolute, $doc_root . '/', strlen($doc_root) + 1) === 0) {
     return substr($absolute, strlen($doc_root));
   }
 

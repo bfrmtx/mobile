@@ -171,13 +171,6 @@ class recording_status {
   private int $remaining_job_time;        //!< remaining job time in seconds
   private int $time_to_next_job;          //!< time to next job in seconds
   private string $target_directory;       //!< target directory /mtdata/data/....
-  private string $ts_directory_selected;  //!< time series directory selected
-  // maybe not needed
-  private int $ts_act_buffer_offset;      //!< time series active buffer offset
-  private int $ts_start;                  //!< time series start == start time UTC timestamp in seconds
-  private int $ts_stop;                   //!< time series stop == calculated stop time in seconds
-  private int $ts_act_buffer_step_size;   //!< time series active buffer step size
-  private int $ts_display_mode;           //!< time series display mode
 
   public function __construct(array $kv) {
     $this->sampling_rate = intval($kv['sampling_rate'] ?? 0);
@@ -187,12 +180,6 @@ class recording_status {
     $this->remaining_job_time = intval($kv['remaining_job_time'] ?? 0);
     $this->time_to_next_job = intval($kv['time_to_next_job'] ?? 0);
     $this->target_directory = $kv['target_directory'] ?? '';
-    $this->ts_directory_selected = $kv['ts_directory_selected'] ?? '';
-    $this->ts_act_buffer_offset = intval($kv['ts_act_buffer_offset'] ?? 0);
-    $this->ts_start = intval($kv['ts_start'] ?? 0);
-    $this->ts_stop = intval($kv['ts_stop'] ?? 0);
-    $this->ts_act_buffer_step_size = intval($kv['ts_act_buffer_step_size'] ?? 0);
-    $this->ts_display_mode = intval($kv['ts_display_mode'] ?? 0);
   }
 
   public function get_sampling_rate(): int {
@@ -213,12 +200,6 @@ class recording_status {
     $html .= 'Remaining Job Time: ' . seconds_to_hh_mm_ss($this->remaining_job_time) . '<br>';
     $html .= 'Time to Next Job: ' . seconds_to_hh_mm_ss($this->time_to_next_job) . '<br>';
     $html .= 'Target Directory: ' . $this->target_directory . '<br>';
-    $html .= 'Time Series Directory Selected: ' . $this->ts_directory_selected . '<br>';
-    $html .= 'Time Series Active Buffer Offset: ' . $this->ts_act_buffer_offset . '<br>';
-    $html .= 'Time Series Start: ' . $this->ts_start . '<br>';
-    $html .= 'Time Series Stop: ' . $this->ts_stop . '<br>';
-    $html .= 'Time Series Active Buffer Step Size: ' . $this->ts_act_buffer_step_size . '<br>';
-    $html .= 'Time Series Display Mode: ' . $this->ts_display_mode . '<br>';
     $html .= '</div>';
     return $html;
   }
