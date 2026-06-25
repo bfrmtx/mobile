@@ -170,6 +170,7 @@ class joblist {
       'sampling_rate' => $value,
       'start_date'    => $dt->format('Y-m-d'),
       'start_time'    => $dt->format('H:i:s'),
+      'started'       => 0,
     ]);
   }
 
