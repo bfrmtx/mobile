@@ -73,6 +73,14 @@ class sensor {
     return $this->sensor_type;
   }
 
+  /**
+   * @brief Get the sensor type in the alias form used by the SQL database (e.g. 'MFS06e', 'EFP06').
+   * @return string Alias sensor type for persisting to hwConfig.
+   */
+  public function get_sensor_type_alias(): string {
+    return $this->sensor_type_to_alias($this->sensor_type);
+  }
+
   public function set_sensor_type(string $sensor_type_) {
     $was_clamp = ($this->sensor_type === 'Clamp');
     $this->sensor_type = $sensor_type_;
@@ -134,7 +142,8 @@ class sensor {
       $this->set_sensor_serial(intval($kv['sensor_serial']));
     }
     if (isset($kv['sensor_type'])) {                // hwConfig
-      $this->set_sensor_type(strval($kv['sensor_type']));
+      // DB stores aliases (e.g. 'MFS06e', 'EFP06'); the web interface uses canonical names.
+      $this->set_sensor_type($this->sensor_type_from_alias(strval($kv['sensor_type'])));
     }
     if (isset($kv['dipole_length'])) {             // job
       $parsed_dipole_length = $this->parse_dipole_length_input($kv['dipole_length']);

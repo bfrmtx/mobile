@@ -26,6 +26,16 @@ trait global_vars {
     'Plate',
     'Clamp'
   ];
+  protected array $sensor_types_e_aliases = [      //!< shared hard-coded sensor type selector values for electric field sensors
+    'EFP06',
+    'EFP07',
+    'StROD',
+    'BUF_5',
+    'BUF_10',
+    'BUF_25',
+    'Plate',
+    'Clamp'
+  ];
   protected array $sensor_types_h = [      //!< shared hard-coded sensor type selector values for magnetic field sensors
     'MFS-06e',
     'MFS-07e',
@@ -37,6 +47,18 @@ trait global_vars {
     'SHFT-04e',
     'FGS-03e',
     'FGS-04e'
+  ];
+  protected array $sensor_types_h_aliases = [      //!< shared hard-coded sensor type selector values for magnetic field sensors
+    'MFS06e',
+    'MFS07e',
+    'MFS10e',
+    'MFS12e',
+    'MFS14e',
+    'SHFT02e',
+    'SHFT03e',
+    'SHFT04e',
+    'FGS03e',
+    'FGS04e'
   ];
 
   protected array $allowed_choppers = [-1, 0, 1]; //!< shared hard-coded chopper selector values for electric field sensors, -1 for auto, 0 for chopper off, 1 for chopper on
@@ -99,4 +121,42 @@ trait global_vars {
     0,
     1
   ];
+
+  /**
+   * @brief Map a sensor type stored in the SQL database (alias form, e.g. 'MFS06e', 'EFP06')
+   *        to the canonical form used by the web interface (e.g. 'MFS-06e', 'EFP-06').
+   * @param string $alias Sensor type as stored in the database.
+   * @return string Canonical sensor type, or the unchanged input if no mapping applies.
+   * @details The *_aliases arrays are index-aligned with their canonical counterparts.
+   */
+  protected function sensor_type_from_alias(string $alias): string {
+    $idx = array_search($alias, $this->sensor_types_e_aliases, true);
+    if ($idx !== false) {
+      return $this->sensor_types_e[$idx];
+    }
+    $idx = array_search($alias, $this->sensor_types_h_aliases, true);
+    if ($idx !== false) {
+      return $this->sensor_types_h[$idx];
+    }
+    return $alias; // already canonical or empty/unknown: leave unchanged
+  }
+
+  /**
+   * @brief Map a canonical sensor type used by the web interface (e.g. 'MFS-06e', 'EFP-06')
+   *        to the alias form stored in the SQL database (e.g. 'MFS06e', 'EFP06').
+   * @param string $canonical Sensor type as used by the web interface.
+   * @return string Alias sensor type, or the unchanged input if no mapping applies.
+   * @details The *_aliases arrays are index-aligned with their canonical counterparts.
+   */
+  protected function sensor_type_to_alias(string $canonical): string {
+    $idx = array_search($canonical, $this->sensor_types_e, true);
+    if ($idx !== false) {
+      return $this->sensor_types_e_aliases[$idx];
+    }
+    $idx = array_search($canonical, $this->sensor_types_h, true);
+    if ($idx !== false) {
+      return $this->sensor_types_h_aliases[$idx];
+    }
+    return $canonical; // already alias or empty/unknown: leave unchanged
+  }
 }

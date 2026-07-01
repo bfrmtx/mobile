@@ -146,16 +146,16 @@ function set_hwconfig_defaults(SQLite3 $db, int $n_slots): void {
       continue;
     }
     if ($slot_index == 0) {
-      $default_sensor_type = 'EFP-06';
+      $default_sensor_type = 'EFP06';
       upsert_key_value($db, $table_name, 'sensor_serial', 12);
     } else if ($slot_index == 1) {
-      $default_sensor_type = 'EFP-06';
+      $default_sensor_type = 'EFP06';
       upsert_key_value($db, $table_name, 'sensor_serial', 34);
     } else if ($slot_index >= 5) {
-      $default_sensor_type = 'SHFT-03e';
+      $default_sensor_type = 'SHFT03e';
       upsert_key_value($db, $table_name, 'sensor_serial', $slot_index);
     } else {
-      $default_sensor_type = 'MFS-12e';
+      $default_sensor_type = 'MFS12e';
       upsert_key_value($db, $table_name, 'sensor_serial', $slot_index);
     }
     upsert_key_value($db, $table_name, 'serial', $slot_index);

@@ -116,7 +116,8 @@ class adu extends frequency_handler {
 
     $kv_db = [
       // only items for hwConfig
-      'sensor_type' => $slot->get_sensor_type(),
+      // DB stores aliases (e.g. 'MFS06e', 'EFP06'); convert canonical web-interface names back.
+      'sensor_type' => $slot->get_sensor_type_alias(),
       'sensor_serial' => $slot->get_sensor_serial(),
     ];
     $this->db->update_key_value_table($kv_db);
