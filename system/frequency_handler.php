@@ -362,6 +362,7 @@ class frequency_handler extends job_time {
    */
   public function sampling_rate_drop_down_plus_link(): string {
     $html = '<span style="display:inline-flex;align-items:center;gap:14px;white-space:nowrap;">';
+    $html .= '<a href="channels.php" class="w3-text-black">ChannelsPage</a>';
     $html .= $this->sampling_rate_drop_down();
     $html .= '<a href="status.php" class="w3-text-black">StatusPage</a>';
     $html .= '</span>';
@@ -507,7 +508,7 @@ class frequency_handler extends job_time {
    */
   public function virtual_sub_filter_rates_drop_down() {
     if (!$this->is_filter()) {
-      return '<p style="color:navy;">activate filter first.</p>';
+      return '';
     }
     $html = '<form method="POST" action="">' . PHP_EOL;
     $html .= '<input type="hidden" name="sender" value="frequency_handler" />' . PHP_EOL;

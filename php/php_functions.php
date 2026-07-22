@@ -178,6 +178,10 @@ function show_messages() {
     showAutoAlert($_SESSION["error_message"], 2000);
     unset($_SESSION["error_message"]);
   }
+  if (isset($_SESSION["msg_warning"])) {
+    showAutoAlert($_SESSION["msg_warning"], 2000);
+    unset($_SESSION["msg_warning"]);
+  }
   if (isset($_SESSION["warning_message"])) {
     showAutoAlert($_SESSION["warning_message"], 2000);
     unset($_SESSION["warning_message"]);
@@ -226,6 +230,55 @@ function show_status_navbar(): void {
   require_once SYSTEM_DIR . 'nav_status_bar.php';
   $bar = new nav_status_bar();
   echo $bar->render_navbar();
+}
+
+/**
+ * @brief Check whether selftest is currently active from systemStatus.db.
+ */
+function mobile_is_selftest_active(): bool {
+  require_once SYSTEM_DIR . 'system_status.php';
+  try {
+    $system_status = new status();
+    return ($system_status->adu_status !== null && $system_status->adu_status->get_selftest_active() === 1);
+  } catch (Throwable $e) {
+    return false;
+  }
+}
+
+function mobile_is_recording(): bool {
+  require_once SYSTEM_DIR . 'system_status.php';
+  try {
+    $system_status = new status();
+    return ($system_status->adu_status !== null && $system_status->adu_status->get_recording_active() === 1);
+  } catch (Throwable $e) {
+    return false;
+  }
+}
+
+function mobile_is_recording_or_selftest(): bool {
+  return mobile_is_recording() || mobile_is_selftest_active();
+}
+/**
+ * @brief Render the selftest active icon banner shown at top of pages.
+ */
+function render_selftest_active_banner(): string {
+  $html = '<div class="w3-row w3-padding-16">';
+  $html .= '<div class="w3-full w3-container" style="text-align:center;">';
+
+  $st_svg = @file_get_contents(ICONS_DIR . 'st.svg');
+  if ($st_svg !== false && strpos($st_svg, '<svg') !== false) {
+    $st_svg = preg_replace('/<svg\b/', '<svg style="width:64px;height:64px;vertical-align:middle;"', $st_svg, 1);
+    if ($st_svg !== null) {
+      $html .= $st_svg;
+    }
+  } else {
+    $html .= '<img src="' . htmlspecialchars(base_asset_url('icons/st.svg'), ENT_QUOTES, 'UTF-8') . '" alt="Selftest Active" style="height:64px;" />';
+  }
+
+  $html .= '<h4 class="w3-text-red" style="margin-top:6px;"><strong>Selftest Active</strong></h4>';
+  $html .= '</div>';
+  $html .= '</div>';
+  return $html;
 }
 
 function get_iso_datepicker_submit_js() {

@@ -20,4 +20,5 @@
 quarto/.quarto/
 quarto/**/*.quarto_ipynb
 quarto/render_quarto.zsh
+sync_adu_bfr.zsh
 

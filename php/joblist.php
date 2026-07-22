@@ -196,6 +196,10 @@ class joblist {
     $this->db->delete_row_by_id($id);
   }
 
+  public function delete_all_rows(bool $vacuum = false): void {
+    $this->db->delete_all_rows($vacuum);
+  }
+
   /**
    * @brief Return all rows, newest first.
    */

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 100 100">
+  <!-- Minimalist Frame -->
+  <rect x="5" y="5" width="90" height="90" rx="8" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" />
+  <!-- Flat Baseline & ECG Pulse Line -->
+  <path d="M 5 50
+        H 30
+        L 35 55
+        L 40 42
+        L 45 50
+        H 50
+        L 55 20
+        L 62 80
+        L 68 55
+        L 72 50
+        H 95"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+  </svg>

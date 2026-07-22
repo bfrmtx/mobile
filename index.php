@@ -40,6 +40,9 @@ print_header("JOBs");
   <?php
   show_status_navbar();
   show_messages();
+
+  $selftest_active = mobile_is_selftest_active();
+
   $total_duration       = max(0, $job->get_duration());
   $total_days           = intdiv($total_duration, 86400);
   $start_date_time       = $job->get_start_datetime_utc();
@@ -51,6 +54,10 @@ print_header("JOBs");
   ?>
   <?php echo get_iso_datepicker_submit_js(); ?>
   <div id="mainDiv" class="w3-main" style="margin-left:0px">
+    <?php if ($selftest_active) { ?>
+      <?php echo render_selftest_active_banner(); ?>
+    <?php } ?>
+
     <div class="w3-row w3-padding-32">
       <div class="w3-full w3-container">
         <table style="width:95%;border:1px solid black;border-collapse:collapse;border-spacing:5px;">
@@ -134,7 +141,7 @@ print_header("JOBs");
           </tr>
           <tr>
             <td align="right">
-              <h3 class="w3-text-deep-orange">Subjobs&nbsp;&nbsp;</h3>
+              <h3 class="w3-text-deep-orange"><strong>Subjobs&nbsp;&nbsp;</strong></h3>
             </td>
             <td>
               <h3><?php echo $job->subjob_status(); ?></h3>
@@ -283,6 +290,14 @@ print_header("JOBs");
       </span>
     </div>
   </div>
+  <?php if ($selftest_active) { ?>
+    <script>
+      // Auto-refresh only while selftest is active; it stops once DB reports finished.
+      setTimeout(function() {
+        window.location.reload();
+      }, 2000);
+    </script>
+  <?php } ?>
   <script>
     function padTimePart(value) {
       return String(value).padStart(2, '0');

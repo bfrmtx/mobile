@@ -229,4 +229,8 @@ class system_log {
 
     return $html;
   }
+
+  function delete_all_rows(bool $vacuum = false): void {
+    $this->db->delete_all_rows($vacuum);
+  }
 } // end of class system_log

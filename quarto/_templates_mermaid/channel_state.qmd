@@ -1,0 +1,95 @@
+```{mermaid}
+stateDiagram-v2
+detect_sensors : detect sensors
+no_sensors : no sensors detected
+sensors_ok : sensors detected
+e_and_h_active : E and H active
+contd_e : continue with E
+contd_h : continue with E & H <br> detected channels
+load_template : load template
+template_loaded : template loaded
+e_active : E active
+e_only : E (EMAP) <br> or current clamps, <br> +/- 2.5 V
+[*] --> boot
+boot --> detect_sensors
+detect_sensors --> no_sensors
+detect_sensors --> sensors_ok
+sensors_ok --> e_and_h_active
+no_sensors --> e_active
+e_active --> contd_e
+e_active --> load_template
+e_and_h_active --> contd_h
+e_and_h_active --> load_template
+load_template --> template_loaded
+contd_e --> e_only
+
+```
+configuration logic for ADU-12e
+
+```{mermaid}
+flowchart TD
+    %% Define two separate start nodes
+    AD1([AD1]) --> CH1[Ch: 0 1 2 5 <br> Ex Ey Hx Hx_2]
+    AD2([AD2]) --> CH2[Ch: 3 4 6 7 <br> Hy Hz Hy_2 Hz_2]
+
+    %% Connect to intermediate or final steps
+   %% CH1 --> MP{MP}
+   %% CH2 --> MP
+   %% CH1 --> Merge{Merge}
+   %% CH2 --> Merge
+```
+| ADU Channel | A/D Channel | ADC-Channel | Name |
+|-------------|-------------|-------------|------|
+| 0           | 0           | 0           | Ex   |
+| 1           | 0           | 1           | Ey   |
+| 2           | 0           | 2           | Hx   |
+| 5           | 0           | 3           | MP-0|
+| 3           | 1           | 0           | Hy   |
+| 4           | 1           | 1           | Hz   |
+| 6           | 1           | 2           | MP-1|
+| 7           | 1           | 3           | MP-2|
+
+Channel assignment for ADU-12e
+
+# use cases
+
+```{mermaid}
+stateDiagram-v2
+      [*] --> Off
+      Off --> Green : plugged
+      Green --> Yellow : mount
+      Yellow --> Red : writing
+      Red --> Green : finished
+      Red --> Yellow : wait write (job)
+      Green --> Off : unplugged
+
+      style Green fill:#348017,color:white
+      style Yellow fill:#FFD700
+      style Red fill:#FF0000
+
+```
+green: you can unplug the device
+
+booting selftest missing
+
+```{mermaid}
+stateDiagram-v2
+    short_selftest --> running: boot
+    running --> short_selftest: do_nothing
+    running --> long_selftest: set_long
+    long_selftest --> running: boot
+
+```
+
+the system measures the contact resistance with ± 5% accuracy
+0 Ω may appear ~0.1 Ω and open channels ~4.8 MΩ (or 11.8 MΩ for the line)
+
+max gain is 8; a higher gain may cause saturation when a) peaks occur or b) when there is a drift in the signal of the electrodes.
+
+Probe Resistance <5kOhm  Radio Filter strong
+Probe Resistance >=5kOhm  Radio Filter weak
+~2.5MB/s WiFi transfer rate
+WiFi range ~10m indoors, ~30m outdoors, access point mode recommended and encryption WPA2 enabled
+
+
+

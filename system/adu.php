@@ -235,6 +235,12 @@ class adu extends frequency_handler {
       $this->db->set_table('slot' . $i);
       $kv = [];
       $kv = $this->db->read_key_value_table();
+      if ($i >= 2 && $i <= 7 && isset($kv['sensor_serial']) && intval($kv['sensor_serial']) === 0) {
+        if (trim(strval($kv['sensor_type'] ?? '')) !== '') {
+          $this->db->update_key_value_table(['sensor_type' => '']);
+        }
+        $kv['sensor_type'] = '';
+      }
       $slot->set_kv($kv); //!< set the properties of the slot (and sensor) based on the values in the database
       $i++;
     }

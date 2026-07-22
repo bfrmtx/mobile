@@ -323,6 +323,41 @@ class database {
     }
   }
 
+  /**
+   * @brief Delete all rows from the current table.
+   * @throws RuntimeException if the database connection is not established or the table name is not set
+   */
+  public function delete_all_rows(bool $vacuum = false): void {
+    if ($this->pdo === null) {
+      throw new RuntimeException('Database connection is not established.');
+    }
+    if ($this->table === '') {
+      throw new RuntimeException('Table name is not set.');
+    }
+    try {
+      $this->pdo->exec('DELETE FROM ' . $this->table);
+      if ($vacuum) {
+        $this->vacuum();
+      }
+    } catch (PDOException $e) {
+      throw new RuntimeException('Failed to delete all rows: ' . $e->getMessage(), 0, $e);
+    }
+  }
+
+  /**
+   * @brief Rebuild database file and free unused pages.
+   */
+  public function vacuum(): void {
+    if ($this->pdo === null) {
+      throw new RuntimeException('Database connection is not established.');
+    }
+    try {
+      $this->pdo->exec('VACUUM');
+    } catch (PDOException $e) {
+      throw new RuntimeException('Failed to vacuum database: ' . $e->getMessage(), 0, $e);
+    }
+  }
+
   public function create_key_value_table() {
     if ($this->pdo === null) {
       throw new RuntimeException('Database connection is not established.');

@@ -90,6 +90,14 @@ class adu_status {
     return $this->free_disk_space_mb_sd;
   }
 
+  public function get_selftest_active(): int {
+    return $this->selftest_active;
+  }
+
+  public function get_recording_active(): int {
+    return $this->recording_status;
+  }
+
   public function get_adu_status_html(): string {
     $html = '<div class="w3-container w3-padding-16">';
     $html .= '<h3 class="w3-text-deep-orange">ADU Status</h3>';

@@ -223,6 +223,9 @@ The recording status drives the icon on the mobile web interface. <br>
 {{< include ../../system/ADU-11e/systemStatus/adu.sql >}}
 ```
 
+*selftest_active* is 1 when the self test is running, 0 when it is finished. <br>
+*selftest_status* is 0 when ok, 1 when warning, 2 when critical. <br>
+
 ### gps
 The system status for the GPS. <br>
 If sync_state is 4, the GPS is fully synced and you can submit jobs, the GPS symbol on the mobile web interface will be green. <br>
