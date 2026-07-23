@@ -23,7 +23,7 @@ print_header('Selftest Results');
       <div class="w3-row w3-padding-32">
         <div class="w3-full w3-container">
           <h2 class="w3-text-deep-orange">Selftest Results</h2>
-          <h3><a href="index.php" class="w3-text-black">Back to Jobs</a></h3>
+          <h3><a href="index.php" class="w3-text-black">Back to Jobs</a> &Leftrightarrow; <a href="channels.php" class="w3-text-black">to Channels</a> &Leftrightarrow; <a href="status.php" class="w3-text-black">to Status</a></h3>
         </div>
       </div>
 

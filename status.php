@@ -23,7 +23,7 @@ print_header('System Status', 2);
       <div class="w3-row w3-padding-32">
         <div class="w3-full w3-container">
           <h2 class="w3-text-deep-orange">System Status</h2>
-          <h3><a href="index.php" class="w3-text-black">back toJobs</a></h3>
+          <h3><a href="index.php" class="w3-text-black">back to Jobs</a> &Leftrightarrow; <a href="channels.php" class="w3-text-black">to Channels</a></h3>
         </div>
       </div>
 

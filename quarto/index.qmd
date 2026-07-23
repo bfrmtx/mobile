@@ -1,14 +1,15 @@
----
-title: "Mobile WebInterface"
----
+# Mobile WebInterface
 
-# Purpose
 
-Add introductory material for operators and developers.
+```{=html}
+<p>
+  <button onclick="history.back()" class="btn btn-outline-secondary">
+    &larr; Previous Page / Back
+  </button>
+</p>
+```
 
-The intent is a error free operation of the ADU system for 95% of the use cases. For the remaining 5% the expert interface on the laptop can be used. <br>
-The mobile web interface is designed to be used on a smartphone, tablet or laptop.
-
+[Jobs](jobs/jobs.qmd)
 
 
 

@@ -18,7 +18,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['sender'] ?? '') ==
   $joblist->insert_special_job(-2);
   $_SESSION['msg_info'] = 'Detect sensors marker added.';
   $_SESSION['detect_sensors_reload'] = true;
-  $_SESSION['detect_sensors_reload_seconds'] = $job->get_prep_time() - 10;
+  // Set a default reload time of 12 seconds, Martin says 10s, ensure that the values are in the DB
+  $_SESSION['detect_sensors_reload_seconds'] = 12;
   header('Location: channels.php');
   exit;
 }
@@ -46,7 +47,7 @@ unset($_SESSION['detect_sensors_reload_seconds']);
       <div class="w3-row w3-padding-32">
         <div class="w3-full w3-container">
           <h2 class="w3-text-deep-orange">Channels</h2>
-          <h3><a href="index.php" class="w3-text-black">Back to Jobs</a></h3>
+          <h3><a href="index.php" class="w3-text-black">Back to Jobs</a> &Leftrightarrow; <a href="status.php" class="w3-text-black">to Status</a></h3>
         </div>
       </div>
 
