@@ -5,12 +5,12 @@ on:
     branches:
       - main
     paths:
-      - 'quarto/**'
-      - 'doc/**'
+      - 'qmd/**'
+      - 'html/**'
       - '.github/workflows/quarto-render.yml'
   pull_request:
     paths:
-      - 'quarto/**'
+      - 'qmd/**'
       - '.github/workflows/quarto-render.yml'
 
 jobs:
@@ -25,5 +25,5 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Render Quarto project
-        working-directory: quarto
+        working-directory: qmd
         run: quarto render

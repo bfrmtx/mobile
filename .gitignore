@@ -17,8 +17,8 @@
 .history/
 
 # Quarto workspace artifacts
-quarto/.quarto/
-quarto/**/*.quarto_ipynb
-quarto/render_quarto.zsh
+qmd/.quarto/
+qmd/**/*.quarto_ipynb
+qmd/render_quarto.zsh
 sync_adu_bfr.zsh
 
