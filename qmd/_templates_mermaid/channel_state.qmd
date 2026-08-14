@@ -70,6 +70,16 @@ stateDiagram-v2
 ```
 green: you can unplug the device
 
+```{mermaid}
+stateDiagram-v2
+    direction LR
+    [*] --> jobs
+    booting --> selftest: boot
+    selftest --> missing: do_nothing
+    selftest --> running: set_long
+    running --> selftest: boot
+```
+
 booting selftest missing
 
 ```{mermaid}

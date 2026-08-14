@@ -1,0 +1,35 @@
+---
+title: "Jobs Flow"
+---
+<br>
+@todo too early - do nothing or page refresh
+
+The start date and time *is updated at the time accessing the page* **once**.
+
+Submit will postpone. <br>
+Use "start now" does the same
+
+```{mermaid}
+flowchart TD
+	A[Job] --> B{too early?}
+	B -- Yes --> C[update<br> start date & time]
+	C --> D{overlapping?}
+	B -- No --> D{overlapping?}
+	D -- Yes --> E[reject<br>&<br>notification]
+	D -- No --> F[proceed &<br>submit to DB]
+
+```
+
+Senors
+
+```{mermaid}
+flowchart TD
+	A[sensors] --> B{detect}
+	B -- NO --> C[Ex & Ey]
+	C --> X[EMAP]
+	C --> Y[Clamp]
+	B -- Yes --> D{airborne}
+	D -- Yes --> E[**H only**]
+	D -- No --> F[**E *and* H**]
+
+```

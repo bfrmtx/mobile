@@ -268,24 +268,24 @@ print_header("JOBs");
         <form method="post" action="index.php" style="margin:0;">
           <input type="hidden" name="sender" value="joblist" />
           <input type="hidden" name="what" value="submit" />
-          <button type="submit" class="w3-button w3-black w3-round" style="font-size:1.1em;padding:8px 24px;">Submit Job</button>
+          <button type="submit" class="w3-button w3-black w3-round" style="font-size:1.1em;padding:8px 24px;" <?php echo $selftest_active ? ' disabled' : ''; ?>>Submit Job</button>
         </form>
 
         <form method="post" action="index.php" style="margin:0;">
           <input type="hidden" name="sender" value="joblist" />
           <input type="hidden" name="what" value="start_now" />
-          <button type="submit" class="w3-button w3-khaki w3-round" style="font-size:1.1em;padding:8px 24px;">Start Now</button>
+          <button type="submit" class="w3-button w3-khaki w3-round" style="font-size:1.1em;padding:8px 24px;" <?php echo $selftest_active ? ' disabled' : ''; ?>>Start Now</button>
         </form>
 
         <form method="get" action="airborne.php" style="margin:0;">
-          <button type="submit" class="w3-button w3-grey w3-round" style="font-size:1.1em;padding:8px 24px;">Airborne (no electric)</button>
+          <button type="submit" class="w3-button w3-grey w3-round" style="font-size:1.1em;padding:8px 24px;" <?php echo $selftest_active ? ' disabled' : ''; ?>>Airborne (no electric)</button>
         </form>
 
         <form method="post" action="index.php" style="margin:0;">
           <input type="hidden" name="sender" value="joblist" />
           <input type="hidden" name="what" value="special" />
           <input type="hidden" name="value" value="-1" />
-          <button type="submit" class="w3-button w3-deep-orange w3-round" style="font-size:1.1em;padding:8px 24px;">Stop Job</button>
+          <button type="submit" class="w3-button w3-deep-orange w3-round" style="font-size:1.1em;padding:8px 24px;" <?php echo $selftest_active ? ' disabled' : ''; ?>>Stop Job</button>
         </form>
       </span>
     </div>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -41,10 +44,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-12eeb4b20e9f5a2b0bfc604bfaf942bb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-c574c73dd0d0ff61020859ffc61752ee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,6 +75,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -172,6 +178,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ADC</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../flows/jobs_flow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Jobs Flow</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -180,7 +192,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#creating-a-job" id="toc-creating-a-job" class="nav-link active" data-scroll-target="#creating-a-job"><span class="header-section-number">2.1</span> Creating a Job</a></li>
+  <li><a href="#creating-a-job" id="toc-creating-a-job" class="nav-link active" data-scroll-target="#creating-a-job"><span class="header-section-number">2.1</span> Creating a Job</a>
+  <ul class="collapse">
+  <li><a href="#first-select-the-sampling-rate." id="toc-first-select-the-sampling-rate." class="nav-link" data-scroll-target="#first-select-the-sampling-rate."><span class="header-section-number">2.1.1</span> <strong>First, select the sampling rate.</strong><br></a></li>
+  <li><a href="#start-and-stop-date-and-time" id="toc-start-and-stop-date-and-time" class="nav-link" data-scroll-target="#start-and-stop-date-and-time"><span class="header-section-number">2.1.2</span> Start and Stop Date and Time</a></li>
+  </ul></li>
   <li><a href="#submitting-a-job" id="toc-submitting-a-job" class="nav-link" data-scroll-target="#submitting-a-job"><span class="header-section-number">2.2</span> Submitting a Job</a></li>
   </ul>
 </nav>
@@ -211,8 +227,60 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>You can not create a job in the past.<br> When the job page is accessed, the start date and time is updated to the current date and time <strong>once</strong>. <br> The stop date and time is stored as <em>duration</em> in the database. <br> $prep_time = 30s is added to the start date and time in case the start date and time is too “early”. <br> So finally a job shall start regardless if you press <strong>submit</strong> or <strong>start now</strong>. <br> While the selftest is active, you can’t submit a job. <br></p>
 <section id="creating-a-job" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="creating-a-job"><span class="header-section-number">2.1</span> Creating a Job</h2>
+<section id="first-select-the-sampling-rate." class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="first-select-the-sampling-rate."><span class="header-section-number">2.1.1</span> <strong>First, select the sampling rate.</strong><br></h3>
+<ul>
+<li>Rates marked with <em>(fil)</em> are virtual low sampling rates, nothing to do further on, start a job.</li>
+<li>Rates not marked, can be used for additional filtering <strong><em>or</em></strong> for shots.
+<ul>
+<li>additional filtering: record with 4 kHz and 128 Hz. <br> the 128 Hz you may want for remote download, the 4 kHz you download later.</li>
+<li>shots: record with 2 kHz and 32 kHz overnight. <br>
+<ul>
+<li>get your continuous LF data with 2 kHz, later filter</li>
+<li>get your shot every 15 minutes with 32 kHz, later filter 4x. <br> From the shot data you select shots with good AMT activity. <br> You get a smooth sounding from 10 kHz down to 100 or 1000s - depending on how long you recorded.</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A["straight 132k, 65k&lt;br&gt;30 min"]
+  B["filter 4x, 4x"]
+  C["interpretation"]
+  D["32 Hz (fil)"]
+  E["LF&lt;br&gt;8 kHz&lt;br&gt;256 Hz sub "]
+  F["remote download&lt;br&gt;256 Hz"]
+  G["HF&lt;br&gt;4 kHz&lt;br&gt;64k shots"]
+
+  A --&gt; B
+  B --&gt; C
+  D --&gt; B
+  G --&gt; B
+  E --&gt; F
+  E --&gt; B
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>We cover the following cases as displayed above:</p>
+<ul>
+<li>AMT, 2 km, high sampling rate only</li>
+<li>Fluxgate deep, 100 km, low sampling rate only</li>
+<li>typical overnight, 5 km, medium sampling rate plus shots</li>
+<li>deep with remote download / monitoring, 30 km, medium sampling rate plus filter</li>
+</ul>
+</section>
+<section id="start-and-stop-date-and-time" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="start-and-stop-date-and-time"><span class="header-section-number">2.1.2</span> Start and Stop Date and Time</h3>
+</section>
 </section>
 <section id="submitting-a-job" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="submitting-a-job"><span class="header-section-number">2.2</span> Submitting a Job</h2>

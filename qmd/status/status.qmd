@@ -2,8 +2,43 @@
 title: "Status"
 ---
 
-## GPS 
+## Status Bar
 
-## System
+![status bar](../_media/status_bar.png)
 
+The actual GPS time is updated every two seconds from the database, and there it is cycled every few seconds from the GPS. So the time lacks always *behind*, up to 4 seconds (this is not meant to be a real-time display).<br>
 
+## GPS ![](../_media/gps.svg){width=10%}
+
+Turns [green]{style="color:green;"} when the GPS is locked, and [red]{style="color:red;"} when the GPS is not locked.<br>
+Hence that the ADU does **not adjust the time while recording**. It makes sense to wait for lock. Especially for long jobs or remote reference do not start when the symbol is red!
+
+## Battery ![](../_media/battery-charge-level-100-percent-icon.svg){width=10%}
+
+|Status | Color / Voltage |
+|---|---|
+| green: 100% battery voltage is | above 12.8 V  [green]{style="color:green;"} ![](../_media/battery-charge-level-100-percent-icon.svg){width=10%} |
+| green: 75% battery voltage is | above 12.2 V  [green]{style="color:green;"} ![](../_media/battery-charge-level-75-percent-icon.svg){width=10%} |
+| yellow: 50% battery voltage is | above 11.8 V  [yellow]{style="color:orange;"} ![](../_media/battery-charge-level-50-percent-icon.svg){width=10%} |
+| red: 20% battery voltage is | below 11.8 V  [red]{style="color:red;"} ![](../_media/battery-charge-level-20-percent-icon.svg){width=10%} |
+
+You can set the shutdown voltage in the configuration file.<br>
+**LiIon** batteries can have their own voltage controller and **suddenly switch off at 12V**.<br>
+`echo "12.0" > /mtdata/mcp_sys/ExtraShutdownVoltage.txt` <br>
+as root user, changes the shutdown voltage to 12.0 V for example.
+
+### Disk ![](../_media/disk_status.svg){width=6%}
+
+|Free Space | Color  |
+|---|---|
+| > 40 GB free | [green]{style="color:green;"} |
+| > 20 GB free | [yellow]{style="color:#edda74;"} |
+| < 20 GB free | [red]{style="color:red;"} |
+
+### Timer
+
+| Timer status | Symbol |
+|---|---|
+| Idle | ![](../_media/idle.svg){ width=10%} |
+| Waiting | ![](../_media/wait_start.svg){ width=10%} |
+| Recording | ![](../_media/rec_active.svg){ width=10%} |

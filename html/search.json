@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Mobile WebInterface",
     "section": "",
-    "text": "1 Mobile WebInterface\n\n  \n    ← Previous Page / Back\n  \n\nJobs",
+    "text": "← Previous Page / Back to WebInterface\n  \n\nThe mobile web interface is designed for small screens. It only provides a subset of the full web interface.\n\nIt always connects the E field. Can be switched off for airborne.\nIt ONLY uses H sensors which are connected.\nWait until selftest is finished and GPS is green.\nset the dipole length for N→S and E→W (no rotation)\nselect the sampling rate or a JobList\nin case set a filter or a shot rate\n⇒ off you go\n\nThe design is for error free simple operation.\nJobs\nStatus",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Mobile WebInterface</span>"
     ]
@@ -14,7 +14,18 @@
     "href": "jobs/jobs.html",
     "title": "2  Jobs",
     "section": "",
-    "text": "2.1 Creating a Job",
+    "text": "2.1 Creating a Job\nYou can not create a job in the past. When the job page is accessed, the start date and time is updated to the current date and time once.  The stop date and time is stored as duration in the database.  $prep_time = 30s is added to the start date and time in case the start date and time is too “early”.  So finally a job shall start regardless if you press submit or start now.  While the selftest is active, you can’t submit a job.",
+    "crumbs": [
+      "User Guide",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Jobs</span>"
+    ]
+  },
+  {
+    "objectID": "jobs/jobs.html#creating-a-job",
+    "href": "jobs/jobs.html#creating-a-job",
+    "title": "2  Jobs",
+    "section": "",
+    "text": "2.1.1 First, select the sampling rate.\n\nRates marked with (fil) are virtual low sampling rates, nothing to do further on, start a job.\nRates not marked, can be used for additional filtering or for shots.\n\nadditional filtering: record with 4 kHz and 128 Hz.  the 128 Hz you may want for remote download, the 4 kHz you download later.\nshots: record with 2 kHz and 32 kHz overnight. \n\nget your continuous LF data with 2 kHz, later filter\nget your shot every 15 minutes with 32 kHz, later filter 4x.  From the shot data you select shots with good AMT activity.  You get a smooth sounding from 10 kHz down to 100 or 1000s - depending on how long you recorded.\n\n\n\n\n\n\n\n\nflowchart LR\n  A[\"straight 132k, 65k&lt;br&gt;30 min\"]\n  B[\"filter 4x, 4x\"]\n  C[\"interpretation\"]\n  D[\"32 Hz (fil)\"]\n  E[\"LF&lt;br&gt;8 kHz&lt;br&gt;256 Hz sub \"]\n  F[\"remote download&lt;br&gt;256 Hz\"]\n  G[\"HF&lt;br&gt;4 kHz&lt;br&gt;64k shots\"]\n\n  A --&gt; B\n  B --&gt; C\n  D --&gt; B\n  G --&gt; B\n  E --&gt; F\n  E --&gt; B\n\n\n\n\n\n\nWe cover the following cases as displayed above:\n\nAMT, 2 km, high sampling rate only\nFluxgate deep, 100 km, low sampling rate only\ntypical overnight, 5 km, medium sampling rate plus shots\ndeep with remote download / monitoring, 30 km, medium sampling rate plus filter\n\n\n\n2.1.2 Start and Stop Date and Time",
     "crumbs": [
       "User Guide",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Jobs</span>"
@@ -36,18 +47,40 @@
     "href": "status/status.html",
     "title": "3  Status",
     "section": "",
-    "text": "3.1 GPS",
+    "text": "3.1 Status Bar\nThe actual GPS time is updated every two seconds from the database, and there it is cycled every few seconds from the GPS. So the time lacks always behind, up to 4 seconds (this is not meant to be a real-time display).",
     "crumbs": [
       "User Guide",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Status</span>"
     ]
   },
   {
-    "objectID": "status/status.html#system",
-    "href": "status/status.html#system",
+    "objectID": "status/status.html#status-bar",
+    "href": "status/status.html#status-bar",
     "title": "3  Status",
-    "section": "3.2 System",
-    "text": "3.2 System",
+    "section": "",
+    "text": "status bar",
+    "crumbs": [
+      "User Guide",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Status</span>"
+    ]
+  },
+  {
+    "objectID": "status/status.html#gps",
+    "href": "status/status.html#gps",
+    "title": "3  Status",
+    "section": "3.2 GPS ",
+    "text": "3.2 GPS \nTurns green when the GPS is locked, and red when the GPS is not locked. Hence that the ADU does not adjust the time while recording. It makes sense to wait for lock. Especially for long jobs or remote reference do not start when the symbol is red!",
+    "crumbs": [
+      "User Guide",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Status</span>"
+    ]
+  },
+  {
+    "objectID": "status/status.html#battery",
+    "href": "status/status.html#battery",
+    "title": "3  Status",
+    "section": "3.3 Battery ",
+    "text": "3.3 Battery \n\n\n\n\n\n\n\nStatus\nColor / Voltage\n\n\n\n\ngreen: 100% battery voltage is\nabove 12.8 V green \n\n\ngreen: 75% battery voltage is\nabove 12.2 V green \n\n\nyellow: 50% battery voltage is\nabove 11.8 V yellow \n\n\nred: 20% battery voltage is\nbelow 11.8 V red \n\n\n\nYou can set the shutdown voltage in the configuration file. LiIon batteries can have their own voltage controller and suddenly switch off at 12V. echo \"12.0\" &gt; /mtdata/mcp_sys/ExtraShutdownVoltage.txt  as root user, changes the shutdown voltage to 12.0 V for example.\n\n3.3.1 Disk \n\n\n\nFree Space\nColor\n\n\n\n\n&gt; 40 GB free\ngreen\n\n\n&gt; 20 GB free\nyellow\n\n\n&lt; 20 GB free\nred\n\n\n\n\n\n3.3.2 Timer\n\n\n\nTimer status\nSymbol\n\n\n\n\nIdle\n\n\n\nWaiting\n\n\n\nRecording",
     "crumbs": [
       "User Guide",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Status</span>"
@@ -260,6 +293,17 @@
     "crumbs": [
       "Developers",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>ADC</span>"
+    ]
+  },
+  {
+    "objectID": "flows/jobs_flow.html",
+    "href": "flows/jobs_flow.html",
+    "title": "8  Jobs Flow",
+    "section": "",
+    "text": "@todo too early - do nothing or page refresh\nThe start date and time is updated at the time accessing the page once.\nSubmit will postpone.  Use “start now” does the same\n\n\n\n\n\nflowchart TD\n    A[Job] --&gt; B{too early?}\n    B -- Yes --&gt; C[update&lt;br&gt; start date & time]\n    C --&gt; D{overlapping?}\n    B -- No --&gt; D{overlapping?}\n    D -- Yes --&gt; E[reject&lt;br&gt;&&lt;br&gt;notification]\n    D -- No --&gt; F[proceed &&lt;br&gt;submit to DB]\n\n\n\n\n\n\n\nSenors\n\n\n\n\n\nflowchart TD\n    A[sensors] --&gt; B{detect}\n    B -- NO --&gt; C[Ex & Ey]\n    C --&gt; X[EMAP]\n    C --&gt; Y[Clamp]\n    B -- Yes --&gt; D{airborne}\n    D -- Yes --&gt; E[**H only**]\n    D -- No --&gt; F[**E *and* H**]",
+    "crumbs": [
+      "Developers",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Jobs Flow</span>"
     ]
   }
 ]

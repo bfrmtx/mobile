@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Status – Mobile WebInterface</title>
+<title>8&nbsp; Jobs Flow – Mobile WebInterface</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../mwi/mwi.html" rel="next">
-<link href="../jobs/jobs.html" rel="prev">
+<link href="../flows/adc.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -75,6 +74,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -88,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../jobs/jobs.html">User Guide</a></li><li class="breadcrumb-item"><a href="../status/status.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Status</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mwi/mwi.html">Developers</a></li><li class="breadcrumb-item"><a href="../flows/jobs_flow.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Jobs Flow</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -136,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../status/status.html" class="sidebar-item-text sidebar-link active">
+  <a href="../status/status.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Status</span></span></a>
   </div>
 </li>
@@ -177,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../flows/jobs_flow.html" class="sidebar-item-text sidebar-link">
+  <a href="../flows/jobs_flow.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Jobs Flow</span></span></a>
   </div>
 </li>
@@ -185,19 +187,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
     </ul>
     </div>
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#status-bar" id="toc-status-bar" class="nav-link active" data-scroll-target="#status-bar"><span class="header-section-number">3.1</span> Status Bar</a></li>
-  <li><a href="#gps" id="toc-gps" class="nav-link" data-scroll-target="#gps"><span class="header-section-number">3.2</span> GPS <img src="../_media/gps.svg" class="img-fluid" style="width:10.0%"></a></li>
-  <li><a href="#battery" id="toc-battery" class="nav-link" data-scroll-target="#battery"><span class="header-section-number">3.3</span> Battery <img src="../_media/battery-charge-level-100-percent-icon.svg" class="img-fluid" style="width:10.0%"></a>
-  <ul class="collapse">
-  <li><a href="#disk" id="toc-disk" class="nav-link" data-scroll-target="#disk"><span class="header-section-number">3.3.1</span> Disk <img src="../_media/disk_status.svg" class="img-fluid" style="width:6.0%"></a></li>
-  <li><a href="#timer" id="toc-timer" class="nav-link" data-scroll-target="#timer"><span class="header-section-number">3.3.2</span> Timer</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -206,9 +196,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../jobs/jobs.html">User Guide</a></li><li class="breadcrumb-item"><a href="../status/status.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Status</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mwi/mwi.html">Developers</a></li><li class="breadcrumb-item"><a href="../flows/jobs_flow.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Jobs Flow</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Status</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Jobs Flow</span></h1>
 </div>
 
 
@@ -225,106 +215,51 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="status-bar" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="status-bar"><span class="header-section-number">3.1</span> Status Bar</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../_media/status_bar.png" class="img-fluid figure-img"></p>
-<figcaption>status bar</figcaption>
-</figure>
+<p><br> <span class="citation" data-cites="todo">@todo</span> too early - do nothing or page refresh</p>
+<p>The start date and time <em>is updated at the time accessing the page</em> <strong>once</strong>.</p>
+<p>Submit will postpone. <br> Use “start now” does the same</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A[Job] --&gt; B{too early?}
+    B -- Yes --&gt; C[update&lt;br&gt; start date &amp; time]
+    C --&gt; D{overlapping?}
+    B -- No --&gt; D{overlapping?}
+    D -- Yes --&gt; E[reject&lt;br&gt;&amp;&lt;br&gt;notification]
+    D -- No --&gt; F[proceed &amp;&lt;br&gt;submit to DB]
+
+</pre>
 </div>
-<p>The actual GPS time is updated every two seconds from the database, and there it is cycled every few seconds from the GPS. So the time lacks always <em>behind</em>, up to 4 seconds (this is not meant to be a real-time display).<br></p>
-</section>
-<section id="gps" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="gps"><span class="header-section-number">3.2</span> GPS <img src="../_media/gps.svg" class="img-fluid" style="width:10.0%"></h2>
-<p>Turns <span style="color:green;">green</span> when the GPS is locked, and <span style="color:red;">red</span> when the GPS is not locked.<br> Hence that the ADU does <strong>not adjust the time while recording</strong>. It makes sense to wait for lock. Especially for long jobs or remote reference do not start when the symbol is red!</p>
-</section>
-<section id="battery" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="battery"><span class="header-section-number">3.3</span> Battery <img src="../_media/battery-charge-level-100-percent-icon.svg" class="img-fluid" style="width:10.0%"></h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Status</th>
-<th>Color / Voltage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>green: 100% battery voltage is</td>
-<td>above 12.8 V <span style="color:green;">green</span> <img src="../_media/battery-charge-level-100-percent-icon.svg" class="img-fluid" style="width:10.0%"></td>
-</tr>
-<tr class="even">
-<td>green: 75% battery voltage is</td>
-<td>above 12.2 V <span style="color:green;">green</span> <img src="../_media/battery-charge-level-75-percent-icon.svg" class="img-fluid" style="width:10.0%"></td>
-</tr>
-<tr class="odd">
-<td>yellow: 50% battery voltage is</td>
-<td>above 11.8 V <span style="color:orange;">yellow</span> <img src="../_media/battery-charge-level-50-percent-icon.svg" class="img-fluid" style="width:10.0%"></td>
-</tr>
-<tr class="even">
-<td>red: 20% battery voltage is</td>
-<td>below 11.8 V <span style="color:red;">red</span> <img src="../_media/battery-charge-level-20-percent-icon.svg" class="img-fluid" style="width:10.0%"></td>
-</tr>
-</tbody>
-</table>
-<p>You can set the shutdown voltage in the configuration file.<br> <strong>LiIon</strong> batteries can have their own voltage controller and <strong>suddenly switch off at 12V</strong>.<br> <code>echo "12.0" &gt; /mtdata/mcp_sys/ExtraShutdownVoltage.txt</code> <br> as root user, changes the shutdown voltage to 12.0 V for example.</p>
-<section id="disk" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="disk"><span class="header-section-number">3.3.1</span> Disk <img src="../_media/disk_status.svg" class="img-fluid" style="width:6.0%"></h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Free Space</th>
-<th>Color</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>&gt; 40 GB free</td>
-<td><span style="color:green;">green</span></td>
-</tr>
-<tr class="even">
-<td>&gt; 20 GB free</td>
-<td><span style="color:#edda74;">yellow</span></td>
-</tr>
-<tr class="odd">
-<td>&lt; 20 GB free</td>
-<td><span style="color:red;">red</span></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="timer" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="timer"><span class="header-section-number">3.3.2</span> Timer</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Timer status</th>
-<th>Symbol</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Idle</td>
-<td><img src="../_media/idle.svg" class="img-fluid" style="width:10.0%"></td>
-</tr>
-<tr class="even">
-<td>Waiting</td>
-<td><img src="../_media/wait_start.svg" class="img-fluid" style="width:10.0%"></td>
-</tr>
-<tr class="odd">
-<td>Recording</td>
-<td><img src="../_media/rec_active.svg" class="img-fluid" style="width:10.0%"></td>
-</tr>
-</tbody>
-</table>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Senors</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A[sensors] --&gt; B{detect}
+    B -- NO --&gt; C[Ex &amp; Ey]
+    C --&gt; X[EMAP]
+    C --&gt; Y[Clamp]
+    B -- Yes --&gt; D{airborne}
+    D -- Yes --&gt; E[**H only**]
+    D -- No --&gt; F[**E *and* H**]
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -729,14 +664,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../jobs/jobs.html" class="pagination-link" aria-label="Jobs">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Jobs</span></span>
+      <a href="../flows/adc.html" class="pagination-link" aria-label="ADC">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ADC</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../mwi/mwi.html" class="pagination-link" aria-label="MWI">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">MWI</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

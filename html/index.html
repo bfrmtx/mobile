@@ -2,21 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-07-23">
+<meta name="dcterms.date" content="2026-08-14">
 
 <title>Mobile WebInterface</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -41,10 +44,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-12eeb4b20e9f5a2b0bfc604bfaf942bb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c574c73dd0d0ff61020859ffc61752ee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -172,17 +175,17 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ADC</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./flows/jobs_flow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Jobs Flow</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
     </div>
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#mobile-webinterface" id="toc-mobile-webinterface" class="nav-link active" data-scroll-target="#mobile-webinterface"><span class="header-section-number">1</span> Mobile WebInterface</a></li>
-  </ul>
-</nav>
+    
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -204,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 23, 2026</p>
+      <p class="date">August 14, 2026</p>
     </div>
   </div>
   
@@ -216,17 +219,26 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="mobile-webinterface" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Mobile WebInterface</h1>
 <p>
   <button onclick="history.back()" class="btn btn-outline-secondary">
-    ← Previous Page / Back
+    ← Previous Page / Back to WebInterface
   </button>
 </p>
-<p><a href="./jobs/jobs.html">Jobs</a></p>
+<p>The mobile web interface is designed for small screens. It only provides a subset of the full web interface.</p>
+<ul>
+<li>It always connects the E field. Can be switched off for airborne.</li>
+<li>It <strong>ONLY</strong> uses <strong>H</strong> sensors which are connected.</li>
+<li>Wait until selftest is finished and GPS is green.</li>
+<li>set the dipole length for N→S and E→W (no rotation)</li>
+<li>select the sampling rate <em>or</em> a JobList</li>
+<li>in case set a filter or a shot rate</li>
+<li>⇒ off you go</li>
+</ul>
+<p><strong>The design is for error free simple operation</strong>.</p>
+<p><a href="./jobs/jobs.html">Jobs</a><br></p>
+<p><a href="./status/status.html">Status</a></p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

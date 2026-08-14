@@ -1,15 +1,29 @@
-# Mobile WebInterface
-
+---
+title: "Mobile WebInterface"
+---
 
 ```{=html}
 <p>
   <button onclick="history.back()" class="btn btn-outline-secondary">
-    &larr; Previous Page / Back
+    &larr; Previous Page / Back to WebInterface
   </button>
 </p>
 ```
+The mobile web interface is designed for small screens. It only provides a subset of the full web interface. 
 
-[Jobs](jobs/jobs.qmd)
+* It always connects the E field. Can be switched off for airborne.
+* It **ONLY** uses **H** sensors which are connected.
+* Wait until selftest is finished and GPS is green.
+* set the dipole length for N&rarr;S and E&rarr;W (no rotation)
+* select the sampling rate *or* a JobList
+* in case set a filter or a shot rate
+* &rArr; off you go
+
+**The design is for error free simple operation**. 
+
+[Jobs](jobs/jobs.qmd)<br>
+
+[Status](status/status.qmd)
 
 
 

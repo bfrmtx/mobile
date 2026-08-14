@@ -2,6 +2,53 @@
 title: "Jobs"
 ---
 
+You can not create a job in the past.<br>
+When the job page is accessed, the start date and time is updated to the current date and time **once**. <br>
+The stop date and time is stored as *duration* in the database. <br>
+$prep_time = 30s is added to the start date and time in case the start date and time is too "early". <br>
+So finally a job shall start regardless if you press **submit** or **start now**. <br>
+While the selftest is active, you can't submit a job. <br>
+
 ## Creating a Job
+
+### **First, select the sampling rate.**<br>
+
+* Rates marked with *(fil)* are virtual low sampling rates, nothing to do further on, start a job.
+* Rates not marked, can be used for additional filtering ***or*** for shots.
+  * additional filtering: record with 4 kHz and 128 Hz. <br>
+  the 128 Hz you may want for remote download, the 4 kHz you download later.
+  * shots: record with 2 kHz and 32 kHz overnight. <br>
+    * get your continuous LF data with 2 kHz, later filter
+    * get your shot every 15 minutes with 32 kHz, later filter 4x. <br>
+    From the shot data you select shots with good AMT activity. <br>
+    You get a smooth sounding from 10 kHz down to 100 or 1000s - depending on how long you recorded.
+
+```{mermaid}
+flowchart LR
+  A["straight 132k, 65k<br>30 min"]
+  B["filter 4x, 4x"]
+  C["interpretation"]
+  D["32 Hz (fil)"]
+  E["LF<br>8 kHz<br>256 Hz sub "]
+  F["remote download<br>256 Hz"]
+  G["HF<br>4 kHz<br>64k shots"]
+
+  A --> B
+  B --> C
+  D --> B
+  G --> B
+  E --> F
+  E --> B
+```
+
+We cover the following cases as displayed above:
+
+* AMT, 2 km, high sampling rate only
+* Fluxgate deep, 100 km, low sampling rate only
+* typical overnight, 5 km, medium sampling rate plus shots
+* deep with remote download / monitoring, 30 km, medium sampling rate plus filter
+
+### Start and Stop Date and Time
+
 
 ## Submitting a Job

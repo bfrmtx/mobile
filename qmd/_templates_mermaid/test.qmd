@@ -1,0 +1,16 @@
+```{mermaid}
+stateDiagram-v2
+    direction LR
+    state if_state <<choice>>
+    [*] --> job
+    job --> check: submit
+    check --> if_state
+    if_state --> [*]: too early
+    if_state --> [*]: overlapping
+    if_state --> Job_DB: submit
+
+    style Green fill:#348017,color:white
+    style Yellow fill:#FFD700
+    style check fill:#FF0000
+
+```

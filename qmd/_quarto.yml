@@ -22,6 +22,7 @@ book:
         - databases/databases.qmd
         - flows/slots-flow.qmd
         - flows/adc.qmd
+        - flows/jobs_flow.qmd
 
 format:
   html:
@@ -33,5 +34,7 @@ format:
 
 execute:
   freeze: auto
+  engine: julia
+
 
 # quarto preview . --port 3333
