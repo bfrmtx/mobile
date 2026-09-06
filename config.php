@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @ file config.php
- * @ brief set up the session and the path for the database ALWAYS INCLUDE!
- * @ details starts the SESSION and set the systemtype and so on.
+ * @file config.php
+ * @brief set up the session and the path for the database ALWAYS INCLUDE!
+ * @details starts the SESSION and set the systemtype and so on.
  */
 
 // check if session is already started (not uses isset ... this is better)
@@ -155,5 +155,5 @@ function adu_db_root() {
   // Keep a deterministic fallback for diagnostics when expected folders are missing.
   return '/home/database';
 }
-
+// DB_DIR has already a trailing slash
 define('DB_DIR', adu_db_root() . DIRECTORY_SEPARATOR); //!< root directory where ADU database files reside (e.g. /home/database/ or /home/$user/adu_database/).

@@ -19,7 +19,9 @@ The mobile web interface is designed for small screens. It only provides a subse
 * in case set a filter or a shot rate
 * &rArr; off you go
 
-**The design is for error free simple operation**. 
+![](_media/nuclear-sign-icon.svg){width="10%"} [<br>**mobile will sync its jobs to mcpdb and remove others**]{style="color:red;"}
+
+[**The design is for error free simple operation**]{style="color:green;"}
 
 [Jobs](jobs/jobs.qmd)<br>
 

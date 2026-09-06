@@ -13,7 +13,7 @@ class str_selftest_results {
   protected array $str_bases = []; //!< array of str_base objects for each table name
 
   public function __construct(string $db_file_) {
-    $this->db = new database($db_file_); // create_if_missing = true
+    $this->db = new database($db_file_);
     for ($i = 0; $i < NSLOTS; $i++) {
       $this->table_names[] = 'slot' . strval($i);
     }

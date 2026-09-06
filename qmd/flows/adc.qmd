@@ -8,6 +8,7 @@ The ADU-11e has two ADCs, each with 8 channels, **A** and **B**. They are workin
 
 ### 8 Channel Measurement Setup with MFS
 
+(polarity shown)
 
 <table>
   <thead>
@@ -25,7 +26,7 @@ The ADU-11e has two ADCs, each with 8 channels, **A** and **B**. They are workin
       <td>S &rarr; N</td><td>0</td><td>0</td><td>A 0</td><td>E<sub>x</sub></td><td>C000_TEx</td>
     </tr>
     <tr style="background-color:#f9a825;">
-      <td>E &rarr; W</td><td>1</td><td>1</td><td>A 1</td><td>E<sub>y</sub></td><td>C001_TEy</td>
+      <td>W &rarr; E</td><td>1</td><td>1</td><td>A 1</td><td>E<sub>y</sub></td><td>C001_TEy</td>
     </tr>
     <tr style="background-color:#42a5f5;">
       <td>H<sub>x</sub></td><td>2</td><td>2</td><td>A 2</td><td>H<sub>x</sub></td><td>C002_THx</td>
@@ -68,7 +69,7 @@ Switch is set to **default**. Hence: the switch is on the connector board!
       <td>S &rarr; N</td><td>0</td><td>0</td><td>A 0</td><td>E<sub>x</sub></td><td>C000_TEx</td>
     </tr>
     <tr style="background-color:#f9a825;">
-      <td>E &rarr; W</td><td>1</td><td>1</td><td>A 1</td><td>E<sub>y</sub></td><td>C001_TEy</td>
+      <td>W &rarr; E</td><td>1</td><td>1</td><td>A 1</td><td>E<sub>y</sub></td><td>C001_TEy</td>
     </tr>
     <tr style="background-color:#42a5f5;">
       <td>H<sub>x</sub></td><td>2</td><td>2</td><td>A 2</td><td>H<sub>x</sub></td><td>C002_THx</td>
@@ -102,7 +103,7 @@ Switch is set to **MP**. Hence: the switch is on the connector board!
       <td>S &rarr; N</td><td>0</td><td>0</td><td>A 0</td><td>E<sub>x</sub></td><td>C000_TEx</td>
     </tr>
     <tr style="background-color:#f9a825;">
-      <td>E &rarr; W</td><td>1</td><td>1</td><td>A 1</td><td>E<sub>y</sub></td><td>C001_TEy</td>
+      <td>W &rarr; E</td><td>1</td><td>1</td><td>A 1</td><td>E<sub>y</sub></td><td>C001_TEy</td>
     </tr>
     <tr style="background-color:#42a5f5;">
       <td>MP H<sub>x</sub></td><td style="background-color:#66bb6a;">5</td><td>2</td><td>A 2</td><td>H<sub>x</sub></td><td>C002_THx</td>
@@ -136,14 +137,14 @@ Switch is set to **MP**. Hence: the switch is on the connector board!
       <td>S &rarr; N</td><td>0</td><td>0</td><td>A 0</td><td>E<sub>x</sub></td><td>C000_TEx</td>
     </tr>
     <tr style="background-color:#f9a825;">
-      <td>E &rarr; W</td><td>1</td><td>1</td><td>A 1</td><td>E<sub>y</sub></td><td>C001_TEy</td>
+      <td>W &rarr; E</td><td>1</td><td>1</td><td>A 1</td><td>E<sub>y</sub></td><td>C001_TEy</td>
     </tr>
   </tbody>
 </table>
 
 ## Summary
 
-- The first two connectors (S &rarr; N and E &rarr; W) are always on the same slots (0 and 1) and are always associated with the channels 0 and 1, aka E<sub>x</sub> and E<sub>y</sub>.
+- The first two connectors (S &rarr; N and W &rarr; E) are always on the same slots (0 and 1) and are always associated with the channels 0 and 1, aka E<sub>x</sub> and E<sub>y</sub>.
 - The connectors (H<sub>x</sub>, H<sub>y</sub>, H<sub>z</sub>) are on slots 2, 3, and 4 **and if** a sensor is detected, are associated with channels 2, 3, and 4.
 - The connectors (MP H<sub>x</sub>, MP H<sub>y</sub>, MP H<sub>z</sub>) are on slots 5, 6, and 7 **and if** a sensor is detected:
   - are associated with channels 2, 3, and 4 **if** H<sub>x</sub>, H<sub>y</sub>, H<sub>z</sub> are not detected

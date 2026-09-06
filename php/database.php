@@ -6,373 +6,412 @@
  */
 require_once __DIR__ . '/../config.php'; //!< make your SESSION and path.
 require_once TRAITS_DIR . 'global_vars.php';
-class database {
-  use global_vars; //!< global_vars for drop downs and selectors
+
+class database extends SQLite3 {
+  use global_vars;                         //!< global_vars for drop downs and selectors
   protected string $db_file = '';          //!< path to the SQLite database file
-  protected ?PDO $pdo = null;              //!< PDO instance for database connection
-  protected int $busy_timeout_s = 2;       //!< max wait on locked SQLite operations
   protected string $table = '';            //!< quoted table name for use in queries
 
+  /**
+   * @brief Constructor for the database class.
+   * @param string $db_file_ The path to the SQLite database file.
+   * @details we use just the name, NOT a path.
+   * @details default is /home/database/$db_file_ for the ADU system.
+   * @details on MAC we should get $candidate = '/Users/' . $user . '/adu_database';
+   * @details on Linux we should get $candidate = '/home/' . $user . '/adu_database';
+   * @param bool $create_if_missing_ Whether to create the database file if it does not exist.
+   * @throws RuntimeException If the database file is not found and creation is not allowed.
+   * @throws InvalidArgumentException If the provided database file path is invalid.
+   */
   public function __construct(string $db_file_, bool $create_if_missing_ = false) {
 
-    // we use just the name, NOT a path.
-    // default is /home/database/$db_file_ for the ADU system.
-    // on MAC we should get $candidate = '/Users/' . $user . '/adu_database';
-    // on Linux we should get $candidate = '/home/' . $user . '/adu_database';
-    if ($db_file_ !== '' && $db_file_[0] !== DIRECTORY_SEPARATOR) {
-      $candidate = DB_DIR . ltrim($db_file_, DIRECTORY_SEPARATOR);
-      if (file_exists($candidate) || $create_if_missing_) {
-        $this->db_file = $candidate;
-      } else {
-        throw new RuntimeException('Database file not found: ' . $candidate);
+    // check if empty
+    if (empty($db_file_)) {
+      throw new InvalidArgumentException('Database file path cannot be empty.');
+    }
+    // Resolve DB path; relative names are rooted in DB_DIR.
+    $db_file_path = ($db_file_[0] === DIRECTORY_SEPARATOR)
+      ? $db_file_
+      : DB_DIR . ltrim($db_file_, DIRECTORY_SEPARATOR);
+
+    if (file_exists($db_file_path)) {
+      if (!is_file($db_file_path)) {
+        throw new RuntimeException('Database path is not a file: ' . $db_file_path);
       }
     } else {
-      throw new InvalidArgumentException('Invalid database file path: ' . $db_file_);
+      if (!$create_if_missing_) {
+        throw new RuntimeException('Database file not found: ' . $db_file_path);
+      }
+      $dir = dirname($db_file_path);
+      if (!is_dir($dir)) {
+        throw new RuntimeException('Database directory not found: ' . $dir);
+      }
     }
-    try {
-      // create a new PDO instance with a file-based SQLite connection
-      // options:
-      // null username 
-      // null password
-      // set error mode to exceptions and a reasonable timeout for busy locks
-      $this->pdo = new PDO(
-        'sqlite:' . $this->db_file,
-        null,
-        null,
-        [
-          PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-          PDO::ATTR_TIMEOUT => $this->busy_timeout_s, // set the timeout for busy locks in seconds
-        ]
-      );
+    $this->db_file = $db_file_path;
 
-      // Align SQLite lock wait with the configured timeout in milliseconds.
-      $this->pdo->exec('PRAGMA busy_timeout = ' . intval($this->busy_timeout_s * 1000)); // SQLite expects busy_timeout in milliseconds
-    } catch (PDOException $e) {
-      throw new RuntimeException('Database connection failed: ' . $e->getMessage(), 0, $e);
+    // sqlite3 will create the database file if it does not exist, so we don't need to handle that here.
+    try {
+      parent::__construct($this->db_file);
+      $this->enableExceptions(true);              // Enable exceptions for error handling
+      $this->busyTimeout(DB_TIMEOUT * 1000);      // Set busy timeout in milliseconds
+    } catch (Exception $e) {
+      throw new RuntimeException('Failed to open database: ' . $e->getMessage());
     }
   }
 
   public function __destruct() {
-    // Close the database connection
-    $this->pdo = null;
-  }
-
-  public function close() {
-    $this->pdo = null;
+    $this->close();
+    $this->db_file = '';
     $this->table = '';
   }
 
-  public function get_pdo(): ?PDO {
-    return $this->pdo;
+  /**
+   * @brief Set the table name for the database queries.
+   * @param string $table_name The name of the table.
+   * @details The table name will be quoted to prevent SQL injection.
+   */
+  public function set_table(string $table_name): void {
+    $this->table = '"' . str_replace('"', '""', $table_name) . '"'; // Quote the table name to prevent SQL injection
   }
 
   /**
-   * @function _set_table
-   * @brief Set the table name for this database instance, properly quoted for use in queries
-   * @param string $table_ The name of the table to set (unquoted)
-   * @detail for this embedded system you take care to use valid names with spaces and keywords and ";"
+   * @brief Get the current table name for the database queries.
+   * @return string The current table name.
    */
-  public function set_table(string $table_) {
-    $this->table = $table_;
+  public function get_table(): string {
+    return $this->table;
   }
 
   /**
-   * @function read_key_value_table
-   * @brief Read all key-value pairs from the current table and return as an associative array
-   * @return array An associative array of key-value pairs from the table
-   * @details the class will analyze the return values
-   * @throws RuntimeException if the database connection is not established or the table name is not set
+   * @brief Get the path to the SQLite database file.
+   * @return string The path to the database file.
    */
-  public function read_key_value_table() {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
+  public function get_db_file(): string {
+    return $this->db_file;
+  }
+  /**
+   * @brief Read all key-value pairs from the specified table.
+   * @return array An associative array of key-value pairs from the table.
+   * @throws RuntimeException If the database is not open or the table name is not set.
+   * @throws RuntimeException If the query fails to execute.
+   */
+  public function read_key_value_table(): array {
+    // check if open
+    if (!$this->db_file) {
+      throw new RuntimeException('Database is not open.');
     }
-    if ($this->table === '') {
+    // check if table is set
+    if (!$this->table) {
       throw new RuntimeException('Table name is not set.');
     }
-    try {
-      $stmt = $this->pdo->query('SELECT key, value FROM ' . $this->table);
-      $kv = [];
-      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $kv[$row['key']] = $row['value'];
-      }
-      return $kv;
-    } catch (PDOException $e) {
-      throw new RuntimeException('Failed to read from database: ' . $e->getMessage(), 0, $e);
+    $result = $this->query('SELECT * FROM ' . $this->table);
+    if (!$result) {
+      throw new RuntimeException('Failed to read from table: ' . $this->lastErrorMsg());
     }
-  }
-
-  public function write_key_value_table(array $kv) {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
+    $kv = []; // Initialize an empty key value array to hold the key-value pairs
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+      $kv[$row['key']] = $row['value'];
     }
-    if ($this->table === '') {
-      throw new RuntimeException('Table name is not set.');
-    }
-    try {
-      // Use a transaction for batch insert/update
-      $this->pdo->beginTransaction();
-      $stmt = $this->pdo->prepare('REPLACE INTO ' . $this->table . ' (key, value) VALUES (:key, :value)');
-      foreach ($kv as $key => $value) {
-        $stmt->execute([':key' => $key, ':value' => $value]);
-      }
-      $this->pdo->commit();
-    } catch (PDOException $e) {
-      $this->pdo->rollBack();
-      throw new RuntimeException('Failed to write to database: ' . $e->getMessage(), 0, $e);
-    }
+    return $kv;
   }
 
   /**
-   * @brief Update existing key-value rows only; never insert new rows.
-   * @details Intended for hwConfig tables where row ids must stay constant.
+   * @brief Write key-value pairs to the specified table, replacing existing entries if the key already exists.
+   * @param array $kv An associative array of key-value pairs to write to the table.
+   * @throws RuntimeException If the database is not open or the table name is not set.
+   * @throws RuntimeException If the query fails to execute.
+   */
+  public function write_key_value_table(array $kv): void {
+    // check if open
+    if (!$this->db_file) {
+      throw new RuntimeException('Database is not open.');
+    }
+    // check if table is set
+    if (!$this->table) {
+      throw new RuntimeException('Table name is not set.');
+    }
+    $this->exec('BEGIN TRANSACTION');
+    foreach ($kv as $key => $value) {
+      $stmt = $this->prepare('INSERT OR REPLACE INTO ' . $this->table . ' (key, value) VALUES (:key, :value)');
+      $stmt->bindValue(':key', $key, SQLITE3_TEXT);
+      $stmt->bindValue(':value', $value, SQLITE3_TEXT);
+      if (!$stmt->execute()) {
+        throw new RuntimeException('Failed to write to table: ' . $this->lastErrorMsg());
+      }
+    }
+    $this->exec('COMMIT');
+  }
+
+  /**
+   * @brief Update existing key-value pairs in the specified table.
+   * @param array $kv An associative array of key-value pairs to update in the table.
+   * @throws RuntimeException If the database is not open or the table name is not set.
+   * @throws RuntimeException If the query fails to execute.
+   * @details This method will only update existing entries; it will not insert new entries. Tables are small
    */
   public function update_key_value_table(array $kv): void {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
+    // check if open
+    if (!$this->db_file) {
+      throw new RuntimeException('Database is not open.');
     }
-    if ($this->table === '') {
+    // check if table is set
+    if (!$this->table) {
       throw new RuntimeException('Table name is not set.');
     }
-    try {
-      $this->pdo->beginTransaction();
-      $stmt = $this->pdo->prepare('UPDATE ' . $this->table . ' SET value = :value WHERE key = :key');
-      foreach ($kv as $key => $value) {
-        $stmt->execute([':key' => $key, ':value' => $value]);
+    $this->exec('BEGIN TRANSACTION');
+    foreach ($kv as $key => $value) {
+      $stmt = $this->prepare('UPDATE ' . $this->table . ' SET value = :value WHERE key = :key');
+      $stmt->bindValue(':key', $key, SQLITE3_TEXT);
+      $stmt->bindValue(':value', $value, SQLITE3_TEXT);
+      if (!$stmt->execute()) {
+        throw new RuntimeException('Failed to update table: ' . $this->lastErrorMsg());
       }
-      $this->pdo->commit();
-    } catch (PDOException $e) {
-      $this->pdo->rollBack();
-      throw new RuntimeException('Failed to update database rows: ' . $e->getMessage(), 0, $e);
+    }
+    $this->exec('COMMIT');
+  }
+
+  public function create_key_value_table(): void {
+    // check if open
+    if (!$this->db_file) {
+      throw new RuntimeException('Database is not open.');
+    }
+    // check if table is set
+    if (!$this->table) {
+      throw new RuntimeException('Table name is not set.');
+    }
+    $sql = 'CREATE TABLE IF NOT EXISTS ' . $this->table . ' (id INTEGER PRIMARY KEY AUTOINCREMENT, key TEXT UNIQUE, value TEXT)';
+    if (!$this->exec($sql)) {
+      throw new RuntimeException('Failed to create key-value table: ' . $this->lastErrorMsg());
     }
   }
 
   /**
-   * create job or jobs table
-   */
-  public function create_job_table(bool $for_job_list = false) {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
-    }
-    if ($this->table === '') {
-      throw new RuntimeException('Table name is not set.');
-    }
-    try {
-      $primary_key_sql = 'id INTEGER PRIMARY KEY CHECK (id = 1)';
-      if ($this->table === 'jobs') {
-        $primary_key_sql = '"id" INTEGER PRIMARY KEY AUTOINCREMENT';
-      }
-      $extra_columns_sql = '';
-      if ($for_job_list) {
-        $extra_columns_sql = ',
-        "slots_on" TEXT,
-        "started" INTEGER';
-      }
-      $this->pdo->exec('CREATE TABLE IF NOT EXISTS ' . $this->table . ' (
-        ' . $primary_key_sql . ',
-        "start_date"	TEXT,
-        "start_time"	TEXT,
-        "duration"	INTEGER,
-        "sampling_rate"	INTEGER,
-        "digital_filter"	INTEGER,
-        "split_main"	INTEGER DEFAULT 0,
-        "cal_mode"	TEXT DEFAULT "off",
-        "channel_types"	TEXT,
-        "choppers"	TEXT,
-        "gains"	TEXT,
-        "dipole_lengths" TEXT,
-        "use_atss" INTEGER,
-        "copy_to_usb" INTEGER,
-        "sub_cycle" INTEGER,
-        "sub_duration" INTEGER,
-        "sub_filter" INTEGER,
-        "split_sub" INTEGER DEFAULT 0,
-        "power_off_limit" REAL,
-        "station_id" STRING' . $extra_columns_sql . '
-      )');
-    } catch (PDOException $e) {
-      throw new RuntimeException('Failed to create table: ' . $e->getMessage(), 0, $e);
-    }
-  }
-
-  public function update_job_table(array $kv) {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
-    }
-    if ($this->table === '') {
-      throw new RuntimeException('Table name is not set.');
-    }
-    try {
-      // Use REPLACE to insert if row doesn't exist, or update if it does
-      $kv['id'] = 1; // Ensure id is set for the job table
-      $columns = array_keys($kv);
-      $placeholders = array_map(function ($col) {
-        return ':' . $col;
-      }, $columns);
-      $column_list = implode(', ', array_map(function ($col) {
-        return '"' . $col . '"';
-      }, $columns));
-      $sql = 'REPLACE INTO ' . $this->table . ' (' . $column_list . ') VALUES (' . implode(', ', $placeholders) . ')';
-      $stmt = $this->pdo->prepare($sql);
-      $params = [];
-      foreach ($kv as $key => $value) {
-        $params[':' . $key] = $value;
-      }
-      $stmt->execute($params);
-    } catch (PDOException $e) {
-      throw new RuntimeException('Failed to update job table: ' . $e->getMessage(), 0, $e);
-    }
-  }
-
-  public function read_job_table(int $id = 1) {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
-    }
-    if ($this->table === '') {
-      throw new RuntimeException('Table name is not set.');
-    }
-    try {
-      $stmt = $this->pdo->prepare('SELECT * FROM ' . $this->table . ' WHERE id = :id');
-      $stmt->execute([':id' => $id]);
-      $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      return $row ?: [];
-    } catch (PDOException $e) {
-      throw new RuntimeException('Failed to read job table: ' . $e->getMessage(), 0, $e);
-    }
-  }
-
-  /**
-   * @function empty_table
-   * @brief Delete all rows from the current table; we don't want to delete the table itself
-   * @throws RuntimeException if the database connection is not established or the table name is not set
-   */
-  public function empty_table() {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
-    }
-    if ($this->table === '') {
-      throw new RuntimeException('Table name is not set.');
-    }
-    try {
-      $this->pdo->exec('DELETE FROM ' . $this->table);
-    } catch (PDOException $e) {
-      throw new RuntimeException('Failed to empty table: ' . $e->getMessage(), 0, $e);
-    }
-  }
-
-  /**
-   * @brief INSERT a new row into an AUTOINCREMENT table (e.g. jobs). id is not supplied.
-   */
-  public function insert_jobs_row(array $kv): int {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
-    }
-    if ($this->table === '') {
-      throw new RuntimeException('Table name is not set.');
-    }
-    try {
-      unset($kv['id']); // never supply id for AUTOINCREMENT
-      $columns = array_keys($kv);
-      $column_list = implode(', ', array_map(fn($c) => '"' . $c . '"', $columns));
-      $placeholders = implode(', ', array_map(fn($c) => ':' . $c, $columns));
-      $sql = 'INSERT INTO ' . $this->table . ' (' . $column_list . ') VALUES (' . $placeholders . ')';
-      $stmt = $this->pdo->prepare($sql);
-      foreach ($kv as $key => $value) {
-        $stmt->bindValue(':' . $key, $value);
-      }
-      $stmt->execute();
-      return (int) $this->pdo->lastInsertId();
-    } catch (PDOException $e) {
-      throw new RuntimeException('Failed to insert row: ' . $e->getMessage(), 0, $e);
-    }
-  }
-
-  /**
-   * @brief Return all rows ordered by id DESC.
-   */
-  public function read_all_rows(): array {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
-    }
-    if ($this->table === '') {
-      throw new RuntimeException('Table name is not set.');
-    }
-    try {
-      $stmt = $this->pdo->query('SELECT * FROM ' . $this->table . ' ORDER BY id DESC');
-      return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-      throw new RuntimeException('Failed to read rows: ' . $e->getMessage(), 0, $e);
-    }
-  }
-
-  /**
-   * @brief Delete a single row by id.
+   * @brief Delete a row from the specified table by ID.
+   * @param int $id The ID of the row to delete.
+   * @throws RuntimeException If the database is not open or the table name is not set.
+   * @throws RuntimeException If the query fails to execute.
    */
   public function delete_row_by_id(int $id): void {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
+    // check if open
+    if (!$this->db_file) {
+      throw new RuntimeException('Database is not open.');
     }
-    if ($this->table === '') {
+    // check if table is set
+    if (!$this->table) {
       throw new RuntimeException('Table name is not set.');
     }
-    try {
-      $stmt = $this->pdo->prepare('DELETE FROM ' . $this->table . ' WHERE id = :id');
-      $stmt->execute([':id' => $id]);
-    } catch (PDOException $e) {
-      throw new RuntimeException('Failed to delete row: ' . $e->getMessage(), 0, $e);
+    $stmt = $this->prepare('DELETE FROM ' . $this->table . ' WHERE id = :id');
+    $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+    if (!$stmt->execute()) {
+      throw new RuntimeException('Failed to delete row from table: ' . $this->lastErrorMsg());
     }
   }
 
   /**
-   * @brief Delete all rows from the current table.
-   * @throws RuntimeException if the database connection is not established or the table name is not set
+   * @brief Delete all entries from the specified table.
+   * @throws RuntimeException If the database is not open or the table name is not set.
+   * @throws RuntimeException If the query fails to execute.
+   * @details This method will remove all entries from the table, effectively emptying it.
    */
-  public function delete_all_rows(bool $vacuum = false): void {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
+  public function empty_table(bool $vacuum = false): void {
+    // check if open
+    if (!$this->db_file) {
+      throw new RuntimeException('Database is not open.');
     }
-    if ($this->table === '') {
+    // check if table is set
+    if (!$this->table) {
       throw new RuntimeException('Table name is not set.');
     }
-    try {
-      $this->pdo->exec('DELETE FROM ' . $this->table);
-      if ($vacuum) {
-        $this->vacuum();
+    $this->exec('DELETE FROM ' . $this->table);
+    if ($vacuum) {
+      $this->exec('VACUUM');
+    }
+  }
+
+  /**
+   * @brief Create a table from an SQL file.
+   * @param string $sql_file The path to the SQL file containing the table creation statement.
+   * @throws RuntimeException If the SQL file cannot be read or if the SQL execution fails.
+   * @details The SQL file should contain a valid SQL statement to create the table
+   * @details during runtime you should use file like INIT_DIR . 'filename.sql'. or 
+   * example  INIT_DIR . 'systemStatus' . DIRECTORY_SEPARATOR . 'adu.sql'
+   * example  INIT_DIR . 'job' . DIRECTORY_SEPARATOR . 'job.sql'
+   */
+  public function create_table_from_SQL_file($sql_file): void {
+    $sql = file_get_contents($sql_file);
+    if ($sql === false) {
+      throw new RuntimeException('Failed to read SQL file: ' . $sql_file);
+    }
+
+    if (!$this->exec($sql)) {
+      throw new RuntimeException('Failed to execute SQL from file: ' . $this->lastErrorMsg());
+    }
+
+    $json_file = preg_replace('/\.sql$/', '.json', $sql_file);
+    if (file_exists($json_file)) {
+      $json_data = file_get_contents($json_file);
+      if ($json_data === false) {
+        throw new RuntimeException('Failed to read JSON file: ' . $json_file);
       }
-    } catch (PDOException $e) {
-      throw new RuntimeException('Failed to delete all rows: ' . $e->getMessage(), 0, $e);
+    } else {
+      return; // No JSON file to read, so we just return after creating the table
     }
+    // the table is ALWAYS id, key (text), value (text), so we can simply put the key-value pairs into the table
+    $kv = json_decode($json_data, true);
+    if (!is_array($kv)) {
+      throw new RuntimeException('Failed to decode JSON data from file: ' . $json_file);
+    }
+    $this->set_table(basename($sql_file, '.sql'));
+    $this->write_key_value_table($kv);
+  }
+
+  public function update_job_table(array $kv, int $id = 1): void {
+    // check if open
+    if (!$this->db_file) {
+      throw new RuntimeException('Database is not open.');
+    }
+    // check if table is set
+    if (!$this->table) {
+      throw new RuntimeException('Table name is not set.');
+    }
+    $this->exec('BEGIN TRANSACTION');
+    foreach ($kv as $key => $value) {
+      $stmt = $this->prepare('UPDATE ' . $this->table . ' SET ' . $key . ' = :value WHERE id = :id');
+      $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+      $stmt->bindValue(':value', $value, SQLITE3_TEXT);
+      if (!$stmt->execute()) {
+        throw new RuntimeException('Failed to update table: ' . $this->lastErrorMsg());
+      }
+    }
+    $this->exec('COMMIT');
+  }
+
+  public function insert_jobs_row(array $kv): int {
+    // check if open
+    if (!$this->db_file) {
+      throw new RuntimeException('Database is not open.');
+    }
+    // check if table is set
+    if (!$this->table) {
+      throw new RuntimeException('Table name is not set.');
+    }
+    unset($kv['id']); // remove the id from the array, as it will be auto-incremented
+    $columns = implode(', ', array_keys($kv));
+    $placeholders = ':' . implode(', :', array_keys($kv));
+    $stmt = $this->prepare('INSERT INTO ' . $this->table . ' (' . $columns . ') VALUES (' . $placeholders . ')');
+    foreach ($kv as $key => $value) {
+      $stmt->bindValue(':' . $key, $value, SQLITE3_TEXT);
+    }
+    if (!$stmt->execute()) {
+      throw new RuntimeException('Failed to insert into table: ' . $this->lastErrorMsg());
+    }
+    return $this->lastInsertRowID();
+  }
+
+  function check_start_date_time_columns(): bool {
+    // check if open
+    if (!$this->db_file) {
+      throw new RuntimeException('Database is not open.');
+    }
+    // check if table is set
+    if (!$this->table) {
+      throw new RuntimeException('Table name is not set.');
+    }
+    $row = $this->querySingle('SELECT * FROM ' . $this->table . ' LIMIT 1', true);
+    if (!$row) {
+      throw new RuntimeException('Failed to read from table: ' . $this->lastErrorMsg());
+    }
+    return isset($row['start_date']) && isset($row['start_time']);
   }
 
   /**
-   * @brief Rebuild database file and free unused pages.
+   * @brief Get rows from the specified table. IMPORTANT: use check_start_date_time_columns() if you read other tables than job or jobs! ONLY these tables have guranteed start_date and start_time columns.
+   * @param int $id If given (not -1), fetch only the row with this id.
+   * @param bool $order_by_date Whether to order the results by start_date and start_time (true) or not (false). Ignored if $id is given.
+   * @return array If $id is given: a single associative array for that row (or [] if not found). Otherwise: an array of associative arrays, one per row.
+   * @throws RuntimeException If the database is not open or the table name is not set.
+   * @throws RuntimeException If the query fails to execute.
    */
-  public function vacuum(): void {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
+  public function get_rows(int $id = -1, bool $order_by_date = false): array {
+    // check if open
+    if (!$this->db_file) {
+      throw new RuntimeException('Database is not open.');
     }
-    try {
-      $this->pdo->exec('VACUUM');
-    } catch (PDOException $e) {
-      throw new RuntimeException('Failed to vacuum database: ' . $e->getMessage(), 0, $e);
+    // check if table is set
+    if (!$this->table) {
+      throw new RuntimeException('Table name is not set.');
     }
+    if ($id != -1) {
+      $stmt = $this->prepare('SELECT * FROM ' . $this->table . ' WHERE id = :id');
+      $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+      $result = $stmt->execute();
+      if (!$result) {
+        throw new RuntimeException('Failed to read from table: ' . $this->lastErrorMsg());
+      }
+      $row = $result->fetchArray(SQLITE3_ASSOC);
+      return is_array($row) ? $row : [];
+    }
+    $query = 'SELECT * FROM ' . $this->table;
+    if ($order_by_date) {
+      $query .= ' ORDER BY start_date ASC, start_time ASC';
+    }
+    $result = $this->query($query);
+    if (!$result) {
+      throw new RuntimeException('Failed to read from table: ' . $this->lastErrorMsg());
+    }
+    $rows = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+      $rows[] = $row;
+    }
+    return $rows;
   }
 
-  public function create_key_value_table() {
-    if ($this->pdo === null) {
-      throw new RuntimeException('Database connection is not established.');
+
+  /**
+   * @brief Reorder jobs in the specified table based on start_date and start_time.
+   * @throws RuntimeException If the database is not open or the table name is not set.
+   * @throws RuntimeException If the query fails to execute.
+   * @details This method will reorder the jobs in the table based on their start_date and start_time. It assumes that the table has columns named 'start_date' and 'start_time' for ordering. If these columns are not present, an exception will be thrown.
+   * @details Nothing is done if the table is ordered already (no re-write needed)
+   */
+  public function reorder_jobs(bool $check_start_date_time_columns = false) {
+    if (!$this->db_file) {
+      throw new RuntimeException('Database is not open.');
     }
-    if ($this->table === '') {
+    if (!$this->table) {
       throw new RuntimeException('Table name is not set.');
     }
     try {
-      $this->pdo->exec('CREATE TABLE IF NOT EXISTS ' . $this->table . ' (
-          "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-          "key" TEXT,
-          "value" TEXT
-        )');
-    } catch (PDOException $e) {
-      throw new RuntimeException('Failed to create table: ' . $e->getMessage(), 0, $e);
+      if ($check_start_date_time_columns && !$this->check_start_date_time_columns()) {
+        throw new RuntimeException('Table does not have start_date and start_time columns.');
+      }
+      // Read all rows (jobs) from db
+      $job_rows = $this->get_rows(-1, false);
+      $job_rows_ordered = $this->get_rows(-1, true);
+      // Reorder logic here
+      // Nothing is done if the table is already ordered correctly
+      if ($job_rows !== $job_rows_ordered) {
+        // If the order is different, we need to reorder the jobs in the database
+        $this->exec('BEGIN TRANSACTION');
+        $this->exec('DELETE FROM ' . $this->table);
+        foreach ($job_rows_ordered as $row) {
+          unset($row['id']); // Remove the id to let it auto-increment
+          $columns = implode(', ', array_keys($row));
+          $placeholders = ':' . implode(', :', array_keys($row));
+          $stmt = $this->prepare('INSERT INTO ' . $this->table . ' (' . $columns . ') VALUES (' . $placeholders . ')');
+          foreach ($row as $key => $value) {
+            $stmt->bindValue(':' . $key, $value, SQLITE3_TEXT);
+          }
+          if (!$stmt->execute()) {
+            throw new RuntimeException('Failed to insert into table: ' . $this->lastErrorMsg());
+          }
+        }
+        $this->exec('COMMIT');
+      }
+    } catch (RuntimeException $e) {
+      throw new RuntimeException('Failed to reorder jobs: ' . $e->getMessage());
     }
+    // now we make sure that the jobs have a pause of PREP_TIME between them
+
   }
-} // end database class
+}

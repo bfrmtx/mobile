@@ -340,9 +340,15 @@ foreach ($folders as $folder) {
   }
   $db_name = $folder; //!< the folder name is the database name
   $db_path = $export_dir . DIRECTORY_SEPARATOR . $db_name . ".db"; //!< the path to the database file to be created
+  $prebuilt_db_path = $folder_path . DIRECTORY_SEPARATOR . 'mcpdb.db';
   if (file_exists($db_path)) {
     unlink($db_path);
   }
+
+  if (file_exists($prebuilt_db_path)) {
+    copy($prebuilt_db_path, $db_path);
+  }
+
   $db = new SQLite3($db_path); //!< create a new SQLite3 database
   echo "Creating database: " . $db_name . "\n";
   // now get all .sql files in this folder and execute them to create the tables
@@ -381,6 +387,8 @@ foreach ($folders as $folder) {
   if ($db_name === 'selftestResult') {
     set_selftestResult_defaults($db, $n_slots);
   }
+
+
 
   echo "Database created at: " . $db_path . "\n";
   $db->close(); //!< close the database connection

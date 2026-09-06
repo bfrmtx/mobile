@@ -1,6 +1,11 @@
 <?php
-trait global_vars {
 
+const PREP_TIME = 30;        //!< seconds the system needs to prepare for a job. time between jobs must be at least this long 
+const MIN_JOB_DURATION = 8;  //!< seconds the system runs a job at least. 
+const GRID = 64;             //!< seconds   n * GRID after 1970-01-01 00:00:00 UTC is a raster or grid to safely start a job
+const DB_TIMEOUT = 2;        //!< seconds to wait for a database query to complete before timing out
+
+trait global_vars {
 
 
   protected array $channel_types_h = [    // shared hard-coded channel type selector values for magnetic field sensors
@@ -160,3 +165,61 @@ trait global_vars {
     return $canonical; // already alias or empty/unknown: leave unchanged
   }
 }
+
+
+/**
+ * @brief Columns for the job table.
+ * @details This array defines the structure of the job table in the database.
+ * @note most of them appear as variables in class later
+ */
+$job_table_columns = [
+  'id',
+  'start_date',
+  'start_time',
+  'duration',
+  'sampling_rate',
+  'digital_filter',
+  'split_main',
+  'cal_mode',
+  'channel_types',
+  'choppers',
+  'gains',
+  'dipole_lengths',
+  'use_atss',
+  'copy_to_usb',
+  'sub_cycle',
+  'sub_duration',
+  'sub_filter',
+  'split_sub',
+  'station_id'
+];
+
+/**
+ * @brief Columns for the jobs table, including additional fields like power_off_limit, slots_on, and started.
+ * @details This array defines the structure of the jobs table in the database.
+ * @note most of them appear as variables in class later
+ */
+$jobs_table_columns = [
+  'id',
+  'start_date',
+  'start_time',
+  'duration',
+  'sampling_rate',
+  'digital_filter',
+  'split_main',
+  'cal_mode',
+  'channel_types',
+  'choppers',
+  'gains',
+  'dipole_lengths',
+  'use_atss',
+  'copy_to_usb',
+  'sub_cycle',
+  'sub_duration',
+  'sub_filter',
+  'split_sub',
+  'station_id',
+  'power_off_limit',
+  'slots_on',
+  'started'
+];

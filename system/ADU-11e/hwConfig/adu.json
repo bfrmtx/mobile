@@ -1,5 +1,9 @@
 {
   "board_type": "ADU-11e",
   "serial": 0,
-  "disk_size_mb_sd": 80000000
+  "disk_size_mb_sd": 80000000,
+  "use_atss": 0,
+  "tz_offset": 0,
+  "dst": false,
+  "power_off_limit": 10
 }

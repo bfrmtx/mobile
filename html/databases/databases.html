@@ -256,14 +256,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#gps-2" id="toc-gps-2" class="nav-link" data-scroll-target="#gps-2"><span class="header-section-number">5.4.2</span> gps</a></li>
   <li><a href="#recording" id="toc-recording" class="nav-link" data-scroll-target="#recording"><span class="header-section-number">5.4.3</span> recording</a></li>
   </ul></li>
-  <li><a href="#job.db" id="toc-job.db" class="nav-link" data-scroll-target="#job.db"><span class="header-section-number">5.5</span> job.db</a></li>
+  <li><a href="#job.db" id="toc-job.db" class="nav-link" data-scroll-target="#job.db"><span class="header-section-number">5.5</span> job.db</a>
+  <ul class="collapse">
+  <li><a href="#jobs.db" id="toc-jobs.db" class="nav-link" data-scroll-target="#jobs.db"><span class="header-section-number">5.5.1</span> jobs.db</a></li>
+  </ul></li>
   <li><a href="#logic" id="toc-logic" class="nav-link" data-scroll-target="#logic"><span class="header-section-number">5.6</span> Logic</a>
   <ul class="collapse">
   <li><a href="#shots" id="toc-shots" class="nav-link" data-scroll-target="#shots"><span class="header-section-number">5.6.1</span> shots</a></li>
   <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="header-section-number">5.6.2</span> filter</a></li>
   <li><a href="#straight" id="toc-straight" class="nav-link" data-scroll-target="#straight"><span class="header-section-number">5.6.3</span> straight</a></li>
   </ul></li>
-  <li><a href="#jobs.db" id="toc-jobs.db" class="nav-link" data-scroll-target="#jobs.db"><span class="header-section-number">5.7</span> jobs.db</a></li>
+  <li><a href="#jobs.db-1" id="toc-jobs.db-1" class="nav-link" data-scroll-target="#jobs.db-1"><span class="header-section-number">5.7</span> jobs.db</a></li>
   </ul>
 </nav>
 </nav>
@@ -300,12 +303,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This is a <em>quasi static</em> database, written by the firmware. Not much in here<br> <strong>The database is created / updated on boot or “sensor detection”.</strong><br> You find the serial numbers here.<br> <em>The sensors will be detected and updated by</em> “<strong>detect sensors</strong>” in the system menu. Slots 0 and 1 can be set manually, for example if you use current clamps instead of electrodes, by loading the user configuration. <br> <strong>The mobile web interface can only work with detected sensors, except slots 0 and 1.</strong></p>
 <section id="adu" class="level3" data-number="5.1.1">
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="adu"><span class="header-section-number">5.1.1</span> adu</h3>
-<p>About the systems and their capabilities. <br> Sample frequencies and digital filter apply to ALL channels, so they are here.<br> As fixed value the <strong>disk size</strong> is here, to converted to <strong>int</strong> later. This is the total size at all of the data partition. <br></p>
+<p>About the systems and their capabilities. <br> Sample frequencies and digital filter apply to ALL channels, so they are here.<br> As fixed value the <strong>disk size</strong> is here, to converted to <strong>int</strong> later. This is the total size at all of the data partition. <br> <strong>use_atss</strong> is 1 when the system shall write in atss format, 0 when not (old ats format). <br> This value acts as a template for new jobs, <em>however</em> the job stores this value individually. ADU reads ONLY from the job! <br> <strong>tz_offset</strong> is the timezone offset in minutes, for example -60 for UTC-1 or 330 for UTC+5:30 (India, IST) <br> <strong>dst</strong> is 1 when daylight saving time is active, 0 otherwise. <br> <strong>power_off_limit</strong> is by default 10 (Volts), Set to 12.2 for LiIon batteries with built-in controller, which may “brute-force” switch off at 12V . <br></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"board_type"</span><span class="fu">:</span> <span class="st">"ADU-11e"</span><span class="fu">,</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"serial"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"disk_size_mb_sd"</span><span class="fu">:</span> <span class="dv">80000000</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"disk_size_mb_sd"</span><span class="fu">:</span> <span class="dv">80000000</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"use_atss"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"tz_offset"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"dst"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"power_off_limit"</span><span class="fu">:</span> <span class="dv">10</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="ot">"adu"</span> (</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"id"</span> <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTOINCREMENT,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"key"</span> STRING <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
@@ -616,7 +623,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"power_off_limit"</span> <span class="dt">REAL</span>,</span>
 <span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"station_id"</span> STRING</span>
 <span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Remark: “slots_on” TEXT and “started” INTEGER are not part of the job.db. They will be appended “on the fly” when the interface submits a job. <br> Vice versa, when you open a job from the jobs.db for editing, the “slots_on” and “started” (aka copying back to the job.db) are not copied (truncate). <br> The slots_on logic is: E (0,1) always on, H as detected. You may submit “no electric”, then E (0,1) are off, H as detected. Mostly for airborne measurements. <br></p>
+<p>Remark: “slots_on” TEXT and “started” INTEGER are not part of the job.db. They will be appended “on the fly” when the interface submits a job. <br> Vice versa, when you open a job from the jobs.db for editing, the “slots_on” and “started” (aka copying back to the job.db) are not copied (truncate). <br> The slots_on logic is: E (0,1) always on, H as detected. You may submit “no electric”, then E (0,1) are off, H as detected. Mostly for airborne measurements.</p>
+<p>job.db has only one row (“id” INTEGER PRIMARY KEY CHECK (id = 1)). That is what is created with the mobile interface. The system will read this row and copy it into jobs.db when the user submits a job. This row is updated when changes are made through the mobile interface. <br></p>
 <p><strong>Syntax: -1 auto, 0 off, 1 on - OR 1, 2, 4, 8 values &gt;= 1</strong>. <br> In the <strong>fields</strong> (plural) gains for example, the <strong>POSITION</strong> (-1,-1, 4, …) is equivalent to the slot number. So the first value is for slot0, the second for slot1, and so on. <br> The same applies for the channel types, dipole_lengths, and choppers. <br></p>
 <ul>
 <li>“id” INTEGER , created by inserting,</li>
@@ -637,8 +645,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>“sub_duration” 0 (default off, set to &gt;0 to use sub-cycles, example 32 for 32 seconds)</li>
 <li>“sub_filter” 0 (default off, set to &gt;0 to use sub-filter, example 32 for a sub job with 64 Hz sample frequency if the main job is 2048 Hz)</li>
 <li>“split_sub” 0 (default off, set to &gt;0 to split sub job into multiple files, example 102400 for 100 MB files), covered by GUI for sub job splitting, but not yet implemented in the system, so no effect for now.</li>
-<li>“power_off_limit” 0 (default off, set to &gt;0, for example 10.9 to power off the system when the battery voltage drops below this limit, in Volt. This can be helpful in case your batteries want that. The system may power off at 9.8 V latest.)</li>
+<li>“power_off_limit” <strong>TO BE REMOVED</strong> 0 (default off, set to &gt;0, for example 10.9 to power off the system when the battery voltage drops below this limit, in Volt. This can be helpful in case your batteries want that. The system may power off at 9.8 V latest.)</li>
 </ul>
+<section id="jobs.db" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="jobs.db"><span class="header-section-number">5.5.1</span> jobs.db</h3>
+<p>refer to job.db above. <br> Contains a list of jobs, which can be read at any time from mcp. <br></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="ot">"jobs"</span> (</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"id"</span> <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTOINCREMENT,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"start_date"</span>    TEXT,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"start_time"</span>    TEXT,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"duration"</span>  <span class="dt">INTEGER</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sampling_rate"</span> <span class="dt">INTEGER</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"digital_filter"</span>    <span class="dt">INTEGER</span>,</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"split_main"</span>    <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"cal_mode"</span>  TEXT <span class="kw">DEFAULT</span> <span class="st">'off'</span>,</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"channel_types"</span> TEXT,</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"choppers"</span>  TEXT,</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"gains"</span> TEXT,</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"dipole_lengths"</span>    TEXT,</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"use_atss"</span>  <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"copy_to_usb"</span>   <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_cycle"</span> <span class="dt">INTEGER</span>,</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_duration"</span>  <span class="dt">INTEGER</span>,</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_filter"</span>    <span class="dt">INTEGER</span>,</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"split_sub"</span> <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"station_id"</span> STRING,</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"power_off_limit"</span> <span class="dt">REAL</span>,</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"slots_on"</span> TEXT,</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"started"</span>   <span class="dt">INTEGER</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Added fields are “slots_on” TEXT and “started” INTEGER. started will be set to 1 by the <em>mcp</em> system when a job starts (not by mobile interface).<br> slots_on will contain a textual representation of which slots are active for the job. This is generated on the fly; so when you edit an older job with a “newer” ADU, the slots_on field will be updated accordingly.</p>
+</section>
 </section>
 <section id="logic" class="level2" data-number="5.6">
 <h2 data-number="5.6" class="anchored" data-anchor-id="logic"><span class="header-section-number">5.6</span> Logic</h2>
@@ -701,33 +738,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="jobs.db" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="jobs.db"><span class="header-section-number">5.7</span> jobs.db</h2>
+<section id="jobs.db-1" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="jobs.db-1"><span class="header-section-number">5.7</span> jobs.db</h2>
 <p>jobs.db contains the recording jobs. <br> When you submit a job, the job parameters are stored (copied) here. <br> If you edit a job, the table row will be copied into job.db for editing, but the original row will stay in job.db. <br> When the system starts a job, the “started” field will be set to 1 by the system. <br></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="ot">"jobs"</span> (</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"id"</span> <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTOINCREMENT,</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"start_date"</span>    TEXT,</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"start_time"</span>    TEXT,</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"duration"</span>  <span class="dt">INTEGER</span>,</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sampling_rate"</span> <span class="dt">INTEGER</span>,</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"digital_filter"</span>    <span class="dt">INTEGER</span>,</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"split_main"</span>    <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"cal_mode"</span>  TEXT <span class="kw">DEFAULT</span> <span class="st">'off'</span>,</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"channel_types"</span> TEXT,</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"choppers"</span>  TEXT,</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"gains"</span> TEXT,</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"dipole_lengths"</span>    TEXT,</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"use_atss"</span>  <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"copy_to_usb"</span>   <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_cycle"</span> <span class="dt">INTEGER</span>,</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_duration"</span>  <span class="dt">INTEGER</span>,</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_filter"</span>    <span class="dt">INTEGER</span>,</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"split_sub"</span> <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"station_id"</span> STRING,</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"power_off_limit"</span> <span class="dt">REAL</span>,</span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"slots_on"</span> TEXT,</span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"started"</span>   <span class="dt">INTEGER</span></span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="ot">"jobs"</span> (</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"id"</span> <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTOINCREMENT,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"start_date"</span>    TEXT,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"start_time"</span>    TEXT,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"duration"</span>  <span class="dt">INTEGER</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sampling_rate"</span> <span class="dt">INTEGER</span>,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"digital_filter"</span>    <span class="dt">INTEGER</span>,</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"split_main"</span>    <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"cal_mode"</span>  TEXT <span class="kw">DEFAULT</span> <span class="st">'off'</span>,</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"channel_types"</span> TEXT,</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"choppers"</span>  TEXT,</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"gains"</span> TEXT,</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"dipole_lengths"</span>    TEXT,</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"use_atss"</span>  <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"copy_to_usb"</span>   <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_cycle"</span> <span class="dt">INTEGER</span>,</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_duration"</span>  <span class="dt">INTEGER</span>,</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"sub_filter"</span>    <span class="dt">INTEGER</span>,</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"split_sub"</span> <span class="dt">INTEGER</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>,</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"station_id"</span> STRING,</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"power_off_limit"</span> <span class="dt">REAL</span>,</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"slots_on"</span> TEXT,</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>    <span class="ot">"started"</span>   <span class="dt">INTEGER</span></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>As mentioned above, “slots_on” TEXT and “started” INTEGER are not part of the job.db. They will be appended “on the fly” when the interface submits a job to the jobs.db. <br></p>
 
 

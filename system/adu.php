@@ -19,24 +19,39 @@ class adu extends frequency_handler {
   private array $sampling_rates = [];         //!< array of native sampling rates for this ADU shall never be changed!
   private ?database $db = null;               //!< database connection for this ADU
   // we use these only for log, error and status messages
+  private array $power_off_limits = [9.8, 10.0, 10.5, 11.0, 11.5, 12.0, 12.2, 12.4, 12.8]; //!< power off limits in Volt,used for drop down menu
 
-  public function __construct($serial_ = -1) {
+  // read from hwConfig, table adu, key-value pairs
+  private float $power_off_limit = 10.0; //!< power off limit in Volt, read 
+  private int $use_atss = 0; //!< 0=old ATS, 1=new ATSS, read from hwConfig
+
+  public function __construct(string $hwConfig_db_ = 'hwConfig.db', string $hwConfig_table_ = 'adu', $serial_ = -1) {
     $this->serial = $serial_;
     // initialize the slots based on the board type
     // KISS keep it simple and stupid. system is defined in config.php
     if ($_SESSION['system_type'] == 'ADU-11e') {
       $this->sampling_rates = $this->sampling_rates_adu_11e; //!< set the sampling rates for ADU-11e
       for ($i = 0; $i < NSLOTS; $i++) {
-        $this->slots[] = new slot($i, "ADU-11E-BB", $this->serial); // eraly creation, slot class will slecet a default sensor type
+        $this->slots[] = new slot($i, "ADU-11E-BB", $this->serial); // early creation, slot class will select a default sensor type
       }
     } elseif ($_SESSION['system_type'] == 'ADU-10e') {
       $this->sampling_rates = $this->sampling_rates_adu_10e; //!< set the sampling rates for ADU-10e
       for ($i = 0; $i < NSLOTS; $i++) {
-        $this->slots[] = new slot($i, "ADU-10E-LF", $this->serial); // eraly creation, slot class will slecet a default sensor type
+        $this->slots[] = new slot($i, "ADU-10E-LF", $this->serial); // early creation, slot class will select a default sensor type
       }
     }
     $this->dipole_lengths = array_fill(0, NSLOTS, 0.0);
     parent::__construct($this->sampling_rates); //!< call the parent constructor to initialize the frequency handler with the sampling rates
+    $this->db = new database($hwConfig_db_); //!< create a database object for the ADU
+    $this->db->set_table($hwConfig_table_); //!< set the table for the ADU
+    // read all the key-value pairs from the database 
+    $kv = $this->db->read_key_value_table();
+    if (isset($kv['power_off_limit'])) {
+      $this->power_off_limit = floatval($kv['power_off_limit']);
+    }
+    if (isset($kv['use_atss'])) {
+      $this->use_atss = intval($kv['use_atss']);
+    }
   }
   public function __destruct() {
     // Destructor code if needed
@@ -50,6 +65,15 @@ class adu extends frequency_handler {
 
   public function get_board_type(): string {
     return $this->board_type;
+  }
+
+  public function get_power_off_limit(): float {
+    return $this->power_off_limit;
+  }
+
+  public function set_power_off_limit(float $limit): void {
+    $this->power_off_limit = $limit;
+    $this->persist_adu_hwConfig(['power_off_limit' => $this->power_off_limit]);
   }
 
   public function get_lowest_sampling_rate(): int {
@@ -112,7 +136,7 @@ class adu extends frequency_handler {
     $this->db = new database($db_file);
     $this->db->set_table('slot' . $slot_num);
     // hwConfig is update-only: keep existing rows and ids stable.
-    $this->db->create_key_value_table();
+    // $this->db->create_key_value_table();
 
     $kv_db = [
       // only items for hwConfig
@@ -120,6 +144,22 @@ class adu extends frequency_handler {
       'sensor_type' => $slot->get_sensor_type_alias(),
       'sensor_serial' => $slot->get_sensor_serial(),
     ];
+    $this->db->update_key_value_table($kv_db);
+  }
+
+  /**
+   * @brief Persist ADU-level hardware config fields to hwConfig DB.
+   */
+  protected function persist_adu_hwConfig(array $kv_db): void {
+    if (empty($kv_db)) {
+      return;
+    }
+
+    $db_file = 'hwConfig.db'; //!< path is handled in database class
+    $this->db = new database($db_file);
+    $this->db->set_table('adu');
+    // i think table MUST exist already!
+    // $this->db->create_key_value_table();
     $this->db->update_key_value_table($kv_db);
   }
 
@@ -215,7 +255,8 @@ class adu extends frequency_handler {
     return max($this->sampling_rates);
   }
 
-  public function read_hwConfig() {
+  public function read_hwConfig(): int {
+    $use_atss = 0; // if 1, the newer format is used
     $db_file = 'hwConfig.db'; //!< path is handled in database class
     $this->db = new database($db_file);
     $this->db->set_table('adu');
@@ -226,6 +267,12 @@ class adu extends frequency_handler {
     }
     if (isset($kv['serial'])) {
       $this->serial = intval($kv['serial']);
+    }
+    if (isset($kv['use_atss'])) {
+      $use_atss = intval($kv['use_atss']);
+    }
+    if (isset($kv['sampling_rates'])) {
+      $this->sampling_rates = array_map('intval', explode(',', strval($kv['sampling_rates'])));
     }
 
     // read the slots for this ADU
@@ -247,6 +294,7 @@ class adu extends frequency_handler {
     $this->read_selftest_result_gains(); //!< load read-only selftest gains for slot0..slot7
     // others are not needed for hardware configuration, they are not configurable.
     // we later use them for status and longs, but not creating jobs.
+    return $use_atss;
   }
 
   /**

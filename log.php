@@ -12,7 +12,7 @@ $syslog = new system_log();
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['sender'] ?? '') === 'system_log') {
   if (($_POST['what'] ?? '') === 'clear_table') {
-    $syslog->delete_all_rows(true);
+    $syslog->empty_table(true);
     $_SESSION['msg_info'] = 'System log table cleared.';
   }
   header('Location: log.php');

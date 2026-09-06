@@ -196,8 +196,12 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#first-select-the-sampling-rate." id="toc-first-select-the-sampling-rate." class="nav-link" data-scroll-target="#first-select-the-sampling-rate."><span class="header-section-number">2.1.1</span> <strong>First, select the sampling rate.</strong><br></a></li>
   <li><a href="#start-and-stop-date-and-time" id="toc-start-and-stop-date-and-time" class="nav-link" data-scroll-target="#start-and-stop-date-and-time"><span class="header-section-number">2.1.2</span> Start and Stop Date and Time</a></li>
+  <li><a href="#e-spacing" id="toc-e-spacing" class="nav-link" data-scroll-target="#e-spacing"><span class="header-section-number">2.1.3</span> E spacing</a></li>
+  <li><a href="#timezone" id="toc-timezone" class="nav-link" data-scroll-target="#timezone"><span class="header-section-number">2.1.4</span> TimeZone</a></li>
+  <li><a href="#atss" id="toc-atss" class="nav-link" data-scroll-target="#atss"><span class="header-section-number">2.1.5</span> atss</a></li>
   </ul></li>
   <li><a href="#submitting-a-job" id="toc-submitting-a-job" class="nav-link" data-scroll-target="#submitting-a-job"><span class="header-section-number">2.2</span> Submitting a Job</a></li>
+  <li><a href="#special-jobs" id="toc-special-jobs" class="nav-link" data-scroll-target="#special-jobs"><span class="header-section-number">2.3</span> Special Jobs</a></li>
   </ul>
 </nav>
 </nav>
@@ -228,6 +232,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>You can not create a job in the past.<br> When the job page is accessed, the start date and time is updated to the current date and time <strong>once</strong>. <br> The stop date and time is stored as <em>duration</em> in the database. <br> $prep_time = 30s is added to the start date and time in case the start date and time is too “early”. <br> So finally a job shall start regardless if you press <strong>submit</strong> or <strong>start now</strong>. <br> While the selftest is active, you can’t submit a job. <br></p>
+<p><img src="../_media/jobs_page.png" class="img-fluid" style="width:90.0%"></p>
 <section id="creating-a-job" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="creating-a-job"><span class="header-section-number">2.1</span> Creating a Job</h2>
 <section id="first-select-the-sampling-rate." class="level3" data-number="2.1.1">
@@ -280,12 +285,107 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="start-and-stop-date-and-time" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="start-and-stop-date-and-time"><span class="header-section-number">2.1.2</span> Start and Stop Date and Time</h3>
+<p>Internally start day and time and duration is stored (finally the system counts the second pulses from the GPS until stop).</p>
+<p>For start time:</p>
+<ul>
+<li>Select from the date icon the day</li>
+<li>slide the start hour</li>
+<li>slide the minute</li>
+<li>slide the second</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If Grid mode is checked, sliders will “jump” into start time <strong>64 seconds grid</strong>.<br> This allows you always to make remote reference, regardless of the sampling rate.</p>
+</div>
+</div>
+<p>Then for stop time:</p>
+<ul>
+<li>Select from the date icon the day</li>
+<li>slide the stop hour</li>
+<li>slide the minute</li>
+<li>slide the second</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Change start
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you later decide to change the start time, stop time will shift accordingly.</p>
+</div>
+</div>
+</section>
+<section id="e-spacing" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="e-spacing"><span class="header-section-number">2.1.3</span> E spacing</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Rotation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not even dream of using others setups. Only N→S and E→W are allowed here.<br> Troublemakers are not.</p>
+</div>
+</div>
+<p>Supply the dipole length.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Timeout
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>After 0.9 seconds the form is saved. You must be faster and type each digit in less than 0.9 seconds. <br> … age control 😊</p>
+</div>
+</div>
+</section>
+<section id="timezone" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="timezone"><span class="header-section-number">2.1.4</span> TimeZone</h3>
+<p>Select a timezone for your work, additionally you can check “DST” (daylight saving time, aka summer time). <br> Hence that in the job tables, file names and others <strong>always UTC</strong> is used.<br> If DST is checked, the “start time” is shifted by 1 hour earlier, BUT the stop time is not correct when DST changes during recording<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. <br></p>
+</section>
+<section id="atss" class="level3" data-number="2.1.5">
+<h3 data-number="2.1.5" class="anchored" data-anchor-id="atss"><span class="header-section-number">2.1.5</span> atss</h3>
+<p>To change between new atss and old ats, go to the channels page and toggle the atss button. <br> It will be stored in the hardware table and used for this and next jobs. <br></p>
 </section>
 </section>
 <section id="submitting-a-job" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="submitting-a-job"><span class="header-section-number">2.2</span> Submitting a Job</h2>
+<p>Ref. also to the <a href="../flows/jobs_flow.html">program logic</a></p>
+<p>If the programmed time (including preparation time) has passed by, the job is simply shifted to the next possible start time. <br></p>
+</section>
+<section id="special-jobs" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="special-jobs"><span class="header-section-number">2.3</span> Special Jobs</h2>
+<ul>
+<li>Sensor Detection: fast, takes 10 s</li>
+<li>auto gain / auto offset: long, takes ~ 3 min. Needs enough time to acquire a reliable estimate</li>
+<li>contact resistance: medium, takes ~ 1 1/2 min. AC currents are fed into the electrodes to measure the contact resistance.</li>
+</ul>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>DST = Daylight Saving Time, 1 hour+ sometimes 2 hours+ is today a troublemaker. No energy is saved, timetables of airlines and trains are mixed up. Some countries stopped DST. 84% of the Europeans 2018 voted against DST.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

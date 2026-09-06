@@ -9,6 +9,8 @@ $prep_time = 30s is added to the start date and time in case the start date and 
 So finally a job shall start regardless if you press **submit** or **start now**. <br>
 While the selftest is active, you can't submit a job. <br>
 
+![](../_media/jobs_page.png){width="90%"}
+
 ## Creating a Job
 
 ### **First, select the sampling rate.**<br>
@@ -50,5 +52,74 @@ We cover the following cases as displayed above:
 
 ### Start and Stop Date and Time
 
+Internally start day and time and duration is stored (finally the system counts the second pulses from the GPS until stop).
+
+For start time:
+
+* Select from the date icon the day
+* slide the start hour
+* slide the minute
+* slide the second
+
+
+::: {.callout-tip}
+If Grid mode is checked, sliders will "jump" into start time **64 seconds grid**.<br>
+This allows you always to make remote reference, regardless of the sampling rate.
+:::
+
+Then for stop time:
+
+* Select from the date icon the day
+* slide the stop hour
+* slide the minute
+* slide the second
+
+
+::: {.callout-tip}
+# Change start
+If you later decide to change the start time, stop time will shift accordingly.
+:::
+
+### E spacing
+
+::: {.callout-important}
+# Rotation
+Do not even dream of using others setups. Only N&rarr;S and E&rarr;W are allowed here.<br>
+Troublemakers are not.
+:::
+
+Supply the dipole length.
+
+::: {.callout-caution}
+# Timeout
+After 0.9 seconds the form is saved. You must be faster and type each digit in less than 0.9 seconds. <br>
+... age control &#128522;
+:::
+
+### TimeZone
+
+ Select a timezone for your work, additionally you can check "DST" (daylight saving time, aka summer time). <br>
+ Hence that in the job tables, file names and others **always UTC** is used.<br>
+ If DST is checked, the "start time" is shifted by 1 hour earlier, BUT the stop time is not correct when DST changes during recording[^dstnote]. <br>
+
+### atss
+
+To change between new atss and old ats, go to the channels page and toggle the atss button. <br>
+It will be stored in the hardware table and used for this and next jobs. <br>
+
 
 ## Submitting a Job
+
+Ref. also to the [program logic](../flows/jobs_flow.qmd)
+
+If the programmed time (including preparation time) has passed by, the job is simply shifted to the next possible start time. <br>
+
+
+## Special Jobs
+
+* Sensor Detection: fast, takes 10 s
+* auto gain / auto offset: long, takes ~ 3 min. Needs enough time to acquire a reliable estimate
+* contact resistance: medium, takes ~ 1 1/2 min. AC currents are fed into the electrodes to measure the contact resistance.
+  
+
+[^dstnote]: DST = Daylight Saving Time, 1 hour+ sometimes 2 hours+ is today a troublemaker. No energy is saved, timetables of airlines and trains are mixed up. Some countries stopped DST. 84% of the Europeans 2018 voted against DST.

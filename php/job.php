@@ -14,9 +14,6 @@ class job extends adu {
   // Use get_start_date() for col 1
   // Use get_start_time() for col 2
   // Use get_duration() for col 3 / and set_*() to access them.
-  // $sampling_rate;                          // sampling rate in Hz controlled by frequency_handler class
-  // $digital_filter                          // setting controlled by frequency_handler class, no direct access from UI.
-  // $split_main                              // setting controlled by frequency_handler class, no direct access from UI.
   public string $cal_mode       = 'off';
   //  $channel_types  = [];                   // per-slot channel type settings in slot class, adu creates array
   //  $choppers       = [];                   // per-slot chopper settings in sensor class via slot class , adu creates array
@@ -28,7 +25,6 @@ class job extends adu {
   // $sub_duration   = 0;          // via frequency handler
   // $sub_filter     = 0;          // via frequency handler
   // $split_sub     = 0;           // via frequency handler
-  public float  $power_off_limit = 10.0;        // power off limit in W, if the estimated power consumption exceeds this limit, the job will not be started (in job class)
   public string   $station_id        = '';          //!< site identifier; not managed here
   // end job table columns
 
@@ -42,12 +38,11 @@ class job extends adu {
 
 
   public function __construct(string $job_db_, string $job_table_) {
-    // default values  (start_date_time and duration initialised by parent::__construct())
+    // default values  (start_date_time and duration initialized by parent::__construct())
     $this->digital_filter = 0;
     $this->cal_mode = 'off';
     $this->use_atss = 0;
     $this->copy_to_usb = 0;
-    $this->power_off_limit = 10.0;
     $this->station_id = '';
     // end default values
 
@@ -57,10 +52,10 @@ class job extends adu {
     $this->table = $job_table_;
     // initialize the ADU object for this job
     parent::__construct(); // ADU
-    $this->read_hwConfig();                              // read the hardware configuration for this ADU
+    $this->use_atss = $this->read_hwConfig();    // read the hardware configuration for this ADU
 
     // if table has now row, create it and write the default values to the database
-    $row = $this->db->read_job_table();
+    $row = $this->db->get_rows(1); //!< read the first row from the job table (which has only id 1 !!)
     if (empty($row)) {
       $this->create(); //!< create the table if it doesn't exist and write the default values to the database
       $this->handle_post_updates(true); //!< write the default values to the database immediately
@@ -74,11 +69,11 @@ class job extends adu {
 
   // create read empty functions for this job, which will interact with the database
   public function create() {
-    $this->db->create_job_table(); //!< create the job table if it doesn't exist
+    $this->db->create_table_from_SQL_file(INIT_DIR . 'job' . DIRECTORY_SEPARATOR . 'job.sql'); //!< create the job table if it doesn't exist
   }
 
   public function read() {
-    $row = $this->db->read_job_table(); //!< read the job data from the database
+    $row = $this->db->get_rows(1); //!< read the job data from the database
     if (!empty($row)) {
       $this->load_row($row);
     }
@@ -96,6 +91,7 @@ class job extends adu {
   }
   public function set_use_atss(int $use_atss): void {
     $this->use_atss = $use_atss;
+    $this->sync_adu_state_from_job();
     $this->persist_job_state();
   }
   public function get_copy_to_usb(): int {
@@ -106,20 +102,16 @@ class job extends adu {
     $this->persist_job_state();
   }
   /**
-   * @brief Populate all job properties from a raw associative row array.
-   * @details Shared by read() (from job table) and restore_from_row() (from jobs table).
+   *@brief Populate all job properties from a raw associative row array.
+   *@note YOU MUST INIT job first with ADU parent constructor!!! then new adu will map into values
+   *@details Shared by read() (from job table) and restore_from_row() (from jobs table).
    */
   private function load_row(array $row): void {
-    // start_date_time is stored as separate date and time columns; reconstruct as UTC DateTimeImmutable
+    // start_date/start_time/duration are the job_time (DateTimeImmutable) master values; reconstruct through the constructor
     $db_date = $row['start_date'] ?? $this->get_start_date();
     $db_time = $row['start_time'] ?? $this->get_start_time();
-    $dt = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $db_date . ' ' . $db_time, new DateTimeZone('UTC'));
-    if ($dt !== false) {
-      $this->start_date_time = $dt;
-    }
-    if (isset($row['duration'])) {
-      $this->set_duration(intval($row['duration']));
-    }
+    $db_duration = isset($row['duration']) ? intval($row['duration']) : $this->get_duration();
+    $this->set_time_from_array(['start_date' => $db_date, 'start_time' => $db_time, 'duration' => $db_duration]);
     $this->sampling_rate = intval($row['sampling_rate'] ?? $this->sampling_rate);       // for frequency handler mainly
     $this->digital_filter = intval($row['digital_filter'] ?? $this->digital_filter);    // for frequency handler
     $this->split_main = intval($row['split_main'] ?? $this->split_main);                // for frequency handler
@@ -136,7 +128,6 @@ class job extends adu {
     $this->sub_duration = intval($row['sub_duration'] ?? $this->sub_duration);          // for frequency handler
     $this->sub_filter = intval($row['sub_filter'] ?? $this->sub_filter);                // for frequency handler
     $this->split_sub = intval($row['split_sub'] ?? $this->split_sub);                   // for frequency handler
-    $this->power_off_limit = floatval($row['power_off_limit'] ?? $this->power_off_limit);
     $this->station_id = strval($row['station_id'] ?? $this->station_id);
     $this->init_virtual_rate_from_sql();                                               // for frequency handler
     // we need to set the slots and sensors in the ADU object
@@ -163,14 +154,19 @@ class job extends adu {
   }
 
   /**
-   * @brief Load job state from an arbitrary row (e.g. copied from jobs table) and persist to job.db.
+   * @brief Load job state from an arbitrary row (e.g. copied from jobs table) and optionally persist to job.db.
    * @param array $row Associative row from jobs table.
+   * @param bool $persist Whether to persist the job state to job.db. Default is true. false is for loading a temporary list of jobs without overwriting the current job state.
+   * @details This method is used to restore a job state from a row in the jobs table.
    */
-  public function restore_from_row(array $row): void {
+  public function restore_from_row(array $row, bool $persist = true): void {
     // jobs-table-only metadata must not be persisted back into job.db
     unset($row['slots_on'], $row['started']);
     $this->load_row($row);
-    $this->persist_job_state();
+    $this->sync_adu_state_from_job();
+    if ($persist) {
+      $this->persist_job_state();
+    }
   }
   // update is handled by the handle_post_updates function
   public function empty() {
@@ -199,10 +195,18 @@ class job extends adu {
       'sub_duration' => $this->sub_duration,
       'sub_filter' => $this->sub_filter,
       'split_sub' => $this->split_sub,
-      'power_off_limit' => $this->power_off_limit,
+      // remove depreciated
+      'power_off_limit' => 10.0,
       'station_id' => $this->station_id,
     ];
     $this->db->update_job_table($kv); //!< write the updates to the database immediately
+  }
+
+  /**
+   * @brief Keep ADU hwConfig fields aligned with job-owned state.
+   */
+  private function sync_adu_state_from_job(): void {
+    $this->persist_adu_hwConfig(['use_atss' => $this->use_atss]);
   }
 
   /**
@@ -235,14 +239,7 @@ class job extends adu {
     $this->persist_job_state();
   }
 
-  public function get_power_off_limit(): float {
-    return $this->power_off_limit;
-  }
 
-  public function set_power_off_limit(float $limit): void {
-    $this->power_off_limit = $limit;
-    $this->persist_job_state();
-  }
 
   public function get_station_id(): string {
     return $this->station_id;
@@ -270,6 +267,7 @@ class job extends adu {
         $this->use_atss = intval($_POST['use_atss']);
         $updated = true;
         $updated_job = true;
+        $this->adu_updated = true; // mark that the ADU configuration was updated and needs to be written to DB
       }
       if (isset($_POST['copy_to_usb'])) {
         $this->copy_to_usb = intval($_POST['copy_to_usb']);
@@ -277,9 +275,10 @@ class job extends adu {
         $updated_job = true;
       }
       if (isset($_POST['power_off_limit'])) {
-        $this->power_off_limit = floatval($_POST['power_off_limit']);
+        parent::set_power_off_limit(floatval($_POST['power_off_limit']));
         $updated = true;
         $updated_job = true;
+        $this->adu_updated = true; // mark that the ADU configuration was updated and needs to be written to DB
       }
       if (isset($_POST['station_id'])) {
         $this->station_id = strval($_POST['station_id']);
@@ -289,6 +288,9 @@ class job extends adu {
     }
     // after routing all updates, we write to DB if there were any updates
     if ($updated || $this->adu_updated || $force) {
+      if ($this->adu_updated) {
+        $this->sync_adu_state_from_job();
+      }
       if (!$this->is_frequency_mode_switch_post() || $updated_job || $this->adu_updated || $force) {
         $this->persist_job_state();
       }
@@ -305,4 +307,6 @@ class job extends adu {
     }
     return '<a href="subjob.php" class="w3-text-black">' . htmlspecialchars($status_text, ENT_QUOTES, 'UTF-8') . '</a>';
   }
+
+  // equals, not_equals, less_than, greater_than, intersects are inherited from job_time
 } // end job class

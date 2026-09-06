@@ -6,6 +6,7 @@
  */
 require_once __DIR__ . '/config.php'; //!< make your SESSION and path.
 require_once PHP_DIR . 'php_functions.php'; //!< this is the php file for shared php functions for the mobile pages.
+require_once TRAITS_DIR . 'global_vars.php';
 require_once PHP_DIR . 'joblist.php';
 
 $job = new job('job.db', 'job');          // initialize the job, adu hadles post updates for HW
@@ -16,7 +17,7 @@ $job->handle_post_updates();              // handle frequency and subjob POST up
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['sender'] ?? '') === 'joblist'
   && ($_POST['what'] ?? '') === 'special' && isset($_POST['value'])
 ) {
-  $joblist = new joblist('jobs.db', 'jobs', $job->get_prep_time());
+  $joblist = new joblist('jobs.db', 'jobs', PREP_TIME);
   $joblist->insert_special_job(intval($_POST['value']));
   $_SESSION['msg_info'] = 'Special job marker added (value=' . intval($_POST['value']) . ').';
   header('Location: subjob.php');

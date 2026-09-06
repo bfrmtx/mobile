@@ -9,6 +9,8 @@
 if (!defined('BASE_DIR')) {
   require_once __DIR__ . '/../config.php';
 }
+// PREP_TIME is used by reorder_jobs_rows() to keep jobs spaced apart.
+require_once TRAITS_DIR . 'global_vars.php';
 
 /**
  * @brief Build a web asset URL from a path relative to BASE_DIR.
@@ -353,4 +355,88 @@ function seconds_to_time($secs, $always_show_days = false) {
     return sprintf('%d days %02d:%02d:%02d', $days, $hours, $minutes, $seconds);
   }
   return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+}
+
+/**
+ * @brief Sort jobs table rows by start_date/start_time and, if a new start is given, shift them all by the same offset.
+ * @param array $rows Rows from the jobs table (see $jobs_table_columns in global_vars.php); each has UTC 'start_date' (Y-m-d) and 'start_time' (H:i:s).
+ * @param string $new_start_date New UTC start date (Y-m-d) for the earliest row. Empty to skip shifting (rows are only sorted).
+ * @param string $new_start_time New UTC start time (H:i:s) for the earliest row. Empty to skip shifting (rows are only sorted).
+ * @return array Rows sorted chronologically, with start_date/start_time shifted by the same offset when a new start is given.
+ */
+function reorder_jobs_rows(array $rows, string $new_start_date = '', string $new_start_time = ''): array {
+  if (empty($rows)) {
+    return $rows;
+  }
+  // rows must contain 'start_date' and 'start_time' columns for sorting and shifting as well as duration for each job
+  foreach ($rows as $row) {
+    if (!isset($row['start_date']) || !isset($row['start_time']) || !isset($row['duration'])) {
+      throw new InvalidArgumentException('Each row must have start_date, start_time, and duration columns.');
+    }
+  }
+
+  usort($rows, function (array $a, array $b): int {
+    return strcmp($a['start_date'] . ' ' . $a['start_time'], $b['start_date'] . ' ' . $b['start_time']);
+  });
+
+  if ($new_start_date === '' || $new_start_time === '') {
+    return $rows; // nothing to shift, just sorted
+  }
+
+  $utc = new DateTimeZone('UTC');
+  $new_start = new DateTimeImmutable($new_start_date . 'T' . $new_start_time, $utc);
+  $old_start = new DateTimeImmutable($rows[0]['start_date'] . 'T' . $rows[0]['start_time'], $utc);
+  $offset_seconds = $new_start->getTimestamp() - $old_start->getTimestamp();
+
+  foreach ($rows as &$row) {
+    $row_start = new DateTimeImmutable($row['start_date'] . 'T' . $row['start_time'], $utc);
+    $shifted = new DateTimeImmutable('@' . ($row_start->getTimestamp() + $offset_seconds));
+    $row['start_date'] = $shifted->format('Y-m-d');
+    $row['start_time'] = $shifted->format('H:i:s');
+  }
+  unset($row);
+
+  // cascade: if a job now starts less than PREP_TIME after the previous job's end, bump it (and so on for later jobs)
+  for ($i = 1; $i < count($rows); $i++) {
+    $prev_start = new DateTimeImmutable($rows[$i - 1]['start_date'] . 'T' . $rows[$i - 1]['start_time'], $utc);
+    $prev_end = $prev_start->add(new DateInterval('PT' . intval($rows[$i - 1]['duration']) . 'S'));
+    $next_start = new DateTimeImmutable($rows[$i]['start_date'] . 'T' . $rows[$i]['start_time'], $utc);
+
+    $gap = $next_start->getTimestamp() - $prev_end->getTimestamp();
+    if ($gap < PREP_TIME) {
+      $bumped = $prev_end->add(new DateInterval('PT' . PREP_TIME . 'S'));
+      $rows[$i]['start_date'] = $bumped->format('Y-m-d');
+      $rows[$i]['start_time'] = $bumped->format('H:i:s');
+    }
+    // now if SESSION job_grid_time is set and true we may shift again;
+    // starting with the first job, it shall start at n * GRID (defined in global_vars.php)
+    // all consecutive jobs may need to be shifted to align with the grid.
+    if (!empty($_SESSION['job_grid_time']) && $_SESSION['job_grid_time']) {
+      $grid = GRID;
+      $current_start = new DateTimeImmutable($rows[0]['start_date'] . 'T' . $rows[0]['start_time'], $utc);
+      $aligned_start = new DateTimeImmutable('@' . (ceil($current_start->getTimestamp() / $grid) * $grid));
+      $rows[0]['start_date'] = $aligned_start->format('Y-m-d');
+      $rows[0]['start_time'] = $aligned_start->format('H:i:s');
+
+      for ($j = 1; $j < count($rows); $j++) {
+        $prev_start = new DateTimeImmutable($rows[$j - 1]['start_date'] . 'T' . $rows[$j - 1]['start_time'], $utc);
+        $prev_end = $prev_start->add(new DateInterval('PT' . intval($rows[$j - 1]['duration']) . 'S'));
+        $next_start = new DateTimeImmutable($rows[$j]['start_date'] . 'T' . $rows[$j]['start_time'], $utc);
+
+        $gap = $next_start->getTimestamp() - $prev_end->getTimestamp();
+        if ($gap < PREP_TIME) {
+          $bumped = $prev_end->add(new DateInterval('PT' . PREP_TIME . 'S'));
+          $rows[$j]['start_date'] = $bumped->format('Y-m-d');
+          $rows[$j]['start_time'] = $bumped->format('H:i:s');
+        }
+
+        $current_start = new DateTimeImmutable($rows[$j]['start_date'] . 'T' . $rows[$j]['start_time'], $utc);
+        $aligned_start = new DateTimeImmutable('@' . (ceil($current_start->getTimestamp() / $grid) * $grid));
+        $rows[$j]['start_date'] = $aligned_start->format('Y-m-d');
+        $rows[$j]['start_time'] = $aligned_start->format('H:i:s');
+      }
+    }
+  }
+
+  return $rows;
 }

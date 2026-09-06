@@ -50,22 +50,14 @@ class system_log {
   }
 
   private function get_total_rows(?int $priority): int {
-    $pdo = $this->db->get_pdo();
-    if ($pdo === null) {
-      return 0;
-    }
-
     if ($priority === null) {
-      $stmt = $pdo->query('SELECT COUNT(*) AS cnt FROM ' . $this->table_name);
-      $row = $stmt !== false ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
-      return intval($row['cnt'] ?? 0);
+      return (int) $this->db->querySingle('SELECT COUNT(*) FROM "' . $this->table_name . '"');
     }
 
-    $stmt = $pdo->prepare('SELECT COUNT(*) AS cnt FROM ' . $this->table_name . ' WHERE priority = :priority');
-    $stmt->bindValue(':priority', $priority, PDO::PARAM_INT);
-    $stmt->execute();
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    return intval($row['cnt'] ?? 0);
+    $stmt = $this->db->prepare('SELECT COUNT(*) FROM "' . $this->table_name . '" WHERE priority = :priority');
+    $stmt->bindValue(':priority', $priority, SQLITE3_INTEGER);
+    $result = $stmt->execute();
+    return (int) $result->fetchArray(SQLITE3_NUM)[0];
   }
 
   private function get_max_offset(int $total_rows): int {
@@ -78,34 +70,25 @@ class system_log {
 
   /** @return array<int,array<string,mixed>> */
   private function get_rows(int $offset, ?int $priority): array {
-    $pdo = $this->db->get_pdo();
-    if ($pdo === null) {
-      return [];
+    $sql = 'SELECT id, date_time, priority, main_index, sub_index, message '
+      . 'FROM "' . $this->table_name . '" ';
+    if ($priority !== null) {
+      $sql .= 'WHERE priority = :priority ';
     }
+    $sql .= 'ORDER BY id DESC LIMIT :limit OFFSET :offset';
 
-    if ($priority === null) {
-      $stmt = $pdo->prepare(
-        'SELECT id, date_time, priority, main_index, sub_index, message '
-          . 'FROM ' . $this->table_name . ' '
-          . 'ORDER BY id DESC LIMIT :limit OFFSET :offset'
-      );
-      $stmt->bindValue(':limit', $this->read_n_lines, PDO::PARAM_INT);
-      $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-      $stmt->execute();
-      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $this->db->prepare($sql);
+    if ($priority !== null) {
+      $stmt->bindValue(':priority', $priority, SQLITE3_INTEGER);
     }
-
-    $stmt = $pdo->prepare(
-      'SELECT id, date_time, priority, main_index, sub_index, message '
-        . 'FROM ' . $this->table_name . ' '
-        . 'WHERE priority = :priority '
-        . 'ORDER BY id DESC LIMIT :limit OFFSET :offset'
-    );
-    $stmt->bindValue(':priority', $priority, PDO::PARAM_INT);
-    $stmt->bindValue(':limit', $this->read_n_lines, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->bindValue(':limit', $this->read_n_lines, SQLITE3_INTEGER);
+    $stmt->bindValue(':offset', $offset, SQLITE3_INTEGER);
+    $result = $stmt->execute();
+    $rows = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+      $rows[] = $row;
+    }
+    return $rows;
   }
 
   private function qs(int $offset, ?int $priority): string {
@@ -230,7 +213,7 @@ class system_log {
     return $html;
   }
 
-  function delete_all_rows(bool $vacuum = false): void {
-    $this->db->delete_all_rows($vacuum);
+  function empty_table(bool $vacuum = false): void {
+    $this->db->empty_table($vacuum);
   }
 } // end of class system_log

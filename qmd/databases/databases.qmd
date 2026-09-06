@@ -21,6 +21,11 @@ You find the serial numbers here.<br>
 About the systems and their capabilities. <br>
 Sample frequencies and digital filter apply to ALL channels, so they are here.<br>
 As fixed value the **disk size** is here, to converted to **int** later. This is the total size at all of the data partition.  <br>
+**use_atss** is 1 when the system shall write in atss format, 0 when not (old ats format). <br>
+This value acts as a template for new jobs, *however* the job stores this value individually. ADU reads ONLY from the job! <br>
+**tz_offset** is the timezone offset in minutes, for example -60 for UTC-1 or 330 for UTC+5:30 (India, IST) <br>
+**dst** is 1 when daylight saving time is active, 0 otherwise. <br>
+**power_off_limit** is by default 10 (Volts), Set to 12.2 for LiIon batteries with built-in controller, which may "brute-force" switch off at 12V . <br>
 
 ```json
 {{< include ../../system/ADU-11e/hwConfig/adu.json >}}
@@ -262,7 +267,10 @@ When you submit a job, the job parameters are stored here. <br>
 
 Remark: "slots_on" TEXT and  "started" INTEGER are not part of the job.db. They will be appended "on the fly" when the interface submits a job. <br>
 Vice versa, when you open a job from the jobs.db for editing, the "slots_on" and "started" (aka copying back to the job.db) are not copied (truncate). <br>
-The slots_on logic is: E (0,1) always on, H as detected. You may submit "no electric", then E (0,1) are off, H as detected. Mostly for airborne measurements. <br> 
+The slots_on logic is: E (0,1) always on, H as detected. You may submit "no electric", then E (0,1) are off, H as detected. Mostly for airborne measurements.
+
+job.db has only one row ("id" INTEGER PRIMARY KEY CHECK (id = 1)). That is what is created with the mobile interface. The system will read this row and copy it into jobs.db when the user submits a job. This row is updated when changes are made through the mobile interface. <br>
+
 
 **Syntax: -1 auto, 0 off, 1 on - OR 1, 2, 4, 8 values >= 1**. <br>
 In the **fields** (plural) gains for example, the **POSITION** (-1,-1, 4, ...) is equivalent to the slot number. So the first value is for slot0, the second for slot1, and so on. <br>
@@ -286,8 +294,19 @@ The same applies for the channel types, dipole_lengths, and choppers. <br>
  - "sub_duration"	0 (default off, set to >0 to use sub-cycles, example 32 for 32 seconds)
  - "sub_filter"	0 (default off, set to >0 to use sub-filter, example 32 for a sub job with 64 Hz sample frequency if the main job is 2048 Hz)
  - "split_sub" 0 (default off, set to >0 to split sub job into multiple files, example 102400 for 100 MB files), covered by GUI for sub job splitting, but not yet implemented in the system, so no effect for now.
- - "power_off_limit"	0 (default off, set to >0, for example 10.9 to power off the system when the battery voltage drops below this limit, in Volt. This can be helpful in case your batteries want that. The system may power off at 9.8 V latest.)
+ - "power_off_limit" **TO BE REMOVED**	0 (default off, set to >0, for example 10.9 to power off the system when the battery voltage drops below this limit, in Volt. This can be helpful in case your batteries want that. The system may power off at 9.8 V latest.)
 
+
+### jobs.db
+
+refer to job.db above. <br>
+Contains a list of jobs, which can be read at any time from mcp. <br>
+
+```sql
+{{< include ../../system/ADU-11e/jobs/jobs.sql >}}
+```
+Added fields are "slots_on" TEXT and "started" INTEGER. started will be set to 1 by the *mcp* system when a job starts (not by mobile interface).<br>
+slots_on will contain a textual representation of which slots are active for the job. This is generated on the fly; so when you edit an older job with a "newer" ADU, the slots_on field will be updated accordingly.
 
 ## Logic
 ### shots

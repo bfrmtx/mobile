@@ -1,0 +1,23 @@
+---
+title: "Job List"
+---
+  
+## Clear
+
+Deletes all jobs from the database. <br>
+That clears also mcp's database. <br>
+
+## Delete
+
+Deletes a specific job from the database. <br>
+That also deletes the job from mcp's database. <br>
+
+## Save to JobList
+
+Takes all jobs and saves them to a new joblist file in the subdirectory `joblists`. <br>
+
+## Load JobList
+
+Clears the present jobs table.<br>
+Asks for a new start date and time.<br>
+Loads a joblist file from the subdirectory `joblists`. <br>

@@ -14,7 +14,7 @@ $job = new job('job.db', 'job');
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['sender'] ?? '') === 'joblist'
   && ($_POST['what'] ?? '') === 'special' && intval($_POST['value'] ?? 0) === -2
 ) {
-  $joblist = new joblist('jobs.db', 'jobs', $job->get_prep_time());
+  $joblist = new joblist('jobs.db', 'jobs', PREP_TIME);
   $joblist->insert_special_job(-2);
   $_SESSION['msg_info'] = 'Detect sensors marker added.';
   $_SESSION['detect_sensors_reload'] = true;
@@ -52,7 +52,7 @@ unset($_SESSION['detect_sensors_reload_seconds']);
       </div>
 
       <div class="w3-row w3-padding-16">
-        <div class="w3-full w3-container">
+        <div class="w3-half w3-container">
           <form method="post" action="channels.php" style="margin:0;">
             <input type="hidden" name="sender" value="joblist" />
             <input type="hidden" name="what" value="special" />
@@ -66,6 +66,16 @@ unset($_SESSION['detect_sensors_reload_seconds']);
 
             <div id="detectSensorsMessage" class="w3-text-green w3-margin-top" style="font-weight:bold;"></div>
 
+          </form>
+        </div>
+        <div class="w3-half w3-container">
+          <form method="post" action="channels.php" style="margin:0;">
+            <input type="hidden" name="use_atss" value="<?php echo $job->get_use_atss() ? '0' : '1'; ?>" />
+            <?php if ($job->get_use_atss()): ?>
+              <button type="submit" class="w3-button w3-green w3-round" style="font-size:1.1em;padding:8px 24px;">using new atss</button>
+            <?php else: ?>
+              <button type="submit" class="w3-button w3-orange w3-round" style="font-size:1.1em;padding:8px 24px;">using old ats</button>
+            <?php endif; ?>
           </form>
         </div>
       </div>

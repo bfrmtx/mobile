@@ -14,14 +14,14 @@ $job->handle_post_updates();             // process any POST updates and persist
 
 // Handle no-electric joblist submissions before sending output.
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['sender'] ?? '') === 'joblist') {
-  $joblist = new joblist('jobs.db', 'jobs', $job->get_prep_time());
+  $joblist = new joblist('jobs.db', 'jobs', PREP_TIME);
   if (($_POST['what'] ?? '') === 'submit') {
-    $new_id = $joblist->insert_from_job($job, true);
+    $new_id = $joblist->insert_from_job($job, true, false); // true = electric channels off, false = not starting now
     if ($new_id > 0) {
       $_SESSION['msg_info'] = 'Job submitted (electric channels off).';
     }
   } elseif (($_POST['what'] ?? '') === 'start_now') {
-    $new_id = $joblist->insert_from_job_now($job, true);
+    $new_id = $joblist->insert_from_job($job, true, true); // true = electric channels off, false = not starting now
     if ($new_id > 0) {
       $_SESSION['msg_info'] = 'Job scheduled to start now (electric channels off).';
     }

@@ -222,7 +222,7 @@ class status {
   public ?recording_status $recording_status = null; //!< recording object for the recording status
 
   public function __construct() {
-    $this->db = new database($this->db_file); // create_if_missing = true
+    $this->db = new database($this->db_file);
     // read all tables with their key value pairs.
     foreach ($this->table_names as $table_name) {
       $this->db->set_table($table_name);
