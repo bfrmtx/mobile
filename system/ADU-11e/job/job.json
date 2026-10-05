@@ -1,0 +1,22 @@
+{
+  "id": 1,
+  "start_date": "2026-09-14",
+  "start_time": "12:00:00",
+  "duration": 3600,
+  "sampling_rate": 1024,
+  "digital_filter": 0,
+  "split_main": 0,
+  "cal_mode": "off",
+  "channel_types": "Ex,Ey,Hx,Hy,Hz,Hx,Hy,Hz",
+  "choppers": "-1,-1,-1,-1,-1,-1,-1,-1",
+  "gains": "-1,-1,-1,-1,-1,-1,-1,-1",
+  "dipole_lengths": "25,25,0,0,0,0,0,0",
+  "use_atss": 0,
+  "copy_to_usb": 0,
+  "sub_cycle": 0,
+  "sub_duration": 0,
+  "sub_filter": 0,
+  "split_sub": 0,
+  "power_off_limit": 10.0,
+  "station_id": null
+}

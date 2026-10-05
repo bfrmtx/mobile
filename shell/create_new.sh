@@ -1,20 +1,42 @@
 #!/usr/bin/env bash
-# create new version from running ADU
-killall adu11e_mcp
-#
-base_dir="/home" 
-indir="database"  # replace with the actual directory of the new version
-extra_file="apps/adu11e_mcp"  # relative to $base_dir, like $indir
-# skip_dirs='lost+found'  # replace with actual directories to skip NOT ON YOCTO
-outfile="new_version_databases.tgz"  # replace with the actual directory where the new version should be created
-# -C already makes paths relative, so -P (unsupported on Yocto's busybox tar) isn't needed
-tar -czvf "$outfile" -C "$base_dir" "$indir" "$extra_file"
-echo "Creation of new version databases tgz completed successfully: $outfile"
-#
-# now the web interface 
-#
-base_dir="/www/pages"
-indir="mobile"  # new web interface version
-outfile="new_version_web.tgz"
-tar -czvf "$outfile" -C "$base_dir" "$indir"
-echo "Creation of new version web tgz completed successfully: $outfile"
+# create new version from my repository
+
+echo "render quarto? [y/N]"
+read -r render_quarto
+# all but y Y
+if [[ "$render_quarto" == "y" || "$render_quarto" == "Y" ]]; then
+    echo "ok, you want to render quarto first"
+    exit 0
+fi
+
+
+# Climb from mobile/shell to the top of mobile.
+
+# Initialize target as current directory
+TARGET_DIR="$PWD"
+tardir='mobile'
+
+# Loop backwards until the current folder name is 'tardir'
+while [[ "${TARGET_DIR:t}" != "$tardir" && "$TARGET_DIR" != "/" ]]; do
+    TARGET_DIR="${TARGET_DIR:h}"
+done
+
+# We found 'mobile', now go up one more level to get the 'top of mobile' (which is "$tardir"/..)
+TARGET_DIR="${TARGET_DIR:h}"
+
+# Validate and navigate
+if [[ ! -d "$TARGET_DIR" || "$TARGET_DIR" == "/" ]]; then
+    echo "Error: Target directory does not exist or is root. Exiting."
+    return 1 2>/dev/null || exit 1
+else
+    cd "$TARGET_DIR"
+fi
+
+echo "Navigated to top of $tardir directory: $TARGET_DIR"
+
+
+# delete any existing new version tgz before creating a new one
+rm -f new_version_mobile.tgz
+# exclude folder .git, .github, qmd
+tar --exclude='.git' --exclude='.github' --exclude='qmd' -czvf new_version_mobile.tgz "$tardir"
+echo "Creation of new version mobile tgz completed successfully: new_version_mobile.tgz"

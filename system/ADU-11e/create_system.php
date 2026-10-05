@@ -319,10 +319,19 @@ function insert_json_data($db, $table_name, $json_file) {
   insert_row($db, $table_name, $data, $table_columns);
 }
 
-// export in tmp of the users home directory, in a folder named "sqlite_db_created"
-$export_dir = getenv('HOME') . DIRECTORY_SEPARATOR . "tmp" . DIRECTORY_SEPARATOR . "sqlite_db_created";
+// On the embedded Yocto system, create databases in their production location.
+$uname = (string) shell_exec('uname -a');
+$is_embedded = stripos($uname, 'yocto') !== false;
+$export_dir = $is_embedded
+  ? '/home/database'
+  : getenv('HOME') . DIRECTORY_SEPARATOR . "tmp" . DIRECTORY_SEPARATOR . "sqlite_db_created";
 if (!file_exists($export_dir)) {
   mkdir($export_dir, 0777, true);
+  # and a sub directory below joblists
+  $joblists_dir = $export_dir . DIRECTORY_SEPARATOR . "joblists";
+  if (!file_exists($joblists_dir)) {
+    mkdir($joblists_dir, 0777, true);
+  }
 }
 // now
 // a) all folders names in this directory are database names to be created
@@ -341,6 +350,12 @@ foreach ($folders as $folder) {
   $db_name = $folder; //!< the folder name is the database name
   $db_path = $export_dir . DIRECTORY_SEPARATOR . $db_name . ".db"; //!< the path to the database file to be created
   $prebuilt_db_path = $folder_path . DIRECTORY_SEPARATOR . 'mcpdb.db';
+
+  if ($is_embedded && $db_name === 'mcpdb') {
+    echo "Keeping existing database: " . $db_path . "\n";
+    continue;
+  }
+
   if (file_exists($db_path)) {
     unlink($db_path);
   }
