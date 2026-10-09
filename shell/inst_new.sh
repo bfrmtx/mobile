@@ -48,4 +48,10 @@ chmod 755 "$DB_DIR"
 chmod 755 "$DB_DIR/joblists"
 chmod 666 "$DB_DIR/joblists"/*
 chmod 666 "$DB_DIR"/*
+# check if dir "$DB_DIR/joblists/system" exists, if so chmod 666 all files inside
+if [ -d "$DB_DIR/joblists/system" ]; then
+    chmod 755 "$DB_DIR/joblists/system"
+    chmod 666 "$DB_DIR/joblists/system"/*
+fi
+chmod 666 "$DB_DIR/joblists/system"/*
 echo "you can reboot the system now."

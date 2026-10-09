@@ -520,12 +520,14 @@ class joblist {
     // job.db already holds the start_date/start_time set on index.php; sort the loaded rows and shift them
     // as a block so the earliest one lands there, preserving the relative spacing between the other rows
     $rows = reorder_jobs_rows($rows, $job->get_start_date(), $job->get_start_time());
+    # fetch the dipole lengths from the current job configuration and adjust the rows accordingly
+
 
     // clear current jobs table
     $this->db->empty_table(true);
-
     // @todo i need to bump the jobs to maintain relative spacing based on the earliest job's start time.
     foreach ($rows as $row) {
+      $row['dipole_lengths'] = $job->get_dipole_lengths();
       $job->restore_from_row($row, false); // false = do not persist to job.db, just load into $job object
       $this->insert_from_job($job, false, false); // false = electric channels off, false = not starting now
     }

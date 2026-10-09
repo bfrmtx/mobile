@@ -131,7 +131,7 @@ print_header("Job List");
           <form method="post" action="jobs.php" class="w3-card w3-white w3-round" style="margin:12px 0;padding:12px;">
             <input type="hidden" name="sender" value="joblist" />
             <input type="hidden" name="what" value="load_joblist" />
-            <label for="load_joblist_name" class="w3-text-dark-grey" style="display:block;margin-bottom:6px;"><strong>Load JobList -> actual Job Time applies (set first!)</strong></label>
+            <label for="load_joblist_name" class="w3-text-dark-grey" style="display:block;margin-bottom:6px;"><strong>Load JobList -> actual Job Time and DIPOLE applies <span class="w3-text-red">(set first!)</span></strong></label>
             <div class="w3-row-padding" style="padding:0;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
               <div style="flex:1 1 240px;min-width:220px;">
                 <select id="load_joblist_name" name="joblist_name" class="w3-select w3-border w3-round" style="margin:0;" required>

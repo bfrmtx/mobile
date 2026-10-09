@@ -146,6 +146,7 @@ class job extends adu {
       if (isset($row['gains'])) {
         $kv['gain'] = $this->gains[$i] ?? -1;
       }
+      # take dipole lengths into account from the actual configuration
       if (isset($row['dipole_lengths'])) {
         $kv['dipole_length'] = $this->dipole_lengths[$i] ?? 0.0;
       }
