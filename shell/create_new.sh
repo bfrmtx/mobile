@@ -40,3 +40,8 @@ rm -f new_version_mobile.tgz
 # exclude folder .git, .github, qmd
 tar --exclude='.git' --exclude='.github' --exclude='qmd' -czvf new_version_mobile.tgz "$tardir"
 echo "Creation of new version mobile tgz completed successfully: new_version_mobile.tgz"
+# delete old database templates
+rm -f database_templates.tgz
+# we tar pages/mobile/system/ADU-11e/database that way that we can unpack it later easily to /home/database
+tar -C "mobile/system/ADU-11e" -czvf database_templates.tgz "joblists"
+echo "Creation of new database templates tgz completed successfully: database_templates.tgz"

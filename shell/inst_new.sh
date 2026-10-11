@@ -41,17 +41,30 @@ fi
 DB_DIR="/home/database"
 mv "$DB_DIR" "$DB_DIR"_backup_"$DATE"
 echo "Database backed up to $DB_DIR"_backup_"$DATE"
+# Create the new database directory structure and set permissions
 mkdir -p "$DB_DIR"
 mkdir -p "$DB_DIR/joblists"
+mkdir -p "$DB_DIR/joblists/system"
 $PHP "$script_dir"/create_system.php
+chmod 666 "$DB_DIR"/*
+chmod 666 "$DB_DIR/joblists"/*
+chmod 666 "$DB_DIR/joblists/system"/*
 chmod 755 "$DB_DIR"
 chmod 755 "$DB_DIR/joblists"
-chmod 666 "$DB_DIR/joblists"/*
-chmod 666 "$DB_DIR"/*
-# check if dir "$DB_DIR/joblists/system" exists, if so chmod 666 all files inside
-if [ -d "$DB_DIR/joblists/system" ]; then
-    chmod 755 "$DB_DIR/joblists/system"
-    chmod 666 "$DB_DIR/joblists/system"/*
-fi
+chmod 755 "$DB_DIR/joblists/system"
+# copy joblists from the old database backup to the new database directory
+cp -r "$DB_DIR"_backup_"$DATE"/joblists/*.db "$DB_DIR/joblists/"
+cp -r "$DB_DIR"_backup_"$DATE"/joblists/system/*.db "$DB_DIR/joblists/system/"
 chmod 666 "$DB_DIR/joblists/system"/*
+#
+# install database templates
+infile="database_templates.tgz"
+if [ ! -f "$infile" ]; then
+    echo "Error: Input file $infile does not exist."
+    echo "no templates to install."
+else
+    tar -C "$DB_DIR" -xzvf database_templates.tgz
+    echo "Database templates installed successfully."
+fi
 echo "you can reboot the system now."
+

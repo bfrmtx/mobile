@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; ADC – Mobile WebInterface</title>
+<title>8&nbsp; ADC – Mobile WebInterface</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-c574c73dd0d0ff61020859ffc61752ee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -75,6 +75,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -88,7 +91,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mwi/mwi.html">Developers</a></li><li class="breadcrumb-item"><a href="../flows/adc.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ADC</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mwi/mwi.html">Developers</a></li><li class="breadcrumb-item"><a href="../flows/adc.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ADC</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -136,8 +139,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../joblist/joblist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Job List</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../status/status.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Status</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Status</span></span></a>
   </div>
 </li>
       </ul>
@@ -154,31 +163,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../mwi/mwi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">MWI</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">MWI</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../databases/databases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Databases</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Databases</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../flows/slots-flow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Slots Flow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Slots Flow</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../flows/adc.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ADC</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ADC</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../flows/jobs_flow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Jobs Flow</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Jobs Flow</span></span></a>
   </div>
 </li>
       </ul>
@@ -189,14 +198,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">7.1</span> Overview</a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">8.1</span> Overview</a>
   <ul class="collapse">
-  <li><a href="#channel-measurement-setup-with-mfs" id="toc-channel-measurement-setup-with-mfs" class="nav-link" data-scroll-target="#channel-measurement-setup-with-mfs"><span class="header-section-number">7.1.1</span> 8 Channel Measurement Setup with MFS</a></li>
-  <li><a href="#channel-measurement-setup-with-mfs-1" id="toc-channel-measurement-setup-with-mfs-1" class="nav-link" data-scroll-target="#channel-measurement-setup-with-mfs-1"><span class="header-section-number">7.1.2</span> 5 Channel Measurement Setup with MFS</a></li>
-  <li><a href="#channel-measurement-setup-with-shft-or-fgs" id="toc-channel-measurement-setup-with-shft-or-fgs" class="nav-link" data-scroll-target="#channel-measurement-setup-with-shft-or-fgs"><span class="header-section-number">7.1.3</span> 5 Channel Measurement Setup with SHFT or FGS</a></li>
-  <li><a href="#channel-measurement-emap-or-current-clamp" id="toc-channel-measurement-emap-or-current-clamp" class="nav-link" data-scroll-target="#channel-measurement-emap-or-current-clamp"><span class="header-section-number">7.1.4</span> 2 Channel Measurement EMAP or Current Clamp</a></li>
+  <li><a href="#channel-measurement-setup-with-mfs-or-mfs-shft-or-mfs-fgs" id="toc-channel-measurement-setup-with-mfs-or-mfs-shft-or-mfs-fgs" class="nav-link" data-scroll-target="#channel-measurement-setup-with-mfs-or-mfs-shft-or-mfs-fgs"><span class="header-section-number">8.1.1</span> 8 Channel Measurement Setup with MFS or MFS &amp; SHFT or MFS &amp; FGS</a></li>
+  <li><a href="#channel-measurement-setup-with-mfs" id="toc-channel-measurement-setup-with-mfs" class="nav-link" data-scroll-target="#channel-measurement-setup-with-mfs"><span class="header-section-number">8.1.2</span> 5 Channel Measurement Setup with MFS</a></li>
+  <li><a href="#channel-measurement-setup-with-shft-or-fgs" id="toc-channel-measurement-setup-with-shft-or-fgs" class="nav-link" data-scroll-target="#channel-measurement-setup-with-shft-or-fgs"><span class="header-section-number">8.1.3</span> 5 Channel Measurement Setup with SHFT or FGS</a></li>
+  <li><a href="#channel-measurement-emap-or-current-clamp" id="toc-channel-measurement-emap-or-current-clamp" class="nav-link" data-scroll-target="#channel-measurement-emap-or-current-clamp"><span class="header-section-number">8.1.4</span> 2 Channel Measurement EMAP or Current Clamp</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.2</span> Summary</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">8.2</span> Summary</a></li>
   </ul>
 </nav>
 </nav>
@@ -207,9 +216,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mwi/mwi.html">Developers</a></li><li class="breadcrumb-item"><a href="../flows/adc.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ADC</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../mwi/mwi.html">Developers</a></li><li class="breadcrumb-item"><a href="../flows/adc.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ADC</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ADC</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ADC</span></h1>
 </div>
 
 
@@ -226,11 +235,11 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">7.1</span> Overview</h2>
+<section id="overview" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">8.1</span> Overview</h2>
 <p>The ADU-11e has two ADCs, each with 8 channels, <strong>A</strong> and <strong>B</strong>. They are working in a combined mode.</p>
-<section id="channel-measurement-setup-with-mfs" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="channel-measurement-setup-with-mfs"><span class="header-section-number">7.1.1</span> 8 Channel Measurement Setup with MFS</h3>
+<section id="channel-measurement-setup-with-mfs-or-mfs-shft-or-mfs-fgs" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="channel-measurement-setup-with-mfs-or-mfs-shft-or-mfs-fgs"><span class="header-section-number">8.1.1</span> 8 Channel Measurement Setup with MFS or MFS &amp; SHFT or MFS &amp; FGS</h3>
 <p>(polarity shown)</p>
 <table>
 <thead>
@@ -418,9 +427,54 @@ C007_THz
 </tr>
 </tbody>
 </table>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+   direction LR
+
+   class A {
+      ch0
+      ch1
+      ch2
+      ch3
+      ch4
+      ch5
+      ch6
+      ch7
+   }
+
+   class B {
+      ch0
+      ch1
+      ch2
+      ch3
+      ch4
+      ch5
+      ch6
+      ch7
+   }
+
+   Ex --&gt; A : ch0
+   Ey --&gt; A : ch1
+   Hx --&gt; A : ch2
+   Hy --&gt; B : ch0
+   Hz --&gt; B : ch1
+   MP_Hx --&gt; A : ch3
+   MP_Hy --&gt; B : ch2
+   MP_Hz --&gt; B : ch3
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
-<section id="channel-measurement-setup-with-mfs-1" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="channel-measurement-setup-with-mfs-1"><span class="header-section-number">7.1.2</span> 5 Channel Measurement Setup with MFS</h3>
+<section id="channel-measurement-setup-with-mfs" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="channel-measurement-setup-with-mfs"><span class="header-section-number">8.1.2</span> 5 Channel Measurement Setup with MFS</h3>
 <p>Switch is set to <strong>default</strong>. Hence: the switch is on the connector board!</p>
 <table>
 <thead>
@@ -549,8 +603,8 @@ C004_THz
 </tbody>
 </table>
 </section>
-<section id="channel-measurement-setup-with-shft-or-fgs" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="channel-measurement-setup-with-shft-or-fgs"><span class="header-section-number">7.1.3</span> 5 Channel Measurement Setup with SHFT or FGS</h3>
+<section id="channel-measurement-setup-with-shft-or-fgs" class="level3" data-number="8.1.3">
+<h3 data-number="8.1.3" class="anchored" data-anchor-id="channel-measurement-setup-with-shft-or-fgs"><span class="header-section-number">8.1.3</span> 5 Channel Measurement Setup with SHFT or FGS</h3>
 <p>Switch is set to <strong>MP</strong>. Hence: the switch is on the connector board!</p>
 <table>
 <thead>
@@ -679,8 +733,8 @@ C004_THz
 </tbody>
 </table>
 </section>
-<section id="channel-measurement-emap-or-current-clamp" class="level3" data-number="7.1.4">
-<h3 data-number="7.1.4" class="anchored" data-anchor-id="channel-measurement-emap-or-current-clamp"><span class="header-section-number">7.1.4</span> 2 Channel Measurement EMAP or Current Clamp</h3>
+<section id="channel-measurement-emap-or-current-clamp" class="level3" data-number="8.1.4">
+<h3 data-number="8.1.4" class="anchored" data-anchor-id="channel-measurement-emap-or-current-clamp"><span class="header-section-number">8.1.4</span> 2 Channel Measurement EMAP or Current Clamp</h3>
 <p>Switch is set to <strong>MP</strong>. Hence: the switch is on the connector board!</p>
 <table>
 <thead>
@@ -750,8 +804,8 @@ C001_TEy
 </table>
 </section>
 </section>
-<section id="summary" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.2</span> Summary</h2>
+<section id="summary" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="summary"><span class="header-section-number">8.2</span> Summary</h2>
 <ul>
 <li>The first two connectors (S → N and W → E) are always on the same slots (0 and 1) and are always associated with the channels 0 and 1, aka E<sub>x</sub> and E<sub>y</sub>.</li>
 <li>The connectors (H<sub>x</sub>, H<sub>y</sub>, H<sub>z</sub>) are on slots 2, 3, and 4 <strong>and if</strong> a sensor is detected, are associated with channels 2, 3, and 4.</li>
@@ -1170,12 +1224,12 @@ C001_TEy
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../flows/slots-flow.html" class="pagination-link" aria-label="Slots Flow">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Slots Flow</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Slots Flow</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../flows/jobs_flow.html" class="pagination-link" aria-label="Jobs Flow">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Jobs Flow</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Jobs Flow</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

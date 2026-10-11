@@ -343,6 +343,10 @@ foreach ($folders as $folder) {
   if ($folder === "." || $folder === "..") {
     continue;
   }
+  // skip folder joblists, here we have pre-configured joblists, not for main databases
+  if ($folder === "joblists") {
+    continue;
+  }
   $folder_path = $base_dir . DIRECTORY_SEPARATOR . $folder;
   if (!is_dir($folder_path)) {
     continue;

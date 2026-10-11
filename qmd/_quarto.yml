@@ -15,6 +15,7 @@ book:
     - part: "User Guide"
       chapters:
         - jobs/jobs.qmd
+        - joblist/joblist.qmd
         - status/status.qmd
     - part: "Developers"
       chapters:

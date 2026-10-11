@@ -4,8 +4,8 @@ title: "Mobile WebInterface"
 
 ```{=html}
 <p>
-  <button onclick="history.back()" class="btn btn-outline-secondary">
-    &larr; Previous Page / Back to WebInterface
+  <button onclick="window.location.assign('/mobile/index.php')" class="btn btn-outline-secondary">
+    &larr; Back to WebInterface <b>on ADU</b>
   </button>
 </p>
 ```
@@ -26,6 +26,5 @@ The mobile web interface is designed for small screens. It only provides a subse
 [Jobs](jobs/jobs.qmd)<br>
 
 [Status](status/status.qmd)
-
 
 

@@ -18,6 +18,8 @@ Takes all jobs and saves them to a new joblist file in the subdirectory `joblist
 
 ## Load JobList
 
+**FIRST** set **DIPOLE LENGTH** and **START DATE and TIME**.<br>
+These values will be used for the jobs loaded from the joblist file.<br>
+
 Clears the present jobs table.<br>
-Asks for a new start date and time.<br>
-Loads a joblist file from the subdirectory `joblists`. <br>
+Loads a joblist file from the subdirectory `joblists` or `system` (where pre-configured joblists are stored) <br>
