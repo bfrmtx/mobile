@@ -96,7 +96,9 @@ trait global_vars {
     0,
     4,
     8,
-    32
+    16,
+    32,
+    64
   ];
 
   protected array $cycles_mins = [              //!< shared hard-coded cycle selector values for cyclic sub-jobs, minutes (calc seconds later), so start a subjob every x minutes
